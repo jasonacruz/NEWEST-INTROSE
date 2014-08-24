@@ -1,6 +1,10 @@
 
 import ProgramCodes.Employee;
 import ProgramCodes.Faculty;
+import databaseCodes.ClassroomDAO;
+import java.awt.GridBagConstraints;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,6 +18,8 @@ import ProgramCodes.Faculty;
  */
 public class Splash extends javax.swing.JFrame {
     Faculty teacher;
+    String[] subjList;
+    ClassroomDAO cd;
     /**
      * Creates new form Splash
      */
@@ -24,9 +30,32 @@ public class Splash extends javax.swing.JFrame {
     {
         initComponents();
         teacher = emp;
+        cd = new ClassroomDAO();
         IUserName.setText(teacher.getFirstName() + " " +teacher.getLastName());
+        addSectionButton();
     }
 
+    public final void addSectionButton()
+    {
+        GridBagConstraints constraint = new GridBagConstraints();
+        constraint.anchor = GridBagConstraints.CENTER;
+        constraint.fill = GridBagConstraints.NONE;
+        constraint.gridx = 0;
+        constraint.gridy = GridBagConstraints.RELATIVE;
+        constraint.weightx = 1.0f;
+        constraint.weighty = 1.0f;
+        
+        subjList = new String[20];
+        cd.getSubjectInfo(teacher, subjList);
+         for (String string : subjList) {
+             if(string != null){
+            JButton button = new JButton();
+            button.setText(string);
+            jPanel1.add(button, constraint);
+    }
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,14 +64,15 @@ public class Splash extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         PHSLogo = new javax.swing.JLabel();
         settingsIcon = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,7 +85,46 @@ public class Splash extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Philadelphia High School");
         setBackground(new java.awt.Color(255, 204, 204));
+        setMaximumSize(new java.awt.Dimension(1980, 1024));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Lao UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(156, 89, 90));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("LOG OUT");
+        jLabel4.setOpaque(true);
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Lao UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(156, 89, 90));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("ACCOUNT");
+        jLabel5.setOpaque(true);
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 110, 30));
+
+        jLabel3.setBackground(new java.awt.Color(156, 89, 90));
+        jLabel3.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel3.setOpaque(true);
+        jLabel3.setRequestFocusEnabled(false);
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 150));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 153, 140));
+        jPanel3.setVisible(false);
+        jPanel3.getAccessibleContext().setAccessibleName("");
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,72 +132,26 @@ public class Splash extends javax.swing.JFrame {
         jScrollPane1.setOpaque(false);
 
         jPanel1.setOpaque(false);
-
-        jButton1.setText("Grade 4 Math");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
-        jButton2.setText("Grade 4 Math");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
-        jButton3.setText("Grade 4 Math");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-
-        jButton4.setText("Grade 4 Math");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {0, 5, 0};
+        jPanel1Layout.rowHeights = new int[] {0, 5, 0};
         jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 1052, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 1052, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 1052, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 1052, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 69, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-
         jScrollPane1.setViewportView(jPanel1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 1080, 530));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1130, 500));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 1100, 760));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 1100, 590));
 
         PHSLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phila-logo.png"))); // NOI18N
         getContentPane().add(PHSLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
         getContentPane().add(settingsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/settingslogo.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 660, -1, -1));
 
         IUserName.setText("User name");
@@ -139,7 +162,7 @@ public class Splash extends javax.swing.JFrame {
         getContentPane().add(ribbon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 160, 60));
 
         redbar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bar.png"))); // NOI18N
-        getContentPane().add(redbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 180, -1));
+        getContentPane().add(redbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, -1));
 
         bgElement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background2_1.png"))); // NOI18N
         getContentPane().add(bgElement, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -820, 1980, 1680));
@@ -147,24 +170,25 @@ public class Splash extends javax.swing.JFrame {
         setBounds(0, 0, 1492, 798);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        MainTable m = new MainTable(teacher);
-        m.setVisible(true);
-        m.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-        //this.setVisible(false);
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+       if(!jPanel3.isVisible())
+           jPanel3.setVisible(true);
+       else
+           jPanel3.setVisible(false);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_jLabel5MousePressed
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // 
-    }//GEN-LAST:event_jButton4MouseClicked
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+       int response = JOptionPane.showConfirmDialog(rootPane, "Will you log out?", "Logging out",  JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       if(response == JOptionPane.YES_OPTION)
+       {
+           this.setVisible(false);
+           new mainLogin().setVisible(true);
+       }
+    }//GEN-LAST:event_jLabel4MousePressed
 
     /**
      * @param args the command line arguments
@@ -207,14 +231,14 @@ public class Splash extends javax.swing.JFrame {
     private javax.swing.JLabel IUserName;
     private javax.swing.JLabel PHSLogo;
     private javax.swing.JLabel bgElement;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel redbar;
     private javax.swing.JLabel ribbon;
