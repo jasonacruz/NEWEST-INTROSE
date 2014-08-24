@@ -12,6 +12,8 @@ INSERT INTO STUDENT(idStudent,firstNameSt,middleNameSt,lastNameSt,genderSt,birth
 INSERT INTO STUDENT(idStudent,firstNameSt,middleNameSt,lastNameSt,genderSt,birthDateSt,yearLevelSt) VALUES (12345678, 'jasonee', 'antyhon', 'cruz', 'm', 'October-12-1995', '1'); 
 INSERT INTO CLASSADVISER(classYear,classSection,adviserID) VALUES(2013, 'Peace',99999999);
 INSERT INTO CLASSADVISER(classYear,classSection,adviserID) VALUES(2014, 'Love',12345678);
+INSERT INTO CLASSADVISER(classYear,classSection,adviserID) VALUES(2014, 'Love',12345678);
+INSERT INTO CLASSADVISER(classYear,classSection,adviserID) VALUES(2014, 'Love',12345678);
 INSERT INTO CLASSADVISER(classYear,classSection,adviserID) VALUES(2015, 'Peace',99999999);
 INSERT INTO CLASSADVISER(classYear,classSection,adviserID) VALUES(2014, 'Peace',11233877);
 INSERT INTO STUDENTROSTER(sr_ClassID,sr_StudentID) VALUES(4, 123456);
