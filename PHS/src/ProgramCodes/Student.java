@@ -49,6 +49,9 @@ public class Student extends Person {
                 super(idNum, lastName, firstName, midName, contactNum, homeAddress);
 		throw new UnsupportedOperationException();
 	}
+	
+	public Student(){
+        }
 
 	public ArrayList<Grade> getGrades() {
 		// TODO - implement Student.getGrades

@@ -21,27 +21,48 @@ public class EmployeeDAO{
 	}
 	public boolean addEmployee(Employee emp)
 	{
-	try
-		{
-			String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  addressEmp, passwordEmp, passFlagEmp ) VALUES (?,?,?,?,? , ?,?,  idEmployee, false)";
-			connection = getConnection();
-			stmt = connection.prepareStatement(queryString);
-			stmt.setString(1, emp.getIdNum());
-			stmt.setString(2, emp.getFirstName());
-			stmt.setString(3, emp.getMidName());
-			stmt.setString(4, emp.getLastName());
-			stmt.setString(5, emp.getPosition());
-			stmt.setString(6, emp.getContactNum());
-			stmt.setString(7, emp.getHomeAddress());
-                        stmt.setString(8, emp.getEmpPW());
-			stmt.executeUpdate();
-			}catch (SQLException e) {
-			 System.out.println(e.getMessage() + e.getErrorCode());
-			return false;
+            try{
+                String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  addressEmp, passwordEmp, passFlagEmp ) VALUES (?,?,?,?,? , ?,?,  idEmployee, false)";
+                connection = getConnection();
+                stmt = connection.prepareStatement(queryString);
+                stmt.setString(1, emp.getIdNum());
+                stmt.setString(2, emp.getFirstName());
+                stmt.setString(3, emp.getMidName());
+                stmt.setString(4, emp.getLastName());
+                stmt.setString(5, emp.getPosition());
+                stmt.setString(6, emp.getContactNum());
+                stmt.setString(7, emp.getHomeAddress());
+                //stmt.setString(8, emp.getEmpPW());
+                stmt.executeUpdate();
+            }catch (SQLException e) {
+                System.out.println(e.getMessage() + e.getErrorCode());
+                return false;
+            }
+            return true;
 	}
-		return true;
-			}
-	public boolean regEmployee(Employee emp)
+        
+	public boolean editEmployeeInfo(Employee emp)
+	{
+            int x =0;
+            try{
+		String queryString = "UPDATE EMPLOYEE SET idEmployee =?, firstNameEmp = ?, middleNameEmp = ?, lastNameEmp = ?, position = ? WHERE idEmployee = "+emp.getIdNum()+"";
+		connection = getConnection();
+		stmt = connection.prepareStatement(queryString);
+                stmt.setString(1, emp.getIdNum());
+                stmt.setString(2, emp.getFirstName());
+                stmt.setString(3, emp.getMidName());
+            	stmt.setString(4, emp.getLastName());
+		stmt.setString(5, emp.getPosition());
+		x = stmt.executeUpdate();
+                System.out.println(x);
+            }catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+	}
+        
+        public boolean regEmployee(Employee emp)
 	{
             int x =0;
 	try
@@ -62,9 +83,9 @@ public class EmployeeDAO{
 			}catch (SQLException e) {
 			 System.out.println(e.getMessage());
                          x = 0;
-	}
+                        }
             return x != 0;
-			}
+	}
         /*
         public boolean getEmpInfo(Employee emp)
         { 
