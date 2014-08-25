@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class EmployeeDAO{
 	Connection connection = null;
@@ -22,7 +24,7 @@ public class EmployeeDAO{
 	public boolean addEmployee(Employee emp)
 	{
             try{
-                String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  passwordEmp, passFlagEmp , departmentEmp, genderEmp) VALUES (?,?,?,?,? , ?,idEmployee, false,?,?)";
+                String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  departmentEmp, genderEmp) VALUES (?,?,?,?,? , ?,?,?)";
                 connection = getConnection();
                 stmt = connection.prepareStatement(queryString);
                 stmt.setString(1, emp.getIdNum());
@@ -41,6 +43,30 @@ public class EmployeeDAO{
             return true;
 	}
         
+        public ArrayList<String> getEmployee(int x){
+            Statement st = null;
+            ArrayList<String> sNames = new ArrayList();
+            String a;
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                System.out.println("xx");
+                if(x > 6)
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'High School'");
+                else
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'Elementary'");
+                System.out.println("xxx");
+                  //  rs = st.executeQuery("SELECT * FROM EMPLOYEE WHERE departmentEmp IS Elementary AND positionEmp IS Subject Teacher");
+                while(rs.next()){
+                    System.out.println("xxxx");
+                    sNames.add(rs.getString("lastNameEmp"));
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return sNames;
+        }
+        
 	public boolean editEmployeeInfo(Employee emp)
 	{
             int x =0;
@@ -56,7 +82,7 @@ public class EmployeeDAO{
 		x = stmt.executeUpdate();
                 System.out.println(x);
             }catch (SQLException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + e.getErrorCode());
                 return false;
             }
             return true;
