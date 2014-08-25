@@ -57,4 +57,63 @@ public class SectionDAO {
             }
             return sNames;
         }
+        
+            public ArrayList<String> getYearList(){
+        ArrayList<String> list = new ArrayList();
+       try
+            {
+                    String queryString = "select * from section group by sectionyear order by 2";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    rs =stmt.executeQuery();
+                    
+            while (rs.next()) {
+                 SectionBean ab = new SectionBean(rs.getString("sectionName"), rs.getInt("sectionYear"));
+                 list.add(Integer.toString(ab.getYear()));
+                }
+            if(list != null)
+              return list;
+            else
+              {
+              list.add("Unavailable");
+              return list;
+              }
+            
+            }
+            catch (SQLException e) {
+			 System.out.println("ERROR CODE: "+ e.getErrorCode());
+                         list.add("Empty");
+                         return list;
+            }
+    }
+    
+    public ArrayList<String> getSectionList(String level){
+        ArrayList<String> list = new ArrayList();
+       try
+            {
+                    String queryString = "select * from section where sectionYear = ?";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    stmt.setString(1, level);
+                    rs =stmt.executeQuery();
+                    
+            while (rs.next()) {
+                 SectionBean ab = new SectionBean(rs.getString("sectionName"), rs.getInt("sectionYear"));
+                 list.add(ab.getName());
+                }
+            if(list != null)
+              return list;
+            else
+              {
+              list.add("Unavailable");
+              return list;
+              }
+            
+            }
+            catch (SQLException e) {
+			 System.out.println("ERROR CODE: "+ e.getErrorCode());
+                         list.add("Empty");
+                         return list;
+            }
+    }
 }
