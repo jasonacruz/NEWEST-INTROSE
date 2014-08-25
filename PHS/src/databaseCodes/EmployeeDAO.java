@@ -22,7 +22,7 @@ public class EmployeeDAO{
 	public boolean addEmployee(Employee emp)
 	{
             try{
-                String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  addressEmp, passwordEmp, passFlagEmp ) VALUES (?,?,?,?,? , ?,?,  idEmployee, false)";
+                String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  passwordEmp, passFlagEmp , departmentEmp, genderEmp) VALUES (?,?,?,?,? , ?,idEmployee, false,?,?)";
                 connection = getConnection();
                 stmt = connection.prepareStatement(queryString);
                 stmt.setString(1, emp.getIdNum());
@@ -31,8 +31,8 @@ public class EmployeeDAO{
                 stmt.setString(4, emp.getLastName());
                 stmt.setString(5, emp.getPosition());
                 stmt.setString(6, emp.getContactNum());
-                stmt.setString(7, emp.getHomeAddress());
-                //stmt.setString(8, emp.getEmpPW());
+                stmt.setString(7, emp.getDepartment());
+                stmt.setString(8, emp.getGender());
                 stmt.executeUpdate();
             }catch (SQLException e) {
                 System.out.println(e.getMessage() + e.getErrorCode());

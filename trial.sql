@@ -1,8 +1,8 @@
-INSERT INTO EMPLOYEE(idEmployee,firstNameEmp,middleNameEmp,lastNameEmp,contactNumberEmp,positionEmp,departmentEmp,passwordEmp,addressEmp,passFlagEmp) VALUES (99999999, '','','','','Administrator', '','admin1234', '', 1);
+INSERT INTO EMPLOYEE(idEmployee,firstNameEmp,middleNameEmp,lastNameEmp,contactNumberEmp,positionEmp,departmentEmp,passwordEmp,addressEmp,passFlagEmp, genderEmp) VALUES ('admin', '','','','','Administrator', '','admin1234', '', 1,'');
 
-INSERT INTO EMPLOYEE(idEmployee,firstNameEmp,middleNameEmp,lastNameEmp,contactNumberEmp,positionEmp,departmentEmp,passwordEmp,addressEmp,passFlagEmp) VALUES (11233877, 'Jason','Anthony','Cruz','1234567','Subject Teacher', 'Elementary','Isawboy', 'blabla', 1);
+INSERT INTO EMPLOYEE(idEmployee,firstNameEmp,middleNameEmp,lastNameEmp,contactNumberEmp,positionEmp,departmentEmp,passwordEmp,addressEmp,passFlagEmp,genderEmp) VALUES (11233877, 'Jason','Anthony','Cruz','1234567','Subject Teacher', 'Elementary','Isawboy', 'blabla', 1, 'Male');
 
-INSERT INTO EMPLOYEE(idEmployee,firstNameEmp,middleNameEmp,lastNameEmp,contactNumberEmp,positionEmp,departmentEmp,passwordEmp,addressEmp,passFlagEmp) VALUES (12345678, 'Jason','Anthon','Cruz','1234567','Principal', 'NonE','Isawboy', 'blabla', 1);
+INSERT INTO EMPLOYEE(idEmployee,firstNameEmp,middleNameEmp,lastNameEmp,contactNumberEmp,positionEmp,departmentEmp,passwordEmp,addressEmp,passFlagEmp,genderEmp) VALUES (12345678, 'Jason','Anthon','Cruz','1234567','Principal', 'NonE','Isawboy', 'blabla', 1, 'Female');
 
 INSERT INTO SECTION(`sectionName`, `sectionYear`) VALUES ('Peace', 2);
 INSERT INTO SECTION(`sectionName`, `sectionYear`) VALUES ('Love', 5);

@@ -8,7 +8,17 @@ public abstract class Person {
 	private String midName;
 	private String contactNum;
 	private String homeAddress;
+        private String gender;
 
+        public String getGender()
+        {
+            return gender;
+        }
+        
+        public void setGender(String Gender)
+        {
+            this.gender = Gender;
+        }
 	public String getIdNum() {
 		return this.idNum;
 	}

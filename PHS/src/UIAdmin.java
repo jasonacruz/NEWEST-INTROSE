@@ -10,6 +10,8 @@ import databaseCodes.StudentDAO;
 import databaseCodes.SectionDAO;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Objects;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,10 +28,12 @@ public class UIAdmin extends javax.swing.JFrame {
      * Creates new form UIPrincipal
      */
     
-     EmployeeDAO eDAO = new EmployeeDAO();
-     StudentDAO sDAO = new StudentDAO();
-     SectionDAO seDAO = new SectionDAO();
-      public UIAdmin() {
+     private EmployeeDAO eDAO = new EmployeeDAO();
+     private StudentDAO sDAO = new StudentDAO();
+     private SectionDAO seDAO = new SectionDAO();
+     private Objects[] year;
+     
+     public UIAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -37,9 +41,21 @@ public class UIAdmin extends javax.swing.JFrame {
       public UIAdmin(Admin user)
       {
           initComponents();
+          setYears();
           this.setLocationRelativeTo(null);
       }
   
+     public final void setYears()
+     {
+        year = new Objects[200];
+        studentBirthYearComboBox.removeAllItems();
+         int x = Calendar.getInstance().get(Calendar.YEAR);
+         for(int temp = 1900; x >= temp; temp++)
+         {
+             studentBirthYearComboBox.addItem(temp);
+         }
+         
+     }
     public void changeText(javax.swing.JTextField txtf, String from, String to)
     {
         if(txtf.getText().equals(from))
@@ -129,26 +145,6 @@ public class UIAdmin extends javax.swing.JFrame {
         editStudentButton = new javax.swing.JButton();
         editFacultyButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        addStudentPanel = new javax.swing.JPanel();
-        tabLabel = new javax.swing.JLabel();
-        IDNumLabel = new javax.swing.JLabel();
-        IDNumField = new javax.swing.JTextField();
-        nameLabel = new javax.swing.JLabel();
-        surnameField = new javax.swing.JTextField();
-        firstnameField = new javax.swing.JTextField();
-        middlenameField = new javax.swing.JTextField();
-        genderLabel = new javax.swing.JLabel();
-        studentGenderComboBox = new javax.swing.JComboBox();
-        birthdateLabel = new javax.swing.JLabel();
-        studentBirthdateComboBox = new javax.swing.JComboBox();
-        invalidInputMessage = new javax.swing.JLabel();
-        invalidInputMessage1 = new javax.swing.JLabel();
-        invalidInputMessage2 = new javax.swing.JLabel();
-        invalidInputMessage3 = new javax.swing.JLabel();
-        invalidInputMessage4 = new javax.swing.JLabel();
-        invalidInputMessage5 = new javax.swing.JLabel();
-        addButton = new javax.swing.JButton();
-        bg = new javax.swing.JLabel();
         classDataMenu = new javax.swing.JPanel();
         addSectionButton = new javax.swing.JButton();
         assignFacultyButton = new javax.swing.JButton();
@@ -163,27 +159,31 @@ public class UIAdmin extends javax.swing.JFrame {
         currentSettings = new javax.swing.JButton();
         resetCurrentSettings = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        editStudentPanel = new javax.swing.JPanel();
-        tabLabel2 = new javax.swing.JLabel();
-        IDNumLabel2 = new javax.swing.JLabel();
-        IDNumField2 = new javax.swing.JTextField();
-        Search = new javax.swing.JButton();
-        invalidInputMessage13 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        informationTable = new javax.swing.JTable();
-        invalidInputMessage12 = new javax.swing.JLabel();
-        invalidInputMessage14 = new javax.swing.JLabel();
-        invalidInputMessage15 = new javax.swing.JLabel();
-        invalidInputMessage16 = new javax.swing.JLabel();
-        invalidInputMessage17 = new javax.swing.JLabel();
-        invalidInputMessage18 = new javax.swing.JLabel();
-        saveChangesbutton = new javax.swing.JButton();
-        bg2 = new javax.swing.JLabel();
         accountSettingsMenu = new javax.swing.JPanel();
         accountNameLabel = new javax.swing.JLabel();
         Settings = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        addStudentPanel = new javax.swing.JPanel();
+        tabLabel = new javax.swing.JLabel();
+        IDNumLabel = new javax.swing.JLabel();
+        IDNumField = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
+        surnameField = new javax.swing.JTextField();
+        firstnameField = new javax.swing.JTextField();
+        middlenameField = new javax.swing.JTextField();
+        genderLabel = new javax.swing.JLabel();
+        birthdateLabel = new javax.swing.JLabel();
+        studentBirthMonthComboBox = new javax.swing.JComboBox();
+        studentBirthDateComboBox = new javax.swing.JComboBox();
+        studentBirthYearComboBox = new javax.swing.JComboBox();
+        invalidInputMessage = new javax.swing.JLabel();
+        invalidInputMessage1 = new javax.swing.JLabel();
+        invalidInputMessage2 = new javax.swing.JLabel();
+        invalidInputMessage3 = new javax.swing.JLabel();
+        addButton = new javax.swing.JButton();
+        studentGenderComboBox = new javax.swing.JComboBox();
+        bg = new javax.swing.JLabel();
         addFacultyPanel = new javax.swing.JPanel();
         tabLabel1 = new javax.swing.JLabel();
         IDNumLabel1 = new javax.swing.JLabel();
@@ -200,10 +200,29 @@ public class UIAdmin extends javax.swing.JFrame {
         invalidInputMessage7 = new javax.swing.JLabel();
         invalidInputMessage8 = new javax.swing.JLabel();
         invalidInputMessage9 = new javax.swing.JLabel();
-        invalidInputMessage10 = new javax.swing.JLabel();
-        invalidInputMessage11 = new javax.swing.JLabel();
         addButton1 = new javax.swing.JButton();
+        departmentLabel = new javax.swing.JLabel();
+        departmentComboBox = new javax.swing.JComboBox();
+        contactNoLabel = new javax.swing.JLabel();
+        contactNumberField = new javax.swing.JTextField();
+        invalidInputMessage10 = new javax.swing.JLabel();
         bg1 = new javax.swing.JLabel();
+        editStudentPanel = new javax.swing.JPanel();
+        tabLabel2 = new javax.swing.JLabel();
+        IDNumLabel2 = new javax.swing.JLabel();
+        IDNumField2 = new javax.swing.JTextField();
+        Search = new javax.swing.JButton();
+        invalidInputMessage13 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        informationTable = new javax.swing.JTable();
+        invalidInputMessage12 = new javax.swing.JLabel();
+        invalidInputMessage14 = new javax.swing.JLabel();
+        invalidInputMessage15 = new javax.swing.JLabel();
+        invalidInputMessage16 = new javax.swing.JLabel();
+        invalidInputMessage17 = new javax.swing.JLabel();
+        invalidInputMessage18 = new javax.swing.JLabel();
+        saveChangesbutton = new javax.swing.JButton();
+        bg2 = new javax.swing.JLabel();
         editFacultyPanel = new javax.swing.JPanel();
         tabLabel3 = new javax.swing.JLabel();
         IDNumLabel3 = new javax.swing.JLabel();
@@ -746,6 +765,7 @@ public class UIAdmin extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/phila-logo.png"))); // NOI18N
         logo.setText("jLabel1");
         getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 130));
 
@@ -782,7 +802,7 @@ public class UIAdmin extends javax.swing.JFrame {
         getContentPane().add(gradesDataButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 110, -1));
 
         schoolYearSettings.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        schoolYearSettings.setText("School Year Settings");
+        schoolYearSettings.setText("SY Settings");
         schoolYearSettings.setOpaque(false);
         schoolYearSettings.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -865,113 +885,11 @@ public class UIAdmin extends javax.swing.JFrame {
         personalDataMenu.add(editFacultyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 110, -1));
 
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         personalDataMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 180));
 
         mainPanel.add(personalDataMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 130, 180));
-
-        addStudentPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-        addStudentPanel.setOpaque(false);
-        addStudentPanel.setVisible(false);
-        addStudentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tabLabel.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-        tabLabel.setForeground(new java.awt.Color(102, 0, 0));
-        tabLabel.setText("ADD STUDENT");
-        addStudentPanel.add(tabLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        IDNumLabel.setText("ID number:");
-        addStudentPanel.add(IDNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 70, 20));
-
-        IDNumField.setText("ID Number");
-        IDNumField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDNumFieldActionPerformed(evt);
-            }
-        });
-        addStudentPanel.add(IDNumField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 210, -1));
-
-        nameLabel.setText("Name:");
-        addStudentPanel.add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 20));
-
-        surnameField.setText("Surname");
-        addStudentPanel.add(surnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 210, -1));
-
-        firstnameField.setText("Firstname");
-        firstnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstnameFieldActionPerformed(evt);
-            }
-        });
-        addStudentPanel.add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 210, -1));
-
-        middlenameField.setText("Middlename");
-        middlenameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                middlenameFieldActionPerformed(evt);
-            }
-        });
-        addStudentPanel.add(middlenameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 210, -1));
-
-        genderLabel.setText("Gender:");
-        addStudentPanel.add(genderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 60, 20));
-
-        studentGenderComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
-        addStudentPanel.add(studentGenderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 210, -1));
-
-        birthdateLabel.setText("Birthdate:");
-        addStudentPanel.add(birthdateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 20));
-
-        studentBirthdateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        studentBirthdateComboBox.setAutoscrolls(true);
-        studentBirthdateComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                studentBirthdateComboBoxActionPerformed(evt);
-            }
-        });
-        addStudentPanel.add(studentBirthdateComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 210, -1));
-
-        invalidInputMessage.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage.setText("*invalid input");
-        addStudentPanel.add(invalidInputMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, 20));
-
-        invalidInputMessage1.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage1.setText("*invalid input");
-        addStudentPanel.add(invalidInputMessage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 110, 20));
-
-        invalidInputMessage2.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage2.setText("*invalid input");
-        addStudentPanel.add(invalidInputMessage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 110, 30));
-
-        invalidInputMessage3.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage3.setText("*invalid input");
-        addStudentPanel.add(invalidInputMessage3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 100, 20));
-
-        invalidInputMessage4.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage4.setText("*invalid input");
-        addStudentPanel.add(invalidInputMessage4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 110, 20));
-
-        invalidInputMessage5.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage5.setText("*invalid input");
-        addStudentPanel.add(invalidInputMessage5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 110, -1));
-
-        addButton.setText("Add");
-        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addButtonMouseClicked(evt);
-            }
-        });
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
-            }
-        });
-        addStudentPanel.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 80, -1));
-
-        bg.setText("jLabel4");
-        addStudentPanel.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-        mainPanel.add(addStudentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
 
         classDataMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         classDataMenu.setMaximumSize(new java.awt.Dimension(130, 180));
@@ -1029,6 +947,7 @@ public class UIAdmin extends javax.swing.JFrame {
         classDataMenu.add(editSectionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 110, -1));
 
         jLabel11.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
         jLabel11.setText("jLabel1");
         classDataMenu.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 180));
 
@@ -1045,7 +964,7 @@ public class UIAdmin extends javax.swing.JFrame {
         });
         gradesDataMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        viewGradesButton.setText("View Grades");
+        viewGradesButton.setText("View");
         viewGradesButton.setOpaque(false);
         viewGradesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1054,7 +973,7 @@ public class UIAdmin extends javax.swing.JFrame {
         });
         gradesDataMenu.add(viewGradesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 110, -1));
 
-        changeGradesButton.setText("Change Grades");
+        changeGradesButton.setText("Change");
         changeGradesButton.setOpaque(false);
         changeGradesButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1064,6 +983,7 @@ public class UIAdmin extends javax.swing.JFrame {
         gradesDataMenu.add(changeGradesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 110, -1));
 
         jLabel12.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
         jLabel12.setText("jLabel1");
         gradesDataMenu.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 110));
 
@@ -1080,7 +1000,7 @@ public class UIAdmin extends javax.swing.JFrame {
         });
         schoolyearSettingsMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        currentSettings.setText("Current Settings");
+        currentSettings.setText("Current");
         currentSettings.setOpaque(false);
         currentSettings.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1089,7 +1009,7 @@ public class UIAdmin extends javax.swing.JFrame {
         });
         schoolyearSettingsMenu.add(currentSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 110, -1));
 
-        resetCurrentSettings.setText("Reset Current Settings");
+        resetCurrentSettings.setText("Reset");
         resetCurrentSettings.setOpaque(false);
         resetCurrentSettings.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1099,10 +1019,283 @@ public class UIAdmin extends javax.swing.JFrame {
         schoolyearSettingsMenu.add(resetCurrentSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 110, -1));
 
         jLabel13.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
         jLabel13.setText("jLabel1");
         schoolyearSettingsMenu.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 110));
 
         mainPanel.add(schoolyearSettingsMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 130, 110));
+
+        accountSettingsMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        accountSettingsMenu.setMaximumSize(new java.awt.Dimension(130, 85));
+        accountSettingsMenu.setMinimumSize(new java.awt.Dimension(130, 85));
+        accountSettingsMenu.setOpaque(false);
+        accountSettingsMenu.setPreferredSize(new java.awt.Dimension(130, 85));
+        accountSettingsMenu.setVisible(false);
+        accountSettingsMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accountSettingsMenuMouseClicked(evt);
+            }
+        });
+        accountSettingsMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        accountNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        accountNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        accountNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        accountNameLabel.setText("<Username>");
+        accountSettingsMenu.add(accountNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 20));
+
+        Settings.setText("Settings");
+        Settings.setOpaque(false);
+        Settings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SettingsMouseClicked(evt);
+            }
+        });
+        accountSettingsMenu.add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 110, -1));
+
+        logoutButton.setText("Logout");
+        logoutButton.setOpaque(false);
+        accountSettingsMenu.add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 110, -1));
+
+        jLabel8.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
+        jLabel8.setText("jLabel1");
+        accountSettingsMenu.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 90));
+
+        mainPanel.add(accountSettingsMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 130, 85));
+
+        addStudentPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        addStudentPanel.setOpaque(false);
+        addStudentPanel.setVisible(false);
+        addStudentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel.setText("ADD STUDENT");
+        addStudentPanel.add(tabLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        IDNumLabel.setText("ID number:");
+        addStudentPanel.add(IDNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 70, 20));
+
+        IDNumField.setText("ID Number");
+        IDNumField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IDNumFieldActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(IDNumField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 210, -1));
+
+        nameLabel.setText("Name:");
+        addStudentPanel.add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 20));
+
+        surnameField.setText("Surname");
+        addStudentPanel.add(surnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 210, -1));
+
+        firstnameField.setText("Firstname");
+        firstnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstnameFieldActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 210, -1));
+
+        middlenameField.setText("Middlename");
+        middlenameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                middlenameFieldActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(middlenameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 210, -1));
+
+        genderLabel.setText("Gender:");
+        addStudentPanel.add(genderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 60, 20));
+
+        birthdateLabel.setText("Birthdate:");
+        addStudentPanel.add(birthdateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 20));
+
+        studentBirthMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        studentBirthMonthComboBox.setToolTipText("");
+        studentBirthMonthComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentBirthMonthComboBoxActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(studentBirthMonthComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 80, -1));
+
+        studentBirthDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        studentBirthDateComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentBirthDateComboBoxActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(studentBirthDateComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 60, -1));
+
+        studentBirthYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        studentBirthYearComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentBirthYearComboBoxActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(studentBirthYearComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 70, -1));
+
+        invalidInputMessage.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage.setText("*invalid input");
+        addStudentPanel.add(invalidInputMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, 20));
+
+        invalidInputMessage1.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage1.setText("*invalid input");
+        addStudentPanel.add(invalidInputMessage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 110, 20));
+
+        invalidInputMessage2.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage2.setText("*invalid input");
+        addStudentPanel.add(invalidInputMessage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 110, 30));
+
+        invalidInputMessage3.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage3.setText("*invalid input");
+        addStudentPanel.add(invalidInputMessage3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 100, 20));
+
+        addButton.setText("Add");
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addButtonMouseClicked(evt);
+            }
+        });
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 80, -1));
+
+        studentGenderComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        studentGenderComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentGenderComboBoxActionPerformed(evt);
+            }
+        });
+        addStudentPanel.add(studentGenderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, 20));
+
+        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg.setText("jLabel4");
+        addStudentPanel.add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(addStudentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        addFacultyPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        addFacultyPanel.setOpaque(false);
+        addFacultyPanel.setVisible(false);
+        addFacultyPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel1.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel1.setText("ADD FACULTY");
+        addFacultyPanel.add(tabLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        IDNumLabel1.setText("ID number:");
+        addFacultyPanel.add(IDNumLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 70, 20));
+
+        IDNumField1.setText("ID Number");
+        IDNumField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IDNumField1ActionPerformed(evt);
+            }
+        });
+        addFacultyPanel.add(IDNumField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 210, -1));
+
+        nameLabel1.setText("Name:");
+        addFacultyPanel.add(nameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 60, 20));
+
+        surnameField1.setText("Surname");
+        addFacultyPanel.add(surnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 210, -1));
+
+        firstnameField1.setText("Firstname");
+        firstnameField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstnameField1ActionPerformed(evt);
+            }
+        });
+        addFacultyPanel.add(firstnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 210, -1));
+
+        middlenameField1.setText("Middlename");
+        middlenameField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                middlenameField1ActionPerformed(evt);
+            }
+        });
+        addFacultyPanel.add(middlenameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 210, -1));
+
+        GenderLabel.setText("Gender:");
+        addFacultyPanel.add(GenderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 60, 20));
+
+        facultyGenderComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        facultyGenderComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facultyGenderComboBoxActionPerformed(evt);
+            }
+        });
+        addFacultyPanel.add(facultyGenderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 210, -1));
+
+        positionLabel.setText("Position:");
+        addFacultyPanel.add(positionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 60, 20));
+
+        facultyPositionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Subject Teacher", "Coordinator", "Principal" }));
+        facultyPositionComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facultyPositionComboBoxActionPerformed(evt);
+            }
+        });
+        addFacultyPanel.add(facultyPositionComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 210, -1));
+
+        invalidInputMessage6.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage6.setText("*invalid input");
+        addFacultyPanel.add(invalidInputMessage6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 110, 20));
+
+        invalidInputMessage7.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage7.setText("*invalid input");
+        addFacultyPanel.add(invalidInputMessage7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 110, 20));
+
+        invalidInputMessage8.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage8.setText("*invalid input");
+        addFacultyPanel.add(invalidInputMessage8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 110, 30));
+
+        invalidInputMessage9.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage9.setText("*invalid input");
+        addFacultyPanel.add(invalidInputMessage9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 100, 20));
+
+        addButton1.setText("Add");
+        addButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addButton1MouseClicked(evt);
+            }
+        });
+        addButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButton1ActionPerformed(evt);
+            }
+        });
+        addFacultyPanel.add(addButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 80, -1));
+
+        departmentLabel.setText("Department:");
+        addFacultyPanel.add(departmentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, 20));
+
+        departmentComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elementary", "High School" }));
+        addFacultyPanel.add(departmentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 210, -1));
+
+        contactNoLabel.setText("Contact#;");
+        addFacultyPanel.add(contactNoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 90, 20));
+
+        contactNumberField.setText("Contact Number");
+        addFacultyPanel.add(contactNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 210, -1));
+
+        invalidInputMessage10.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage10.setText("*invalid input");
+        addFacultyPanel.add(invalidInputMessage10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 110, 20));
+
+        bg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg1.setText("jLabel4");
+        addFacultyPanel.add(bg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(addFacultyPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
 
         editStudentPanel.setMaximumSize(new java.awt.Dimension(510, 380));
         editStudentPanel.setOpaque(false);
@@ -1126,11 +1319,6 @@ public class UIAdmin extends javax.swing.JFrame {
         editStudentPanel.add(IDNumField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 210, -1));
 
         Search.setText("searchButton");
-        Search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchActionPerformed(evt);
-            }
-        });
         editStudentPanel.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
 
         invalidInputMessage13.setForeground(new java.awt.Color(255, 0, 0));
@@ -1205,145 +1393,11 @@ public class UIAdmin extends javax.swing.JFrame {
         });
         editStudentPanel.add(saveChangesbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 120, -1));
 
+        bg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
         bg2.setText("jLabel4");
         editStudentPanel.add(bg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
 
         mainPanel.add(editStudentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-        accountSettingsMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-        accountSettingsMenu.setMaximumSize(new java.awt.Dimension(130, 85));
-        accountSettingsMenu.setMinimumSize(new java.awt.Dimension(130, 85));
-        accountSettingsMenu.setOpaque(false);
-        accountSettingsMenu.setPreferredSize(new java.awt.Dimension(130, 85));
-        accountSettingsMenu.setVisible(false);
-        accountSettingsMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                accountSettingsMenuMouseClicked(evt);
-            }
-        });
-        accountSettingsMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        accountNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        accountNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        accountNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        accountNameLabel.setText("<Username>");
-        accountSettingsMenu.add(accountNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 20));
-
-        Settings.setText("Settings");
-        Settings.setOpaque(false);
-        Settings.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SettingsMouseClicked(evt);
-            }
-        });
-        accountSettingsMenu.add(Settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 110, -1));
-
-        logoutButton.setText("Logout");
-        logoutButton.setOpaque(false);
-        accountSettingsMenu.add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 110, -1));
-
-        jLabel8.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel8.setText("jLabel1");
-        accountSettingsMenu.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 90));
-
-        mainPanel.add(accountSettingsMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 130, 85));
-
-        addFacultyPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-        addFacultyPanel.setOpaque(false);
-        addFacultyPanel.setVisible(false);
-        addFacultyPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tabLabel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-        tabLabel1.setForeground(new java.awt.Color(102, 0, 0));
-        tabLabel1.setText("ADD FACULTY");
-        addFacultyPanel.add(tabLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        IDNumLabel1.setText("ID number:");
-        addFacultyPanel.add(IDNumLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 70, 20));
-
-        IDNumField1.setText("ID Number");
-        IDNumField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDNumField1ActionPerformed(evt);
-            }
-        });
-        addFacultyPanel.add(IDNumField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 210, -1));
-
-        nameLabel1.setText("Name:");
-        addFacultyPanel.add(nameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 60, 20));
-
-        surnameField1.setText("Surname");
-        addFacultyPanel.add(surnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 210, -1));
-
-        firstnameField1.setText("Firstname");
-        firstnameField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstnameField1ActionPerformed(evt);
-            }
-        });
-        addFacultyPanel.add(firstnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 210, -1));
-
-        middlenameField1.setText("Middlename");
-        middlenameField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                middlenameField1ActionPerformed(evt);
-            }
-        });
-        addFacultyPanel.add(middlenameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 210, -1));
-
-        GenderLabel.setText("Gender:");
-        addFacultyPanel.add(GenderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 60, 20));
-
-        facultyGenderComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        addFacultyPanel.add(facultyGenderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 210, -1));
-
-        positionLabel.setText("Position:");
-        addFacultyPanel.add(positionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 60, 20));
-
-        facultyPositionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        addFacultyPanel.add(facultyPositionComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 210, -1));
-
-        invalidInputMessage6.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage6.setText("*invalid input");
-        addFacultyPanel.add(invalidInputMessage6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, 20));
-
-        invalidInputMessage7.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage7.setText("*invalid input");
-        addFacultyPanel.add(invalidInputMessage7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 110, 20));
-
-        invalidInputMessage8.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage8.setText("*invalid input");
-        addFacultyPanel.add(invalidInputMessage8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 110, 30));
-
-        invalidInputMessage9.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage9.setText("*invalid input");
-        addFacultyPanel.add(invalidInputMessage9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 100, 20));
-
-        invalidInputMessage10.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage10.setText("*invalid input");
-        addFacultyPanel.add(invalidInputMessage10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 110, 20));
-
-        invalidInputMessage11.setForeground(new java.awt.Color(255, 0, 0));
-        invalidInputMessage11.setText("*invalid input");
-        addFacultyPanel.add(invalidInputMessage11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 110, -1));
-
-        addButton1.setText("Add");
-        addButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addButton1MouseClicked(evt);
-            }
-        });
-        addButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButton1ActionPerformed(evt);
-            }
-        });
-        addFacultyPanel.add(addButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 80, -1));
-
-        bg1.setText("jLabel4");
-        addFacultyPanel.add(bg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-        mainPanel.add(addFacultyPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
 
         editFacultyPanel.setMaximumSize(new java.awt.Dimension(510, 380));
         editFacultyPanel.setOpaque(false);
@@ -1441,6 +1495,7 @@ public class UIAdmin extends javax.swing.JFrame {
         });
         editFacultyPanel.add(saveChangesbutton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 120, -1));
 
+        bg3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
         bg3.setText("jLabel4");
         editFacultyPanel.add(bg3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
 
@@ -1459,12 +1514,7 @@ public class UIAdmin extends javax.swing.JFrame {
         gradeLevelLabel.setText("Grade Level:");
         addSectionPanel.add(gradeLevelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 70, 20));
 
-        gradeLevelCombox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        gradeLevelCombox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gradeLevelCombox1ActionPerformed(evt);
-            }
-        });
+        gradeLevelCombox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         addSectionPanel.add(gradeLevelCombox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 210, -1));
 
         firstSectionLabel.setText("First Section:");
@@ -1502,13 +1552,9 @@ public class UIAdmin extends javax.swing.JFrame {
                 addButton2MouseClicked(evt);
             }
         });
-        addButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButton2ActionPerformed(evt);
-            }
-        });
         addSectionPanel.add(addButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 80, -1));
 
+        bg5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
         bg5.setText("jLabel4");
         addSectionPanel.add(bg5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
 
@@ -1527,18 +1573,13 @@ public class UIAdmin extends javax.swing.JFrame {
         gradeLevelLabel1.setText("Grade Level:");
         assignFacultyPanel.add(gradeLevelLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 70, 20));
 
-        gradeLevelComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+        gradeLevelComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         assignFacultyPanel.add(gradeLevelComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 210, -1));
 
         sectionLabel3.setText("Section:");
         assignFacultyPanel.add(sectionLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 20));
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
-            }
-        });
         assignFacultyPanel.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 210, -1));
 
         invalidInputMessage41.setForeground(new java.awt.Color(255, 0, 0));
@@ -1548,581 +1589,590 @@ public class UIAdmin extends javax.swing.JFrame {
         Adviser.setText("Adviser:");
         assignFacultyPanel.add(Adviser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, 20));
 
-        AdviserComboBox.setModel(new javax.swing.DefaultComboBoxModel();
-            AdviserComboBox.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    AdviserComboBoxActionPerformed(evt);
-                }
-            });
-            assignFacultyPanel.add(AdviserComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 210, -1));
-
-            invalidInputMessage31.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage31.setText("*invalid input");
-            assignFacultyPanel.add(invalidInputMessage31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, 20));
-
-            invalidInputMessage33.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage33.setText("*invalid input");
-            assignFacultyPanel.add(invalidInputMessage33, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 110, 20));
-
-            assignButton.setText("Assign");
-            assignButton.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    assignButtonMouseClicked(evt);
-                }
-            });
-            assignFacultyPanel.add(assignButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 80, -1));
-
-            bg6.setText("jLabel4");
-            assignFacultyPanel.add(bg6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-            mainPanel.add(assignFacultyPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-            assignStudentPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-            assignStudentPanel.setOpaque(false);
-            assignStudentPanel.setVisible(false);
-            assignStudentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            tabLabel7.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-            tabLabel7.setForeground(new java.awt.Color(102, 0, 0));
-            tabLabel7.setText("ASSIGN STUDENT");
-            assignStudentPanel.add(tabLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-            gradeLevelLabel2.setText("Grade Level:");
-            assignStudentPanel.add(gradeLevelLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 70, 20));
-
-            gradeLevelComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            assignStudentPanel.add(gradeLevelComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 190, -1));
-
-            Adviser1.setText("Adviser:");
-            assignStudentPanel.add(Adviser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 20));
-
-            adviserNameLabel.setText("<Adviser's Name>");
-            assignStudentPanel.add(adviserNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 210, 20));
-
-            SectionLabel.setText("Section:");
-            assignStudentPanel.add(SectionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 124, 60, 30));
-
-            jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            assignStudentPanel.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 190, -1));
-
-            invalidInputMessage40.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage40.setText("*invalid input");
-            assignStudentPanel.add(invalidInputMessage40, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 70, 20));
-
-            StudentLabel.setText("Student:");
-            assignStudentPanel.add(StudentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 80, 20));
-
-            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            assignStudentPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, -1));
-
-            invalidInputMessage32.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage32.setText("*invalid input");
-            assignStudentPanel.add(invalidInputMessage32, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 70, 20));
-
-            invalidInputMessage34.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage34.setText("*invalid input");
-            assignStudentPanel.add(invalidInputMessage34, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 110, 20));
-
-            jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {"1", "Anton de Joya"},
-                    {"2", "Jason Cruz"},
-                    {"3", "Jake Tirados"},
-                    {"4", null}
-                },
-                new String [] {
-                    "Number", "Name"
-                }
-            ));
-            jScrollPane3.setViewportView(jTable1);
-
-            assignStudentPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 490, 130));
-
-            assignButton1.setText("Assign");
-            assignButton1.setOpaque(false);
-            assignButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    assignButton1MouseClicked(evt);
-                }
-            });
-            assignStudentPanel.add(assignButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 80, -1));
-
-            DoneButton.setText("Done");
-            DoneButton.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    DoneButtonMouseClicked(evt);
-                }
-            });
-            assignStudentPanel.add(DoneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 90, -1));
-
-            bg7.setText("jLabel4");
-            assignStudentPanel.add(bg7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-            mainPanel.add(assignStudentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-            editSectionPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-            editSectionPanel.setOpaque(false);
-            editSectionPanel.setVisible(false);
-            editSectionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            tabLabel8.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-            tabLabel8.setForeground(new java.awt.Color(102, 0, 0));
-            tabLabel8.setText("EDIT SECTION");
-            editSectionPanel.add(tabLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-            gradeLevelLabel3.setText("Grade Level:");
-            editSectionPanel.add(gradeLevelLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 70, 20));
-
-            gradeLevelComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            editSectionPanel.add(gradeLevelComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 190, -1));
-
-            invalidInputMessage37.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage37.setText("*invalid input");
-            editSectionPanel.add(invalidInputMessage37, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 110, 20));
-
-            jTable2.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {"Adviser", "Anton de Joya"},
-                    {"Student#1", "Jason Cruz"},
-                    {"Student#1", "Jake Tirados"},
-                    {"Student#3", ""}
-                },
-                new String [] {
-                    "", "Name"
-                }
-            ));
-            jScrollPane4.setViewportView(jTable2);
-
-            editSectionPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 490, 200));
-
-            DoneButton1.setText("Done");
-            DoneButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    DoneButton1MouseClicked(evt);
-                }
-            });
-            editSectionPanel.add(DoneButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 90, -1));
-
-            bg8.setText("jLabel4");
-            editSectionPanel.add(bg8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-            mainPanel.add(editSectionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-            viewGradesPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-            viewGradesPanel.setOpaque(false);
-            viewGradesPanel.setVisible(false);
-            viewGradesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            tabLabel9.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-            tabLabel9.setForeground(new java.awt.Color(102, 0, 0));
-            tabLabel9.setText("VIEW GRADES");
-            viewGradesPanel.add(tabLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-            gradeLevelLabel4.setText("Grade Level:");
-            viewGradesPanel.add(gradeLevelLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 70, 20));
-
-            gradeLevelComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            viewGradesPanel.add(gradeLevelComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 120, -1));
-
-            sectionLabel.setText("Section:");
-            viewGradesPanel.add(sectionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 50, 20));
-
-            sectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            viewGradesPanel.add(sectionComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 90, -1));
-
-            quarterLabel.setText("Qtr:");
-            viewGradesPanel.add(quarterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 30, 20));
-
-            jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            viewGradesPanel.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 70, -1));
-
-            StudentLabel1.setText("Student:");
-            viewGradesPanel.add(StudentLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, 20));
-
-            studentComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            viewGradesPanel.add(studentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 180, -1));
-
-            subjectLabel.setText("Subject:");
-            viewGradesPanel.add(subjectLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, 20));
-
-            subjectComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            viewGradesPanel.add(subjectComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 80, -1));
-
-            viewButton.setText("View");
-            viewButton.setOpaque(false);
-            viewButton.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    viewButtonMouseClicked(evt);
-                }
-            });
-            viewGradesPanel.add(viewButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 70, -1));
-
-            jTable3.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {"Quiz", "1", null, null, null, null},
-                    {"HW", "5", null, null, null, null},
-                    {"SW", "10", null, null, null, null},
-                    {"Oral Participation", null, null, null, null, null}
-                },
-                new String [] {
-                    "Activity", "No.", "Knowledge", "Understanding", "Process/Skill", "Product/Performance"
-                }
-            ) {
-                boolean[] canEdit = new boolean [] {
-                    true, true, true, false, true, false
-                };
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                }
-            });
-            jScrollPane5.setViewportView(jTable3);
-
-            viewGradesPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 490, 120));
-
-            averageLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-            averageLabel.setForeground(new java.awt.Color(102, 0, 0));
-            averageLabel.setText("Averages");
-            viewGradesPanel.add(averageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
-
-            knowledgeLabel.setText("Knowledge:");
-            viewGradesPanel.add(knowledgeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 70, -1));
-
-            knowledgeValueLabel.setText("<und. value>");
-            viewGradesPanel.add(knowledgeValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, -1));
-
-            understandingLabel.setText("Understanding:");
-            viewGradesPanel.add(understandingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 90, -1));
-
-            understandingValueLabel.setText("<und. value>");
-            viewGradesPanel.add(understandingValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
-
-            processlabel.setText("Process/Skill:");
-            viewGradesPanel.add(processlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 80, -1));
-
-            processValueLabel.setText("<pro. value>");
-            viewGradesPanel.add(processValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
-
-            productlabel.setText("Product/Performance:");
-            viewGradesPanel.add(productlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 120, -1));
-
-            productValueLabel.setText("<product value>");
-            viewGradesPanel.add(productValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
-
-            lineLabel.setText("----------------------------------------------------------");
-            viewGradesPanel.add(lineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 240, 10));
-
-            finalRatingLabel.setText("FINAL RATING:");
-            viewGradesPanel.add(finalRatingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
-
-            finalRatingValueLabel.setText("<final rating value (number and letter)>");
-            viewGradesPanel.add(finalRatingValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
-
-            bg9.setText("jLabel4");
-            viewGradesPanel.add(bg9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-            mainPanel.add(viewGradesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-            changeGradesPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-            changeGradesPanel.setOpaque(false);
-            changeGradesPanel.setVisible(false);
-            changeGradesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            tabLabel10.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-            tabLabel10.setForeground(new java.awt.Color(102, 0, 0));
-            tabLabel10.setText("CHANGE GRADES");
-            changeGradesPanel.add(tabLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-            gradeLevelLabel5.setText("Grade Level:");
-            changeGradesPanel.add(gradeLevelLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 70, 20));
-
-            gradeLevelComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            changeGradesPanel.add(gradeLevelComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 120, -1));
-
-            sectionLabel1.setText("Section:");
-            changeGradesPanel.add(sectionLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 50, 20));
-
-            sectionComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            changeGradesPanel.add(sectionComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 90, -1));
-
-            quarterLabel1.setText("Qtr:");
-            changeGradesPanel.add(quarterLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 30, 20));
-
-            jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            changeGradesPanel.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 70, -1));
-
-            StudentLabel2.setText("Student:");
-            changeGradesPanel.add(StudentLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, 20));
-
-            studentComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            changeGradesPanel.add(studentComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 180, -1));
-
-            subjectLabel1.setText("Subject:");
-            changeGradesPanel.add(subjectLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, 20));
-
-            subjectComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-            changeGradesPanel.add(subjectComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 80, -1));
-
-            viewButton1.setText("View");
-            viewButton1.setOpaque(false);
-            viewButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    viewButton1MouseClicked(evt);
-                }
-            });
-            changeGradesPanel.add(viewButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 70, -1));
-
-            jTable4.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {"Quiz", "1", null, null, null, null},
-                    {"HW", "5", null, null, null, null},
-                    {"SW", "10", null, null, null, null},
-                    {"Oral Participation", null, null, null, null, null}
-                },
-                new String [] {
-                    "Activity", "No.", "Knowledge", "Understanding", "Process/Skill", "Product/Performance"
-                }
-            ) {
-                boolean[] canEdit = new boolean [] {
-                    true, true, true, false, true, false
-                };
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                }
-            });
-            jScrollPane6.setViewportView(jTable4);
-
-            changeGradesPanel.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 490, 120));
-
-            averageLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-            averageLabel1.setForeground(new java.awt.Color(102, 0, 0));
-            averageLabel1.setText("Averages");
-            changeGradesPanel.add(averageLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
-
-            knowledgeLabel1.setText("Knowledge:");
-            changeGradesPanel.add(knowledgeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 70, -1));
-
-            knowledgeValueLabel1.setText("<und. value>");
-            changeGradesPanel.add(knowledgeValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, -1));
-
-            understandingLabel1.setText("Understanding:");
-            changeGradesPanel.add(understandingLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 90, -1));
-
-            understandingValueLabel1.setText("<und. value>");
-            changeGradesPanel.add(understandingValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
-
-            processlabel1.setText("Process/Skill:");
-            changeGradesPanel.add(processlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 80, -1));
-
-            processValueLabel1.setText("<pro. value>");
-            changeGradesPanel.add(processValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
-
-            productlabel1.setText("Product/Performance:");
-            changeGradesPanel.add(productlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 120, -1));
-
-            productValueLabel1.setText("<product value>");
-            changeGradesPanel.add(productValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
-
-            lineLabel1.setText("----------------------------------------------------------");
-            changeGradesPanel.add(lineLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 240, 10));
-
-            finalRatingLabel1.setText("FINAL RATING:");
-            changeGradesPanel.add(finalRatingLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
-
-            finalRatingValueLabel1.setText("<final rating value (number and letter)>");
-            changeGradesPanel.add(finalRatingValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
-
-            saveButton.setText("Save");
-            saveButton.setOpaque(false);
-            saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    saveButtonMouseClicked(evt);
-                }
-            });
-            changeGradesPanel.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, -1));
-
-            bg10.setText("jLabel4");
-            changeGradesPanel.add(bg10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-            mainPanel.add(changeGradesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-            currentSettingsPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-            currentSettingsPanel.setOpaque(false);
-            currentSettingsPanel.setVisible(false);
-            currentSettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            tabLabel11.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-            tabLabel11.setForeground(new java.awt.Color(102, 0, 0));
-            tabLabel11.setText("CURRENT SETTINGS");
-            currentSettingsPanel.add(tabLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-            knowledgePercentage.setText("Knowledge:");
-            currentSettingsPanel.add(knowledgePercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 70, 20));
-
-            knowledgePercentageField.setText("Knowledge Percentage");
-            knowledgePercentageField.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    knowledgePercentageFieldActionPerformed(evt);
-                }
-            });
-            currentSettingsPanel.add(knowledgePercentageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 160, -1));
-
-            processPercentage.setText("Process/Skills:");
-            currentSettingsPanel.add(processPercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, 20));
-
-            processPercentageLabel.setText("Process/Skills Percentage");
-            processPercentageLabel.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    processPercentageLabelActionPerformed(evt);
-                }
-            });
-            currentSettingsPanel.add(processPercentageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 160, -1));
-
-            understandingPercentage.setText("Understanding:");
-            currentSettingsPanel.add(understandingPercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 80, 20));
-
-            understandingPercentageField.setText("Understanding Percentage");
-            understandingPercentageField.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    understandingPercentageFieldActionPerformed(evt);
-                }
-            });
-            currentSettingsPanel.add(understandingPercentageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 160, -1));
-
-            productPercentage.setText("Product/Performance:");
-            currentSettingsPanel.add(productPercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, 20));
-
-            productPercentageField.setText("Product/Performance Percentage");
-            productPercentageField.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    productPercentageFieldActionPerformed(evt);
-                }
-            });
-            currentSettingsPanel.add(productPercentageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 160, -1));
-
-            jTable5.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {"Jun", "<#ofdays>"},
-                    {"Jul", ""},
-                    {"Aug", null},
-                    {"Sep", null},
-                    {"Oct", null},
-                    {"Nov", null},
-                    {"Dec", null},
-                    {"Jan", null},
-                    {"Feb", null},
-                    {"Mar", null},
-                    {"Total", null}
-                },
-                new String [] {
-                    "Months", "Days of School"
-                }
-            ));
-            jScrollPane7.setViewportView(jTable5);
-
-            currentSettingsPanel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 200, 490, 110));
-
-            invalidInputMessage35.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage35.setText("*invalid input");
-            currentSettingsPanel.add(invalidInputMessage35, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, 20));
-
-            invalidInputMessage36.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage36.setText("*invalid input");
-            currentSettingsPanel.add(invalidInputMessage36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 110, 20));
-
-            invalidInputMessage38.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage38.setText("*invalid input");
-            currentSettingsPanel.add(invalidInputMessage38, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 110, 20));
-
-            invalidInputMessage39.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage39.setText("*invalid input");
-            currentSettingsPanel.add(invalidInputMessage39, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 100, 20));
-
-            saveButton1.setText("Save");
-            saveButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    saveButton1MouseClicked(evt);
-                }
-            });
-            currentSettingsPanel.add(saveButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 100, -1));
-
-            bg11.setText("jLabel4");
-            currentSettingsPanel.add(bg11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-            mainPanel.add(currentSettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-            accountSettingsPanel.setMaximumSize(new java.awt.Dimension(510, 380));
-            accountSettingsPanel.setOpaque(false);
-            accountSettingsPanel.setVisible(false);
-            accountSettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            tabLabel4.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-            tabLabel4.setForeground(new java.awt.Color(102, 0, 0));
-            tabLabel4.setText("ACCOUNT SETTINGS");
-            accountSettingsPanel.add(tabLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-            currentPasswordLabel.setText("Current Password:");
-            accountSettingsPanel.add(currentPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 110, 20));
-
-            currentPasswordField.setText("CureentPassowrd");
-            accountSettingsPanel.add(currentPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 230, -1));
-
-            newPasswordLabel.setText("New Password:");
-            accountSettingsPanel.add(newPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 90, -1));
-
-            newPasswordField.setText("jPasswordField2");
-            newPasswordField.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    newPasswordFieldActionPerformed(evt);
-                }
-            });
-            accountSettingsPanel.add(newPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 230, 20));
-
-            reenterPasswordLabel.setText("Re-enter Password:");
-            accountSettingsPanel.add(reenterPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
-
-            jPasswordField1.setText("jPasswordField1");
-            accountSettingsPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 230, -1));
-
-            invalidInputMessage27.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage27.setText("*password does not match");
-            accountSettingsPanel.add(invalidInputMessage27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 140, 30));
-
-            invalidInputMessage26.setForeground(new java.awt.Color(255, 0, 0));
-            invalidInputMessage26.setText("*invalid input");
-            accountSettingsPanel.add(invalidInputMessage26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 90, 20));
-
-            updateAccountButton.setText("Update Account");
-            updateAccountButton.setOpaque(false);
-            updateAccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    updateAccountButtonMouseClicked(evt);
-                }
-            });
-            accountSettingsPanel.add(updateAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 120, -1));
-
-            bg4.setText("jLabel4");
-            accountSettingsPanel.add(bg4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
-
-            mainPanel.add(accountSettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
-
-            getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, -1, 400));
-
-            panel_menu.setText("jLabel1");
-            panel_menu.setMaximumSize(new java.awt.Dimension(214, 500));
-            panel_menu.setMinimumSize(new java.awt.Dimension(214, 500));
-            panel_menu.setPreferredSize(new java.awt.Dimension(130, 430));
-            getContentPane().add(panel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 400));
-
-            background.setText("jLabel15");
-            background.setMaximumSize(new java.awt.Dimension(660, 425));
-            background.setMinimumSize(new java.awt.Dimension(660, 425));
-            background.setPreferredSize(new java.awt.Dimension(660, 425));
-            getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
-
-            pack();
-        }// </editor-fold>//GEN-END:initComponents
+        AdviserComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        assignFacultyPanel.add(AdviserComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 210, -1));
+
+        invalidInputMessage31.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage31.setText("*invalid input");
+        assignFacultyPanel.add(invalidInputMessage31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, 20));
+
+        invalidInputMessage33.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage33.setText("*invalid input");
+        assignFacultyPanel.add(invalidInputMessage33, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 110, 20));
+
+        assignButton.setText("Assign");
+        assignButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assignButtonMouseClicked(evt);
+            }
+        });
+        assignFacultyPanel.add(assignButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 80, -1));
+
+        bg6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg6.setText("jLabel4");
+        assignFacultyPanel.add(bg6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(assignFacultyPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        assignStudentPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        assignStudentPanel.setOpaque(false);
+        assignStudentPanel.setVisible(false);
+        assignStudentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel7.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel7.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel7.setText("ASSIGN STUDENT");
+        assignStudentPanel.add(tabLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        gradeLevelLabel2.setText("Grade Level:");
+        assignStudentPanel.add(gradeLevelLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 70, 20));
+
+        gradeLevelComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        assignStudentPanel.add(gradeLevelComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 190, -1));
+
+        Adviser1.setText("Adviser:");
+        assignStudentPanel.add(Adviser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 20));
+
+        adviserNameLabel.setText("<Adviser's Name>");
+        assignStudentPanel.add(adviserNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 210, 20));
+
+        SectionLabel.setText("Section:");
+        assignStudentPanel.add(SectionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 124, 60, 30));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        assignStudentPanel.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 190, -1));
+
+        invalidInputMessage40.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage40.setText("*invalid input");
+        assignStudentPanel.add(invalidInputMessage40, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 70, 20));
+
+        StudentLabel.setText("Student:");
+        assignStudentPanel.add(StudentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 80, 20));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        assignStudentPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, -1));
+
+        invalidInputMessage32.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage32.setText("*invalid input");
+        assignStudentPanel.add(invalidInputMessage32, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 70, 20));
+
+        invalidInputMessage34.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage34.setText("*invalid input");
+        assignStudentPanel.add(invalidInputMessage34, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 110, 20));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"1", "Anton de Joya"},
+                {"2", "Jason Cruz"},
+                {"3", "Jake Tirados"},
+                {"4", null}
+            },
+            new String [] {
+                "Number", "Name"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        assignStudentPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 490, 130));
+
+        assignButton1.setText("Assign");
+        assignButton1.setOpaque(false);
+        assignButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assignButton1MouseClicked(evt);
+            }
+        });
+        assignStudentPanel.add(assignButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 80, -1));
+
+        DoneButton.setText("Done");
+        DoneButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DoneButtonMouseClicked(evt);
+            }
+        });
+        assignStudentPanel.add(DoneButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 90, -1));
+
+        bg7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg7.setText("jLabel4");
+        assignStudentPanel.add(bg7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(assignStudentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        editSectionPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        editSectionPanel.setOpaque(false);
+        editSectionPanel.setVisible(false);
+        editSectionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel8.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel8.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel8.setText("EDIT SECTION");
+        editSectionPanel.add(tabLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        gradeLevelLabel3.setText("Grade Level:");
+        editSectionPanel.add(gradeLevelLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 70, 20));
+
+        gradeLevelComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        editSectionPanel.add(gradeLevelComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 190, -1));
+
+        invalidInputMessage37.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage37.setText("*invalid input");
+        editSectionPanel.add(invalidInputMessage37, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 110, 20));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Adviser", "Anton de Joya"},
+                {"Student#1", "Jason Cruz"},
+                {"Student#1", "Jake Tirados"},
+                {"Student#3", ""}
+            },
+            new String [] {
+                "", "Name"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable2);
+
+        editSectionPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 490, 200));
+
+        DoneButton1.setText("Done");
+        DoneButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DoneButton1MouseClicked(evt);
+            }
+        });
+        editSectionPanel.add(DoneButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 90, -1));
+
+        bg8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg8.setText("jLabel4");
+        editSectionPanel.add(bg8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(editSectionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        viewGradesPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        viewGradesPanel.setOpaque(false);
+        viewGradesPanel.setVisible(false);
+        viewGradesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel9.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel9.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel9.setText("VIEW GRADES");
+        viewGradesPanel.add(tabLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        gradeLevelLabel4.setText("Grade Level:");
+        viewGradesPanel.add(gradeLevelLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 70, 20));
+
+        gradeLevelComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        viewGradesPanel.add(gradeLevelComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 120, -1));
+
+        sectionLabel.setText("Section:");
+        viewGradesPanel.add(sectionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 50, 20));
+
+        sectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        viewGradesPanel.add(sectionComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 90, -1));
+
+        quarterLabel.setText("Qtr:");
+        viewGradesPanel.add(quarterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 30, 20));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        viewGradesPanel.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 70, -1));
+
+        StudentLabel1.setText("Student:");
+        viewGradesPanel.add(StudentLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, 20));
+
+        studentComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        viewGradesPanel.add(studentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 180, -1));
+
+        subjectLabel.setText("Subject:");
+        viewGradesPanel.add(subjectLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, 20));
+
+        subjectComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        viewGradesPanel.add(subjectComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 80, -1));
+
+        viewButton.setText("View");
+        viewButton.setOpaque(false);
+        viewButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewButtonMouseClicked(evt);
+            }
+        });
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewButtonActionPerformed(evt);
+            }
+        });
+        viewGradesPanel.add(viewButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 70, -1));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Quiz", "1", null, null, null, null},
+                {"HW", "5", null, null, null, null},
+                {"SW", "10", null, null, null, null},
+                {"Oral Participation", null, null, null, null, null}
+            },
+            new String [] {
+                "Activity", "No.", "Knowledge", "Understanding", "Process/Skill", "Product/Performance"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable3);
+
+        viewGradesPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 490, 120));
+
+        averageLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        averageLabel.setForeground(new java.awt.Color(102, 0, 0));
+        averageLabel.setText("Averages");
+        viewGradesPanel.add(averageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        knowledgeLabel.setText("Knowledge:");
+        viewGradesPanel.add(knowledgeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 70, -1));
+
+        knowledgeValueLabel.setText("<und. value>");
+        viewGradesPanel.add(knowledgeValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, -1));
+
+        understandingLabel.setText("Understanding:");
+        viewGradesPanel.add(understandingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 90, -1));
+
+        understandingValueLabel.setText("<und. value>");
+        viewGradesPanel.add(understandingValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
+
+        processlabel.setText("Process/Skill:");
+        viewGradesPanel.add(processlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 80, -1));
+
+        processValueLabel.setText("<pro. value>");
+        viewGradesPanel.add(processValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
+
+        productlabel.setText("Product/Performance:");
+        viewGradesPanel.add(productlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 120, -1));
+
+        productValueLabel.setText("<product value>");
+        viewGradesPanel.add(productValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
+
+        lineLabel.setText("----------------------------------------------------------");
+        viewGradesPanel.add(lineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 240, 10));
+
+        finalRatingLabel.setText("FINAL RATING:");
+        viewGradesPanel.add(finalRatingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+
+        finalRatingValueLabel.setText("<final rating value (number and letter)>");
+        viewGradesPanel.add(finalRatingValueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+
+        bg9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg9.setText("jLabel4");
+        viewGradesPanel.add(bg9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(viewGradesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        changeGradesPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        changeGradesPanel.setOpaque(false);
+        changeGradesPanel.setVisible(false);
+        changeGradesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel10.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel10.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel10.setText("CHANGE GRADES");
+        changeGradesPanel.add(tabLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        gradeLevelLabel5.setText("Grade Level:");
+        changeGradesPanel.add(gradeLevelLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 70, 20));
+
+        gradeLevelComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        changeGradesPanel.add(gradeLevelComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 120, -1));
+
+        sectionLabel1.setText("Section:");
+        changeGradesPanel.add(sectionLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 50, 20));
+
+        sectionComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        changeGradesPanel.add(sectionComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 90, -1));
+
+        quarterLabel1.setText("Qtr:");
+        changeGradesPanel.add(quarterLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 30, 20));
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        changeGradesPanel.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 70, -1));
+
+        StudentLabel2.setText("Student:");
+        changeGradesPanel.add(StudentLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, 20));
+
+        studentComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        changeGradesPanel.add(studentComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 180, -1));
+
+        subjectLabel1.setText("Subject:");
+        changeGradesPanel.add(subjectLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, 20));
+
+        subjectComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        changeGradesPanel.add(subjectComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 80, -1));
+
+        viewButton1.setText("View");
+        viewButton1.setOpaque(false);
+        viewButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewButton1MouseClicked(evt);
+            }
+        });
+        changeGradesPanel.add(viewButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 70, -1));
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Quiz", "1", null, null, null, null},
+                {"HW", "5", null, null, null, null},
+                {"SW", "10", null, null, null, null},
+                {"Oral Participation", null, null, null, null, null}
+            },
+            new String [] {
+                "Activity", "No.", "Knowledge", "Understanding", "Process/Skill", "Product/Performance"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(jTable4);
+
+        changeGradesPanel.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 490, 120));
+
+        averageLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        averageLabel1.setForeground(new java.awt.Color(102, 0, 0));
+        averageLabel1.setText("Averages");
+        changeGradesPanel.add(averageLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        knowledgeLabel1.setText("Knowledge:");
+        changeGradesPanel.add(knowledgeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 70, -1));
+
+        knowledgeValueLabel1.setText("<und. value>");
+        changeGradesPanel.add(knowledgeValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, -1));
+
+        understandingLabel1.setText("Understanding:");
+        changeGradesPanel.add(understandingLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 90, -1));
+
+        understandingValueLabel1.setText("<und. value>");
+        changeGradesPanel.add(understandingValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
+
+        processlabel1.setText("Process/Skill:");
+        changeGradesPanel.add(processlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 80, -1));
+
+        processValueLabel1.setText("<pro. value>");
+        changeGradesPanel.add(processValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
+
+        productlabel1.setText("Product/Performance:");
+        changeGradesPanel.add(productlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 120, -1));
+
+        productValueLabel1.setText("<product value>");
+        changeGradesPanel.add(productValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
+
+        lineLabel1.setText("----------------------------------------------------------");
+        changeGradesPanel.add(lineLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 240, 10));
+
+        finalRatingLabel1.setText("FINAL RATING:");
+        changeGradesPanel.add(finalRatingLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+
+        finalRatingValueLabel1.setText("<final rating value (number and letter)>");
+        changeGradesPanel.add(finalRatingValueLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+
+        saveButton.setText("Save");
+        saveButton.setOpaque(false);
+        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveButtonMouseClicked(evt);
+            }
+        });
+        changeGradesPanel.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, -1));
+
+        bg10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg10.setText("jLabel4");
+        changeGradesPanel.add(bg10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(changeGradesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        currentSettingsPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        currentSettingsPanel.setOpaque(false);
+        currentSettingsPanel.setVisible(false);
+        currentSettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel11.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel11.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel11.setText("CURRENT SETTINGS");
+        currentSettingsPanel.add(tabLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        knowledgePercentage.setText("Knowledge:");
+        currentSettingsPanel.add(knowledgePercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 70, 20));
+
+        knowledgePercentageField.setText("Knowledge Percentage");
+        knowledgePercentageField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knowledgePercentageFieldActionPerformed(evt);
+            }
+        });
+        currentSettingsPanel.add(knowledgePercentageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 160, -1));
+
+        processPercentage.setText("Process/Skills:");
+        currentSettingsPanel.add(processPercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, 20));
+
+        processPercentageLabel.setText("Process/Skills Percentage");
+        processPercentageLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processPercentageLabelActionPerformed(evt);
+            }
+        });
+        currentSettingsPanel.add(processPercentageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 160, -1));
+
+        understandingPercentage.setText("Understanding:");
+        currentSettingsPanel.add(understandingPercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 80, 20));
+
+        understandingPercentageField.setText("Understanding Percentage");
+        understandingPercentageField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                understandingPercentageFieldActionPerformed(evt);
+            }
+        });
+        currentSettingsPanel.add(understandingPercentageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 160, -1));
+
+        productPercentage.setText("Product/Performance:");
+        currentSettingsPanel.add(productPercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, 20));
+
+        productPercentageField.setText("Product/Performance Percentage");
+        productPercentageField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productPercentageFieldActionPerformed(evt);
+            }
+        });
+        currentSettingsPanel.add(productPercentageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 160, -1));
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Jun", "<#ofdays>"},
+                {"Jul", ""},
+                {"Aug", null},
+                {"Sep", null},
+                {"Oct", null},
+                {"Nov", null},
+                {"Dec", null},
+                {"Jan", null},
+                {"Feb", null},
+                {"Mar", null},
+                {"Total", null}
+            },
+            new String [] {
+                "Months", "Days of School"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable5);
+
+        currentSettingsPanel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 200, 490, 110));
+
+        invalidInputMessage35.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage35.setText("*invalid input");
+        currentSettingsPanel.add(invalidInputMessage35, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, 20));
+
+        invalidInputMessage36.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage36.setText("*invalid input");
+        currentSettingsPanel.add(invalidInputMessage36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 110, 20));
+
+        invalidInputMessage38.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage38.setText("*invalid input");
+        currentSettingsPanel.add(invalidInputMessage38, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 110, 20));
+
+        invalidInputMessage39.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage39.setText("*invalid input");
+        currentSettingsPanel.add(invalidInputMessage39, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 100, 20));
+
+        saveButton1.setText("Save");
+        saveButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveButton1MouseClicked(evt);
+            }
+        });
+        currentSettingsPanel.add(saveButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 330, 100, -1));
+
+        bg11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg11.setText("jLabel4");
+        currentSettingsPanel.add(bg11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(currentSettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        accountSettingsPanel.setMaximumSize(new java.awt.Dimension(510, 380));
+        accountSettingsPanel.setOpaque(false);
+        accountSettingsPanel.setVisible(false);
+        accountSettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabLabel4.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
+        tabLabel4.setForeground(new java.awt.Color(102, 0, 0));
+        tabLabel4.setText("ACCOUNT SETTINGS");
+        accountSettingsPanel.add(tabLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        currentPasswordLabel.setText("Current Password:");
+        accountSettingsPanel.add(currentPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 110, 20));
+
+        currentPasswordField.setText("CureentPassowrd");
+        accountSettingsPanel.add(currentPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 230, -1));
+
+        newPasswordLabel.setText("New Password:");
+        accountSettingsPanel.add(newPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 90, -1));
+
+        newPasswordField.setText("jPasswordField2");
+        newPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPasswordFieldActionPerformed(evt);
+            }
+        });
+        accountSettingsPanel.add(newPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 230, 20));
+
+        reenterPasswordLabel.setText("Re-enter Password:");
+        accountSettingsPanel.add(reenterPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+
+        jPasswordField1.setText("jPasswordField1");
+        accountSettingsPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 230, -1));
+
+        invalidInputMessage27.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage27.setText("*password does not match");
+        accountSettingsPanel.add(invalidInputMessage27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 140, 30));
+
+        invalidInputMessage26.setForeground(new java.awt.Color(255, 0, 0));
+        invalidInputMessage26.setText("*invalid input");
+        accountSettingsPanel.add(invalidInputMessage26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 90, 20));
+
+        updateAccountButton.setText("Update Account");
+        updateAccountButton.setOpaque(false);
+        updateAccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateAccountButtonMouseClicked(evt);
+            }
+        });
+        accountSettingsPanel.add(updateAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 120, -1));
+
+        bg4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main_panelbg.png"))); // NOI18N
+        bg4.setText("jLabel4");
+        accountSettingsPanel.add(bg4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+
+        mainPanel.add(accountSettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 510, 380));
+
+        getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, -1, 400));
+
+        panel_menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
+        panel_menu.setText("jLabel1");
+        panel_menu.setMaximumSize(new java.awt.Dimension(214, 500));
+        panel_menu.setMinimumSize(new java.awt.Dimension(214, 500));
+        panel_menu.setPreferredSize(new java.awt.Dimension(130, 430));
+        getContentPane().add(panel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 400));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.png"))); // NOI18N
+        background.setText("jLabel15");
+        background.setMaximumSize(new java.awt.Dimension(660, 425));
+        background.setMinimumSize(new java.awt.Dimension(660, 425));
+        background.setPreferredSize(new java.awt.Dimension(660, 425));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 430));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void personalDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalDataButtonActionPerformed
         // TODO add your handling code here:
@@ -2204,6 +2254,11 @@ public class UIAdmin extends javax.swing.JFrame {
         x.setMidName(middlenameField1.getText());
         x.setGender(facultyGenderComboBox.getSelectedItem().toString());
         x.setPosition(facultyPositionComboBox.getSelectedItem().toString());
+        x.setContactNum(contactNumberField.getText());
+        if(!facultyPositionComboBox.getSelectedItem().toString().equals("Principal"))
+            x.setDepartment(departmentComboBox.getSelectedItem().toString());
+        else
+            x.setDepartment("None");
         eDAO.addEmployee(x);
     }//GEN-LAST:event_addButton1ActionPerformed
 
@@ -2633,7 +2688,7 @@ public class UIAdmin extends javax.swing.JFrame {
         x.setLastName(surnameField.getText());
         x.setMidName(middlenameField.getText());
         x.setGender(studentGenderComboBox.getSelectedItem().toString());
-        x.setDOB(studentBirthdateComboBox.getSelectedItem().toString());
+        x.setDOB(studentBirthMonthComboBox.getSelectedItem().toString() +"-"+studentBirthDateComboBox.getSelectedItem().toString() +"-" +studentBirthYearComboBox.getSelectedItem().toString());
         sDAO.addStudent(x);
         //sDAO.addStudent(x);
         JOptionPane.showMessageDialog(rootPane, "Are you sure?");
@@ -2673,6 +2728,43 @@ public class UIAdmin extends javax.swing.JFrame {
     private void AdviserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdviserComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AdviserComboBoxActionPerformed
+
+    private void studentBirthMonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentBirthMonthComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentBirthMonthComboBoxActionPerformed
+
+    private void studentBirthDateComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentBirthDateComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentBirthDateComboBoxActionPerformed
+
+    private void studentBirthYearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentBirthYearComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentBirthYearComboBoxActionPerformed
+
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewButtonActionPerformed
+
+    private void studentGenderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentGenderComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentGenderComboBoxActionPerformed
+
+    private void facultyGenderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facultyGenderComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_facultyGenderComboBoxActionPerformed
+
+    private void facultyPositionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facultyPositionComboBoxActionPerformed
+       if(facultyPositionComboBox.getSelectedItem().toString().equals("Principal"))
+       {
+           departmentLabel.setVisible(false);
+           departmentComboBox.setVisible(false);
+       }
+       if(!facultyPositionComboBox.getSelectedItem().toString().equals("Principal"))
+           {
+           departmentLabel.setVisible(true);
+           departmentComboBox.setVisible(true);
+       }
+    }//GEN-LAST:event_facultyPositionComboBoxActionPerformed
    
     /**
      * @param args the command line arguments
@@ -2810,11 +2902,15 @@ public class UIAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel changeGradesPanel;
     private javax.swing.JButton classDataButton;
     private javax.swing.JPanel classDataMenu;
+    private javax.swing.JLabel contactNoLabel;
+    private javax.swing.JTextField contactNumberField;
     private javax.swing.JPasswordField currentPasswordField;
     private javax.swing.JLabel currentPasswordLabel;
     private javax.swing.JButton currentSettings;
     private javax.swing.JDialog currentSettingsDialogBox;
     private javax.swing.JPanel currentSettingsPanel;
+    private javax.swing.JComboBox departmentComboBox;
+    private javax.swing.JLabel departmentLabel;
     private javax.swing.JButton editFacultyButton;
     private javax.swing.JDialog editFacultyDialogBox;
     private javax.swing.JPanel editFacultyPanel;
@@ -2854,7 +2950,6 @@ public class UIAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel invalidInputMessage;
     private javax.swing.JLabel invalidInputMessage1;
     private javax.swing.JLabel invalidInputMessage10;
-    private javax.swing.JLabel invalidInputMessage11;
     private javax.swing.JLabel invalidInputMessage12;
     private javax.swing.JLabel invalidInputMessage13;
     private javax.swing.JLabel invalidInputMessage14;
@@ -2885,10 +2980,8 @@ public class UIAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel invalidInputMessage37;
     private javax.swing.JLabel invalidInputMessage38;
     private javax.swing.JLabel invalidInputMessage39;
-    private javax.swing.JLabel invalidInputMessage4;
     private javax.swing.JLabel invalidInputMessage40;
     private javax.swing.JLabel invalidInputMessage41;
-    private javax.swing.JLabel invalidInputMessage5;
     private javax.swing.JLabel invalidInputMessage6;
     private javax.swing.JLabel invalidInputMessage7;
     private javax.swing.JLabel invalidInputMessage8;
@@ -2984,7 +3077,9 @@ public class UIAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel sectionLabel;
     private javax.swing.JLabel sectionLabel1;
     private javax.swing.JLabel sectionLabel3;
-    private javax.swing.JComboBox studentBirthdateComboBox;
+    private javax.swing.JComboBox studentBirthDateComboBox;
+    private javax.swing.JComboBox studentBirthMonthComboBox;
+    private javax.swing.JComboBox studentBirthYearComboBox;
     private javax.swing.JComboBox studentComboBox;
     private javax.swing.JComboBox studentComboBox1;
     private javax.swing.JComboBox studentGenderComboBox;

@@ -6,13 +6,22 @@ public abstract class Employee extends Person {
 
 	private String empPW;
         private String empPosition;
+        private String empDepartment;
         private Boolean passFlag;
         EmployeeDAO ed = new EmployeeDAO();
         public String getPosition()
         {
             return empPosition;
         }
+        public String getDepartment(){
+            return empDepartment;
+            
+        }
         
+        public void setDepartment(String department)
+        {
+            empDepartment = department;
+        }
         public Employee Login(String empID, String empPW)
         {
             System.out.println("SUCCESSSS!");
