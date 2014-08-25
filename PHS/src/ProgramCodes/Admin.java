@@ -15,7 +15,8 @@ public class Admin extends Employee {
     }
 
 	public boolean addFaculty(Employee emp) {
-        return ed.addEmployee(emp);
+   
+            return ed.addEmployee(emp);
 	}
 
 	public boolean addFacultyList() {
