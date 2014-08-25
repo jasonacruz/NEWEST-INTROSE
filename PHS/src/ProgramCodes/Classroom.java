@@ -3,7 +3,7 @@ package ProgramCodes;
 
 import java.util.ArrayList;
 
-public class Class {
+public class Classroom {
 
 	private String sectName;
 	private ArrayList<Student> Students;

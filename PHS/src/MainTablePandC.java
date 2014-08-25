@@ -1,3 +1,7 @@
+
+import ProgramCodes.Classroom;
+import ProgramCodes.Faculty;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +14,8 @@
  */
 public class MainTablePandC extends javax.swing.JFrame {
 
+    Faculty teacher;
+    Classroom c;
     /**
      * Creates new form Splash
      */
@@ -17,6 +23,11 @@ public class MainTablePandC extends javax.swing.JFrame {
         initComponents();
     }
 
+    public MainTablePandC(Faculty emp, Classroom c) {
+        initComponents();
+        teacher = emp;
+        lUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,7 +96,7 @@ public class MainTablePandC extends javax.swing.JFrame {
         getContentPane().add(settingsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, -1));
 
         lUserName.setText("User name");
-        getContentPane().add(lUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        getContentPane().add(lUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         ribbon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ribbon.png"))); // NOI18N
         getContentPane().add(ribbon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));

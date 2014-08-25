@@ -1,4 +1,5 @@
 
+import ProgramCodes.Classroom;
 import ProgramCodes.Faculty;
 
 /*
@@ -12,7 +13,8 @@ import ProgramCodes.Faculty;
  * @author James
  */
 public class MainTable extends javax.swing.JFrame {
-
+    
+    Classroom c;
     Faculty teacher;
     /**
      * Creates new form Splash
@@ -20,8 +22,7 @@ public class MainTable extends javax.swing.JFrame {
     public MainTable() {
         initComponents();
     }
-
-    MainTable(Faculty emp) {
+    MainTable(Faculty emp, Classroom c) {
         initComponents();
         teacher = emp;
         IUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());

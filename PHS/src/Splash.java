@@ -3,6 +3,8 @@ import ProgramCodes.Employee;
 import ProgramCodes.Faculty;
 import databaseCodes.ClassroomDAO;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -35,6 +37,20 @@ public class Splash extends javax.swing.JFrame {
         addSectionButton();
     }
 
+    public String[] getTruncate(javax.swing.JButton jb) {
+        return jb.getText().split(" - ");
+    }
+    /*public ArrayList<Student> getStudent(javax.swing.JComboBox jc) {
+        s = new Section();
+        ArrayList<Student> studentList;
+        studentList = new ArrayList<Student>();
+        String[] x;
+        x = getTruncate(jc);
+        s.setSectname(x[1]);
+        c = new Classroom(s, user);
+        studentList = cd.getStudent(c);
+        return studentList;
+    }*/
     public final void addSectionButton()
     {
         GridBagConstraints constraint = new GridBagConstraints();
@@ -46,15 +62,43 @@ public class Splash extends javax.swing.JFrame {
         constraint.weighty = 1.0f;
         
         subjList = new String[20];
+        cd.getAdviserSect(teacher, subjList);
+         for (String string : subjList) {
+             if(string != null){
+            final JButton buttonx = new JButton();
+            buttonx.setText(string);
+            buttonx.setBackground(new java.awt.Color(255, 255, 255));
+            buttonx.setFont(new java.awt.Font("Lao UI", 1, 24));
+            buttonx.setForeground(new java.awt.Color(156, 89, 90));
+            jPanel1.add(buttonx, constraint);
+             buttonx.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent ae2) {
+            new MainTablePandC().setVisible(true);
+            System.out.println(buttonx.getText());
+        }
+    });
+                     }
+         
+         }
+        subjList = new String[20];
         cd.getSubjectInfo(teacher, subjList);
          for (String string : subjList) {
              if(string != null){
-            JButton button = new JButton();
+            final JButton button = new JButton();
             button.setText(string);
+            button.setBackground(new java.awt.Color(255, 255, 255));
+            button.setFont(new java.awt.Font("Lao UI", 1, 24));
+            button.setForeground(new java.awt.Color(156, 89, 90));
             jPanel1.add(button, constraint);
-    }
+             button.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent ae2) {
+             new MainTable().setVisible(true);
+         System.out.println(button.getText());
         }
-
+    });
+                     }
+         
+         }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +108,6 @@ public class Splash extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -85,7 +128,6 @@ public class Splash extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Philadelphia High School");
         setBackground(new java.awt.Color(255, 204, 204));
-        setMaximumSize(new java.awt.Dimension(1980, 1024));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

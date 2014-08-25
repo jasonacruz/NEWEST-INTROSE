@@ -111,7 +111,7 @@ public class ClassroomDAO{
             int x = 0;
             try
             {
-                    String queryString = "SELECT sectionYear, subjectName, sectionName FROM CLASSADVISER CA, SECTION S, SUBJECT SU, CLASSTEACHER CT where ct_classYear = ? AND ct_idEmployee = ?AND ct.ct_subjectID = subjectID AND ct_classID = classID ORDER BY sectionYear;";
+                    String queryString = "SELECT sectionYear, subjectName, sectionName FROM CLASSADVISER CA, SECTION S, SUBJECT SU, CLASSTEACHER CT where ct_classYear = ? AND ct_idEmployee = ?AND ct.ct_subjectID = subjectID AND ct_classID = classID AND sectionName = classSection ORDER BY sectionYear;";
                     connection = getConnection();
                     stmt = connection.prepareStatement(queryString);
                     stmt.setInt(1, 2013);
@@ -130,28 +130,29 @@ public class ClassroomDAO{
                          return false;
             }
         }
-        /*
-        public boolean getAdviserSect(Employee emp, Section s)
+        
+        public boolean getAdviserSect(Employee emp, String[] SubjectList)
         { 
             int x = 0;
             try
             {
-                    String queryString = "select sect_yrlvl, class_name FROM SECTION, CLASSADVISER WHERE class_prof = ? AND class_name = sect_name AND class_schlyear = YEAR(CURRENT_TIME)";
+                    String queryString = "SELECT sectionYear, sectionName FROM CLASSADVISER CA, SECTION S where adviserID= ? AND classYear = 2014 AND classSection = sectionName ORDER BY sectionYear;";
                     connection = getConnection();
                     stmt = connection.prepareStatement(queryString);
-                    stmt.setInt(1, emp.getID());
-                    stmt.executeQuery();
-                    ResultSet resultString = stmt.executeQuery();
-                    resultString.next();
-                    s.setSectyear(resultString.getInt("sect_yrlvl"));
-                    s.setSectname(resultString.getString("class_name"));
-                return !s.getSectname().isEmpty();
+                    stmt.setString(1, emp.getIdNum());
+                ResultSet resultString = stmt.executeQuery();
+                    while(resultString.next())
+                    {
+                        
+                        SubjectList[x] = (""+resultString.getString("sectionYear")+" - "+(resultString.getString("sectionName")) + " - Adviser");
+                        System.out.println(SubjectList[x]);
+                        x++;}                
+                    return true;
             }
             catch (SQLException e) {
 			 System.out.println(e.getMessage());
                          return false;
             }
-		
         }
         public boolean getSection(int s, String[] SectList)
         {
@@ -176,5 +177,5 @@ public class ClassroomDAO{
             }
 		
         }
-        */
+       
 }

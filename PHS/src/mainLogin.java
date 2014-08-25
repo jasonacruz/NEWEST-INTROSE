@@ -191,7 +191,7 @@ public class mainLogin extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "You may now login with your new password!", "Successful", JOptionPane.INFORMATION_MESSAGE);
                      }
                     else if(!eh.sLength(pw, 6, 16))
-                        JOptionPane.showMessageDialog(rootPane, "Your password must be between 6 to 16 characters!!", "Unsuccessful", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(rootPane, "Your password must be between 6 to 16 characters!", "Unsuccessful", JOptionPane.ERROR_MESSAGE);
                     }
                  }
                 }
