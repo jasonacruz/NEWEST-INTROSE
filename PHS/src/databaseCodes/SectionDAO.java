@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 /**
  *
  * @author Jan
@@ -39,15 +41,20 @@ public class SectionDAO {
             return true;
         }
         
-        public ResultSet getSections(String x){
+        public ArrayList<String> getSections(String x){
             Statement st = null;
+            ArrayList<String> sNames = new ArrayList();
             try{
                 connection = getConnection();
                 st = connection.createStatement();
+                
                 rs = st.executeQuery("SELECT * FROM SECTION WHERE sectionYear ="+ x +"");
+                while(rs.next()){
+                    sNames.add(rs.getString("sectionName"));
+                }
             }catch(SQLException e){
-                System.out.println("x");
+                System.out.println(e.getMessage() + e.getErrorCode());
             }
-            return rs;
+            return sNames;
         }
 }
