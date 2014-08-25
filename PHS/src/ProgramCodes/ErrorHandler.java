@@ -4,14 +4,14 @@ package ProgramCodes;
 public class ErrorHandler{
 
 
-	public boolean sLength(String s, int l, int h)
+	public boolean sLength(String s, int l, int h) //limits string length from l to h. returns false if not valid
 	{
 		if(s.length() > h|| s.length() < l)
-			return true;
-		else
 			return false;
+		else
+			return true;
 		}
-	public boolean sCheckSpace(String s)
+	public boolean sCheckSpace(String s) // check if string contains to spaces. returns false if not valid
 	{
 		int x;
 		
@@ -23,7 +23,7 @@ public class ErrorHandler{
 			return true;
 	}
 			
-	public boolean sCheckNames(String s)
+	public boolean sCheckNames(String s) //check if string is in valid name characters. returns false if not valid
 	{
 		int x;
 		if((s.isEmpty()))
@@ -38,7 +38,7 @@ public class ErrorHandler{
 		return true;
 	}
 	
-	public boolean sCheckCodes(String s, int stype) //stype 1 = username & stype 0 = password & stype 2 for numbers
+	public boolean sCheckCodes(String s, int stype) //stype 1 = username & stype 0 = password & stype 2 for numbers returns false if not valid
 	{
 		int x;
 		if((s.isEmpty()))
