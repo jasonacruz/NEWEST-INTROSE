@@ -31,6 +31,7 @@ public class StudentDAO {
                 String queryString = "INSERT INTO STUDENT(idStudent, firstNameSt, middleNameSt, lastNameSt, genderST, birthDateSt, yearLevelSt) VALUES (?,?,?,?,?,?, ?)";
                 connection = getConnection();
                 stmt = connection.prepareStatement(queryString);
+                
 		stmt.setString(1, s.getIdNum());
 		stmt.setString(2, s.getFirstName());
 		stmt.setString(3, s.getMidName());
