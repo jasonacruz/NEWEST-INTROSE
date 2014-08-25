@@ -182,7 +182,7 @@ public class Splash extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MousePressed
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-       int response = JOptionPane.showConfirmDialog(rootPane, "Will you log out?", "Logging out",  JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       int response = JOptionPane.showConfirmDialog(rootPane, "Will you log out?", "Notice: Log out",  JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
        if(response == JOptionPane.YES_OPTION)
        {
            this.setVisible(false);

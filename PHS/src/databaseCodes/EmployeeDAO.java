@@ -113,6 +113,26 @@ public class EmployeeDAO{
         }
               
         */
+        
+         public void updatePassword(Employee emp, String newPass)
+        {
+            String x = "null";
+            try
+            {
+                    String queryString = "UPDATE EMPLOYEE SET passwordEmp = ?, passFlagEmp = ? WHERE idEmployee= ? AND passFlagEmp= false";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    stmt.setString(1, newPass);
+                    stmt.setBoolean(2, true);
+                    stmt.setString(3, emp.getIdNum());
+                    stmt.executeUpdate();
+            }
+            catch(SQLException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        
+        }
         public Employee getLoginReq(String idNum, String empPW) 
         {
             String x = "null";
@@ -126,7 +146,7 @@ public class EmployeeDAO{
                     stmt.setString(2,empPW);
                     
                     ResultSet resultString = stmt.executeQuery();
-                    resultString.next();
+                    resultString.next();                    
                     x = resultString.getString("positionEmp");
                     if(!x.equals("")){
                     if(x.equals("Principal"))

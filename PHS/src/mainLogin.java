@@ -6,11 +6,14 @@
 import ProgramCodes.Admin;
 import ProgramCodes.Coordinator;
 import ProgramCodes.Employee;
+import ProgramCodes.ErrorHandler;
 import ProgramCodes.Faculty;
+import ProgramCodes.LengthRestrictedDocument;
 import ProgramCodes.Principal;
 import databaseCodes.EmployeeDAO;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -21,6 +24,7 @@ public class mainLogin extends javax.swing.JFrame {
      * Creates new form mainLogin
      */
     EmployeeDAO ed = new EmployeeDAO();
+    ErrorHandler eh = new ErrorHandler();
     UIAdmin UIA;
     Splash UIF;
     UIPrincipal UIP;
@@ -153,27 +157,47 @@ public class mainLogin extends javax.swing.JFrame {
        String pass =  String.copyValueOf(txtPWord.getPassword());
        Employee emp = ed.getLoginReq(txtUsername.getText(),pass);
        if(emp!= null){
-       if(emp.getPosition().equals("Administrator")){
-           UIA = new UIAdmin((Admin) emp);
-           UIA.setVisible(true);
-       }
-       else if(emp.getPosition().equals("Subject Teacher"))
-       {
-           UIF = new Splash((Faculty) emp);
-           UIF.setVisible(true);
-       }
-       else if(emp.getPosition().equals("Principal")|| emp.getPosition().equals("Coordinator"))
-       {
-           if(emp.getPosition().equals("Principal"))
-                UIP = new UIPrincipal((Principal) emp);
-           else if(emp.getPosition().equals("Coordinator"))
-                UIP = new UIPrincipal((Coordinator) emp);
-           UIP.setVisible(true);
-       }
-           this.setVisible(false);
-       }
+                if(emp.getpassFlag()){
+                if(emp.getPosition().equals("Administrator")){
+                     UIA = new UIAdmin((Admin) emp);
+                      UIA.setVisible(true);
+                }
+                else if(emp.getPosition().equals("Subject Teacher"))
+                {    
+                    UIF = new Splash((Faculty) emp);
+                    UIF.setVisible(true);
+                }
+                else if(emp.getPosition().equals("Principal")|| emp.getPosition().equals("Coordinator"))
+                {
+                    if(emp.getPosition().equals("Principal"))
+                            UIP = new UIPrincipal((Principal) emp);
+                    else if(emp.getPosition().equals("Coordinator"))
+                            UIP = new UIPrincipal((Coordinator) emp);
+                    UIP.setVisible(true);
+                }
+                    this.setVisible(false);
+                }
+                else 
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Your account has not yet been activated. You will be required to create a new password.", "Account activation", JOptionPane.INFORMATION_MESSAGE);
+                    JPasswordField passField = new JPasswordField();
+                    passField.setDocument(new LengthRestrictedDocument(16));
+                    int confirm = JOptionPane.showConfirmDialog(null, passField, "Enter new password", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (confirm == JOptionPane.OK_OPTION) {
+                      String pw = new String(passField.getPassword());
+                    if(eh.sCheckCodes(pw, 0) && eh.sLength(pw, 6, 16))
+                    {
+                        ed.updatePassword(emp, pw);
+                        JOptionPane.showMessageDialog(rootPane, "You may now login with your new password!", "Successful", JOptionPane.INFORMATION_MESSAGE);
+                     }
+                    else if(!eh.sLength(pw, 6, 16))
+                        JOptionPane.showMessageDialog(rootPane, "Your password must be between 6 to 16 characters!!", "Unsuccessful", JOptionPane.ERROR_MESSAGE);
+                    }
+                 }
+                }
        else
            JOptionPane.showMessageDialog(rootPane, "ID Number or Password is incorrect!");
+       
    }
     private void txtPWordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPWordKeyPressed
         
