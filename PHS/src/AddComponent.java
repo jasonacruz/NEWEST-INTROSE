@@ -1,3 +1,7 @@
+
+import ProgramCodes.Classroom;
+import javax.swing.JFrame;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +14,24 @@
  */
 public class AddComponent extends javax.swing.JDialog {
 
+    private String examType;
+    private Classroom c;
     /**
      * Creates new form AddComponent
+     * @param parent
+     * @param modal
+     * @param examType
+     * @param c
      */
-    public AddComponent(java.awt.Frame parent, boolean modal) {
+    public AddComponent(java.awt.Frame parent, boolean modal, String examType, Classroom c) {
         super(parent, modal);
+        this.c = c;
+        this.examType = examType;
+        initComponents();
+    }
+
+    private AddComponent(java.awt.Frame parent, boolean modal) {
+         super(parent, modal);
         initComponents();
     }
 
@@ -115,9 +132,9 @@ public class AddComponent extends javax.swing.JDialog {
 
         btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/check.png"))); // NOI18N
         btnCreate.setText("Create");
-        btnCreate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCreateMouseClicked(evt);
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
             }
         });
         getContentPane().add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 323, 530, 30));
@@ -125,13 +142,13 @@ public class AddComponent extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateMouseClicked
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         java.awt.Frame f = (java.awt.Frame) this.getParent();
-        AddGrades g = new AddGrades(f, true);
+        AddGrades g = new AddGrades(f, true, c, examType);
         g.setVisible(true);
         g.setTitle(this.getTitle());
         this.setVisible(false);
-    }//GEN-LAST:event_btnCreateMouseClicked
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     /**
      * @param args the command line arguments

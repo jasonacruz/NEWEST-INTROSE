@@ -1,6 +1,9 @@
 
 import ProgramCodes.Classroom;
 import ProgramCodes.Faculty;
+import ProgramCodes.Settings;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,20 +17,47 @@ import ProgramCodes.Faculty;
  */
 public class MainTable extends javax.swing.JFrame {
     
-    Classroom c;
-    Faculty teacher;
+    private Classroom c;
+    private Faculty teacher;
+    private Settings settings;
+    DefaultTableModel tab = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column != 2;
+        }
+    };
     /**
-     * Creates new form Splash
+     * Creates new form UITeachers
      */
     public MainTable() {
         initComponents();
     }
-    MainTable(Faculty emp, Classroom c) {
+    public MainTable(Faculty emp, Classroom c, Settings settings) {
         initComponents();
         teacher = emp;
+        this.c = c;
         IUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
+        this.settings = settings;
+        changeTable();
     }
 
+    private void changeTable() {
+        Object[] tableColumnNames = new Object[3];
+        tableColumnNames[0] = "Student ID";
+        tableColumnNames[1] = "Student Name";
+        tableColumnNames[2] = "Grade";
+        tab.setColumnIdentifiers(tableColumnNames);
+        Object[] objects = new Object[3];
+        if (c.getStudentList().size() > 0) {
+            for (int i = 0; i < c.getStudentList().size(); i++) {
+                objects[0] = c.getStudentList().get(i).getIdNum();
+                objects[1] = (c.getStudentList().get(i).getLastName() + ", " + c.getStudentList().get(i).getFirstName() + " " + c.getStudentList().get(i).getMidName());
+                objects[2] = "";
+                tab.addRow(objects);
+            }
+            this.Grades.setModel(tab);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,19 +227,19 @@ public class MainTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuizzesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuizzesActionPerformed
-       AddComponent ac = new AddComponent(this,true);
+       AddComponent ac = new AddComponent(this,true, "Quiz", c);
        ac.setTitle("Quiz <number>");
        ac.setVisible(true);
     }//GEN-LAST:event_btnQuizzesActionPerformed
 
     private void btnHWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHWMouseClicked
-        AddComponent ac = new AddComponent(this,true);
+        AddComponent ac = new AddComponent(this,true, "Homework",c);
         ac.setTitle("Homework <number>");
         ac.setVisible(true);
     }//GEN-LAST:event_btnHWMouseClicked
 
     private void btnSWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSWMouseClicked
-        AddComponent ac = new AddComponent(this,true);
+        AddComponent ac = new AddComponent(this,true, "Seatwork",c);
         ac.setTitle("Seatwork <number>");
         ac.setVisible(true);
     }//GEN-LAST:event_btnSWMouseClicked
@@ -221,7 +251,7 @@ public class MainTable extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProjMouseClicked
 
     private void btnPTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPTMouseClicked
-        AddComponent ac = new AddComponent(this,true);
+        AddComponent ac = new AddComponent(this,true, "Periodical Test",c);
         ac.setTitle("Periodical Test");
         ac.setVisible(true);
     }//GEN-LAST:event_btnPTMouseClicked
@@ -247,20 +277,20 @@ public class MainTable extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Splash().setVisible(true);
+                new UITeachers().setVisible(true);
             }
         });
     }

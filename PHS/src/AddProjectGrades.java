@@ -119,7 +119,7 @@ public class AddProjectGrades extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Splash().setVisible(true);
+                new UITeachers().setVisible(true);
             }
         });
     }

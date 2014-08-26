@@ -6,10 +6,20 @@ import java.util.ArrayList;
 public class Classroom {
 
 	private String sectName;
-	private ArrayList<Student> Students;
+	private ArrayList<Student> studentList;
 	private int sectYearlvl;
 	private int schoolYear;
 
+        public void setStudentList(ArrayList<Student> Students)
+        {
+            this.studentList = Students;
+        }
+        
+        public ArrayList<Student> getStudentList()
+        {
+            return studentList;
+        }
+        
 	public String getSectName() {
 		return this.sectName;
 	}

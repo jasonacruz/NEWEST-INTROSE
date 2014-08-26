@@ -1,6 +1,7 @@
 
 import ProgramCodes.Classroom;
 import ProgramCodes.Faculty;
+import ProgramCodes.Settings;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,19 +15,21 @@ import ProgramCodes.Faculty;
  */
 public class MainTablePandC extends javax.swing.JFrame {
 
-    Faculty teacher;
-    Classroom c;
+    private Faculty teacher;
+    private Classroom c;
+    private Settings settings;
     /**
-     * Creates new form Splash
+     * Creates new form UITeachers
      */
     public MainTablePandC() {
         initComponents();
     }
 
-    public MainTablePandC(Faculty emp, Classroom c) {
+    public MainTablePandC(Faculty emp, Classroom c, Settings settings) {
         initComponents();
         teacher = emp;
         lUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
+        this.settings = settings;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +84,7 @@ public class MainTablePandC extends javax.swing.JFrame {
 
         bSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         bSave.setText("Save a copy");
+        bSave.setEnabled(false);
         getContentPane().add(bSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, -1, -1));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
@@ -136,20 +140,20 @@ public class MainTablePandC extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Splash().setVisible(true);
+                new UITeachers().setVisible(true);
             }
         });
     }

@@ -21,28 +21,25 @@ import javax.swing.JOptionPane;
  *
  * @author James
  */
-public class Splash extends javax.swing.JFrame {
+public class UITeachers extends javax.swing.JFrame {
     private Faculty teacher;
     private String[] subjList;
-    private final ClassroomDAO cd;
-    private int schoolYear;
-    private Settings settings = new Settings();
+    private final ClassroomDAO cd = new ClassroomDAO();
+    private final Settings settings = new Settings();
     private final SettingsDAO setD = new SettingsDAO();
     /**
      * Creates new form Splash
      */
-    public Splash() {
-        this.cd = new ClassroomDAO();
+    public UITeachers() {
         initComponents();
     }
-    public Splash(Faculty emp)
+    public UITeachers(Faculty emp)
     {
-        this.cd = new ClassroomDAO();
+        setD.getSettings(settings);
         initComponents();
         teacher = emp;
         IUserName.setText(teacher.getFirstName() + " " +teacher.getLastName());
         addSectionButton();
-        setD.getSettings(settings);
         System.out.println("Knowledge" + settings.getKnowledge() +" / Understanding"+ settings.getUnderstanding() + " / SchoolYear" + settings.getSchoolYear());
     }
 
@@ -55,9 +52,11 @@ public class Splash extends javax.swing.JFrame {
         String[] temp;
         Classroom cTemp = new Classroom();
         temp = getTruncate(jb);
-        cTemp.setSectYearlvl(Integer.parseInt(temp[1]));
-        cTemp.setSectName(temp[2]);
-        cTemp.setSchoolYear(schoolYear);
+        cTemp.setSectYearlvl(Integer.parseInt(temp[0]));
+        cTemp.setSectName(temp[1]);
+        cTemp.setSchoolYear(settings.getSchoolYear());
+        cd.setStudentList(cTemp);
+        System.out.println(cTemp.getSectYearlvl() + " - " + cTemp.getSectName() + " - " + cTemp.getSchoolYear());
         return cTemp;
         
         
@@ -84,7 +83,7 @@ public class Splash extends javax.swing.JFrame {
         constraint.weighty = 1.0f;
         
         subjList = new String[20];
-        cd.getAdviserSect(teacher, subjList);
+        cd.getAdviserSect(teacher, subjList, settings.getSchoolYear());
          for (String string : subjList) {
              if(string != null){
             final JButton buttonx = new JButton();
@@ -95,7 +94,8 @@ public class Splash extends javax.swing.JFrame {
             jPanel1.add(buttonx, constraint);
              buttonx.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent ae2) {
-            new MainTablePandC().setVisible(true);
+            new MainTablePandC(teacher, setSection(buttonx), settings).setVisible(true);
+          //  new MainTablePandC().setVisible(true);
             System.out.println(buttonx.getText());
         }
     });
@@ -103,7 +103,7 @@ public class Splash extends javax.swing.JFrame {
          
          }
         subjList = new String[20];
-        cd.getSubjectInfo(teacher, subjList);
+        cd.getSubjectInfo(teacher, subjList, settings.getSchoolYear());
          for (String string : subjList) {
              if(string != null){
             final JButton button = new JButton();
@@ -114,7 +114,8 @@ public class Splash extends javax.swing.JFrame {
             jPanel1.add(button, constraint);
              button.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent ae2) {
-             new MainTable().setVisible(true);
+               new MainTable(teacher, setSection(button), settings).setVisible(true);
+            // new MainTable().setVisible(true);
          System.out.println(button.getText());
         }
     });
@@ -271,20 +272,20 @@ public class Splash extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Splash s = new Splash();
+                UITeachers s = new UITeachers();
                 s.setVisible(true);
                 s.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
             }

@@ -1,6 +1,8 @@
 package databaseCodes;
 
+import ProgramCodes.Classroom;
 import ProgramCodes.Employee;
+import ProgramCodes.Student;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +11,8 @@ import java.util.*;
 import java.lang.Exception;
 
 public class ClassroomDAO{
+        private ArrayList<Student> studentList;
+        private Student s;
 	Connection connection = null;
 	PreparedStatement stmt = null;
 	ResultSet rs = null;
@@ -33,23 +37,28 @@ public class ClassroomDAO{
 	}
 	return true;
 	}
-        public ArrayList<Student> getStudent(Classroom c)
+        */
+        public ArrayList<Student> setStudentList(Classroom c)
         {
             try
             {
                     studentList = new ArrayList<Student>();
-                    String queryString = "SELECT st.st_id, st.st_firstname, st.st_lastname FROM  CLASSSTUDENT c, STUDENT st WHERE st_id = class_student AND c.class_name = ? AND c.class_schlyear = YEAR(CURRENT_TIME)";
+                    String queryString = "SELECT idStudent, lastNameSt, firstNameSt, middleNameSt from studentRoster, Student, section where sectionName = ? AND sectionYearLevel = ? AND sectionSchoolYear = ? AND idStudent = sr_studentID AND sectionID = sr_classID ORDER BY lastNameSt, firstNameSt ";
                     connection = getConnection();
                     stmt = connection.prepareStatement(queryString); 
-                    stmt.setString(1, c.getSection().getSectname());
+                    stmt.setString(1, c.getSectName());
+                    stmt.setInt(2, c.getSectYearlvl());
+                    stmt.setInt(3, c.getSchoolYear());
                 ResultSet resultString = stmt.executeQuery();
                     while(resultString.next())
                     {
                         s = new Student();
-                        s.setID(resultString.getInt("st_id"));
-                        s.setFirstname((resultString.getString("st_firstname")));
-                        s.setLastname((resultString.getString("st_lastname")));
+                        s.setIdNum(resultString.getString("idStudent"));
+                        s.setFirstName(resultString.getString("firstNameSt"));
+                        s.setMidName(resultString.getString("middleNameSt"));
+                        s.setLastName(resultString.getString("lastNameST"));
                         studentList.add(s);
+                        c.setStudentList(studentList);
                     }         
                     
             }
@@ -57,7 +66,7 @@ public class ClassroomDAO{
 			 System.out.println(e.getMessage());
             }
                  return studentList;
-        }
+        }/*
         public boolean addAdviser(Classroom c)
         {
              try {
@@ -106,7 +115,7 @@ public class ClassroomDAO{
 	return true;
         }
         */
-        public boolean getSubjectInfo(Employee emp, String[] SubjectList)
+        public boolean getSubjectInfo(Employee emp, String[] SubjectList, int schoolYear)
         {
             int x = 0;
             try
@@ -114,7 +123,7 @@ public class ClassroomDAO{
                     String queryString = "SELECT sectionYearLevel, subjectName, sectionName FROM SECTION , SUBJECT , CLASSTEACHER  where sectionSchoolYear = ? AND ct_idEmployee = ? AND ct_subjectID = subjectID AND ct_classID = sectionID ORDER BY sectionYearLevel;";
                     connection = getConnection();
                     stmt = connection.prepareStatement(queryString);
-                    stmt.setInt(1, 2014);
+                    stmt.setInt(1, schoolYear);
                     stmt.setString(2, emp.getIdNum());
                 ResultSet resultString = stmt.executeQuery();
                     while(resultString.next())
@@ -131,21 +140,19 @@ public class ClassroomDAO{
             }
         }
         
-        public boolean getAdviserSect(Employee emp, String[] SubjectList)
+        public boolean getAdviserSect(Employee emp, String[] SubjectList, int schoolYear)
         { 
             int x = 0;
             try
             {
-                    String queryString = "SELECT sectionYearLevel, sectionName FROM CLASSADVISER CA, SECTION S where adviserID= ? AND sectionSchoolYear = 2014 AND sectionID = ca_classID ORDER BY sectionYearLevel;";
+                    String queryString = "SELECT sectionYearLevel, sectionName FROM CLASSADVISER CA, SECTION S where adviserID= ? AND sectionSchoolYear = ? AND sectionID = ca_classID ORDER BY sectionYearLevel;";
                     connection = getConnection();
                     stmt = connection.prepareStatement(queryString);
                     stmt.setString(1, emp.getIdNum());
+                    stmt.setInt(2, schoolYear);
                 ResultSet resultString = stmt.executeQuery();
                     while(resultString.next())
                     {
-                     /*Unknown column 'sectionYear' in 'field list'
-Unknown column 'ct_classYear' in 'where clause'
-*/   
                         SubjectList[x] = (""+resultString.getString("sectionYearLevel")+" - "+(resultString.getString("sectionName")) + " - Adviser");
                         System.out.println(SubjectList[x]);
                         x++;}                

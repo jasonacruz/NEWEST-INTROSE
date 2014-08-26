@@ -111,6 +111,7 @@
           <Image iconType="3" name="/save.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Save a copy"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

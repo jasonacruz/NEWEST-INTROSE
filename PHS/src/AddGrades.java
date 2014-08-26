@@ -1,3 +1,8 @@
+
+import ProgramCodes.Classroom;
+import ProgramCodes.Settings;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,15 +14,50 @@
  * @author DE JOYA
  */
 public class AddGrades extends javax.swing.JDialog {
-
+    private Classroom c;
+    private Settings settings;
+    DefaultTableModel tab = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column !=1 || column != 0;
+        }
+    };
     /**
      * Creates new form AddGrades
+     * @param parent
+     * @param modal
      */
     public AddGrades(java.awt.Frame parent, boolean modal) {
         super(parent,modal);
         initComponents();
+    } 
+    public AddGrades(java.awt.Frame parent, boolean modal, Classroom c, String examType) {
+        super(parent,modal);
+        this.c = c;
+        initComponents();
+        changeTable();
     }
-
+        private void changeTable() {
+        Object[] tableColumnNames = new Object[5];
+        tableColumnNames[0] = "Student ID";
+        tableColumnNames[1] = "Student Name";
+        tableColumnNames[2] = "Knowledge";
+        tableColumnNames[3] = "Understanding";
+        tableColumnNames[4] = "Process";
+        tab.setColumnIdentifiers(tableColumnNames);
+        Object[] objects = new Object[5];
+        if (c.getStudentList().size() > 0) {
+            for (int i = 0; i < c.getStudentList().size(); i++) {
+                objects[0] = c.getStudentList().get(i).getIdNum();
+                objects[1] = (c.getStudentList().get(i).getLastName() + ", " + c.getStudentList().get(i).getFirstName() + " " + c.getStudentList().get(i).getMidName());
+                objects[2] = "";
+                objects[3] = "";
+                objects[4] = "";
+                tab.addRow(objects);
+            }
+            this.jTable1.setModel(tab);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,7 +159,7 @@ public class AddGrades extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Splash().setVisible(true);
+                new UITeachers().setVisible(true);
             }
         });
     }

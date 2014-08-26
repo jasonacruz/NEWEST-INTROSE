@@ -26,7 +26,7 @@ public class mainLogin extends javax.swing.JFrame {
     EmployeeDAO ed = new EmployeeDAO();
     ErrorHandler eh = new ErrorHandler();
     UIAdmin UIA;
-    Splash UIF;
+    UITeachers UIF;
     UIPrincipal UIP;
     public mainLogin() {
         initComponents();
@@ -164,7 +164,7 @@ public class mainLogin extends javax.swing.JFrame {
                 }
                 else if(emp.getPosition().equals("Subject Teacher"))
                 {    
-                    UIF = new Splash((Faculty) emp);
+                    UIF = new UITeachers((Faculty) emp);
                     UIF.setVisible(true);
                 }
                 else if(emp.getPosition().equals("Principal")|| emp.getPosition().equals("Coordinator"))
