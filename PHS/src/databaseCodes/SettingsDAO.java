@@ -32,7 +32,7 @@ public class SettingsDAO {
             return conn;
 	}
         
-     public boolean Update(int settingValue, String settingName)
+     public boolean updateSettings(int settingValue, String settingName)
      {
           int x =0;
 	try
