@@ -1,7 +1,10 @@
 
+import ProgramCodes.Classroom;
 import ProgramCodes.Employee;
 import ProgramCodes.Faculty;
+import ProgramCodes.Settings;
 import databaseCodes.ClassroomDAO;
+import databaseCodes.SettingsDAO;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,26 +22,45 @@ import javax.swing.JOptionPane;
  * @author James
  */
 public class Splash extends javax.swing.JFrame {
-    Faculty teacher;
-    String[] subjList;
-    ClassroomDAO cd;
+    private Faculty teacher;
+    private String[] subjList;
+    private final ClassroomDAO cd;
+    private int schoolYear;
+    private Settings settings = new Settings();
+    private final SettingsDAO setD = new SettingsDAO();
     /**
      * Creates new form Splash
      */
     public Splash() {
+        this.cd = new ClassroomDAO();
         initComponents();
     }
     public Splash(Faculty emp)
     {
+        this.cd = new ClassroomDAO();
         initComponents();
         teacher = emp;
-        cd = new ClassroomDAO();
         IUserName.setText(teacher.getFirstName() + " " +teacher.getLastName());
         addSectionButton();
+        setD.getSettings(settings);
+        System.out.println("Knowledge" + settings.getKnowledge() +" / Understanding"+ settings.getUnderstanding() + " / SchoolYear" + settings.getSchoolYear());
     }
 
     public String[] getTruncate(javax.swing.JButton jb) {
         return jb.getText().split(" - ");
+    }
+    
+    public Classroom setSection(javax.swing.JButton jb)
+    {
+        String[] temp;
+        Classroom cTemp = new Classroom();
+        temp = getTruncate(jb);
+        cTemp.setSectYearlvl(Integer.parseInt(temp[1]));
+        cTemp.setSectName(temp[2]);
+        cTemp.setSchoolYear(schoolYear);
+        return cTemp;
+        
+        
     }
     /*public ArrayList<Student> getStudent(javax.swing.JComboBox jc) {
         s = new Section();

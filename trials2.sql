@@ -123,3 +123,17 @@ INSERT INTO STUDENTROSTER(sr_ClassID,sr_StudentID) VALUES(2, 123456);
 INSERT INTO STUDENTROSTER(sr_ClassID,sr_StudentID) VALUES(3, 12345678);
 INSERT INTO STUDENTROSTER(sr_ClassID,sr_StudentID) VALUES(3, 1234567);
 INSERT INTO STUDENTROSTER(sr_ClassID,sr_StudentID) VALUES(2, 12345612);
+
+INSERT INTO SETTINGS(SettingName, SettingVal) VALUES('Knowledge', 25);
+INSERT INTO SETTINGS(SettingName, SettingVal) VALUES('Understanding', 25);
+INSERT INTO SETTINGS(SettingName, SettingVal) VALUES('Process', 25);
+INSERT INTO SETTINGS(SettingName, SettingVal) VALUES('Product', 25);
+INSERT INTO SETTINGS(SettingName, SettingVal) VALUES('Schoolyear', 2014);
+INSERT INTO SETTINGS(SettingName, SettingVal) VALUES('Quarter', 1);
+
+UPDATE SETTINGS SET SettingVal = 25 WHERE SettingName = 'Knowledge';
+UPDATE SETTINGS SET SettingVal = 25 WHERE SettingName = 'Understanding';
+UPDATE SETTINGS SET SettingVal = 25 WHERE SettingName = 'Process';
+UPDATE SETTINGS SET SettingVal = 25 WHERE SettingName = 'Product';
+UPDATE SETTINGS SET SettingVal = 2014 WHERE SettingName = 'SchoolYear';
+UPDATE SETTINGS SET SettingVal = 1 WHERE SettingName = 'Quarter';

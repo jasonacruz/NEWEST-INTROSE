@@ -160,7 +160,12 @@ public class MainTable extends javax.swing.JFrame {
         getContentPane().add(lClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 20));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
-        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBackMousePressed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 21, 50, 50));
 
         bExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         bExport.setText("Compile & Export");
@@ -220,6 +225,10 @@ public class MainTable extends javax.swing.JFrame {
         ac.setTitle("Periodical Test");
         ac.setVisible(true);
     }//GEN-LAST:event_btnPTMouseClicked
+
+    private void btnBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMousePressed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackMousePressed
 
     /**
      * @param args the command line arguments

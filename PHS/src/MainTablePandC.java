@@ -84,6 +84,11 @@ public class MainTablePandC extends javax.swing.JFrame {
         getContentPane().add(bSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, -1, -1));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBackMousePressed(evt);
+            }
+        });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         lbSxnSubj.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
@@ -109,6 +114,10 @@ public class MainTablePandC extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMousePressed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackMousePressed
 
     /**
      * @param args the command line arguments
