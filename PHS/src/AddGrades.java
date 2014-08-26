@@ -19,7 +19,7 @@ public class AddGrades extends javax.swing.JDialog {
     DefaultTableModel tab = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return column !=1 || column != 0;
+            return column >2;
         }
     };
     /**
