@@ -1113,6 +1113,7 @@ public class UIAdmin extends javax.swing.JFrame {
         birthdateLabel.setText("Birthdate:");
         addStudentPanel.add(birthdateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 20));
 
+        studentBirthMonthComboBox.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         studentBirthMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         studentBirthMonthComboBox.setToolTipText("");
         studentBirthMonthComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -1120,16 +1121,18 @@ public class UIAdmin extends javax.swing.JFrame {
                 studentBirthMonthComboBoxActionPerformed(evt);
             }
         });
-        addStudentPanel.add(studentBirthMonthComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 80, -1));
+        addStudentPanel.add(studentBirthMonthComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
 
+        studentBirthDateComboBox.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         studentBirthDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         studentBirthDateComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentBirthDateComboBoxActionPerformed(evt);
             }
         });
-        addStudentPanel.add(studentBirthDateComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 60, -1));
+        addStudentPanel.add(studentBirthDateComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 50, -1));
 
+        studentBirthYearComboBox.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         studentBirthYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         studentBirthYearComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
