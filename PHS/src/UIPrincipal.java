@@ -362,10 +362,19 @@ public class UIPrincipal extends javax.swing.JFrame {
 
     private void gradeNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeNumberActionPerformed
         // TODO add your handling code here:
+        SectionDAO a = new SectionDAO();
+        ArrayList<String> sList = new ArrayList();
+        sList = a.getSectionList((String) gradeNumber.getSelectedItem());
+        Section.setModel(new javax.swing.DefaultComboBoxModel(sList.toArray()));
+       SectionActionPerformed(evt);
     }//GEN-LAST:event_gradeNumberActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  
+  SectionDAO a = new SectionDAO();
+       ArrayList<String> gList = new ArrayList();
+       gList = a.getYearList();
+       gradeNumber.setModel(new javax.swing.DefaultComboBoxModel(gList.toArray()));
+        gradeNumberActionPerformed(evt);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
