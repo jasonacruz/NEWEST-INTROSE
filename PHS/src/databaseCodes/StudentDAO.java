@@ -46,25 +46,25 @@ public class StudentDAO {
             return true;
         }
         
-        public boolean editStudentInfo(String st){
+        public boolean editStudentInfo(Student s){
             int x = 0;
             try{
-                Statement s = null;
                 //ResultSet rs = s.executeQuery("SELECT * FROM STUDENT WHERE idStudent = "+ st + "");
                 
-                String queryString = "UPDATE STUDENT SET idStudent =?, firstNameSt = ?, middleNameSt = ?, lastNameSt = ?, genderSt = ?, birthDateSt =? WHERE idEmployee = "+st+"";
+                String queryString = "UPDATE STUDENT SET idStudent =?, firstNameSt = ?, middleNameSt = ?, lastNameSt = ?, genderSt = ?, birthDateSt =?, yearLevelSt = ? WHERE idStudent = '"+s.getIdNum()+"'";
 		connection = getConnection();
 		stmt = connection.prepareStatement(queryString);
-                /*stmt.setString(1, s.getIdNum());
+                stmt.setString(1, s.getIdNum());
                 stmt.setString(2, s.getFirstName());
                 stmt.setString(3, s.getMidName());
             	stmt.setString(4, s.getLastName());
 		stmt.setString(5, s.getGender());
-		stmt.setString(5, s.getDOB());*/
+		stmt.setString(6, s.getDOB());
+		stmt.setInt(7, s.getGradeLvl());
 		x = stmt.executeUpdate();
                 System.out.println(x);
             }catch(SQLException e){
-                System.out.println("lol");
+                System.out.println(e.getMessage() + e.getErrorCode());
                 return false;
             }
             return true;
@@ -103,6 +103,36 @@ public class StudentDAO {
                 }
             }catch(SQLException g){
                 System.out.println("lol");
+            }
+            return a;
+        }
+        public ArrayList<String> getStudents(int x){
+            ArrayList<String> s = new ArrayList();
+            Statement st = null;
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT * FROM STUDENT WHERE yearLevelSt = "+x+"");
+                while(rs.next()){
+                    s.add(rs.getString("lastNameSt"));
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return s;
+        }
+        
+         public String getStudentID(String x){
+            Statement st = null;
+            String a = "";
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT idStudent FROM STUDENT WHERE lastNameSt LIKE '"+x+"%'");
+                while(rs.next())
+                    a = rs.getString("idStudent");
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
             }
             return a;
         }

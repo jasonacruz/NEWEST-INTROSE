@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class EmployeeDAO{
 	Connection connection = null;
@@ -41,11 +43,48 @@ public class EmployeeDAO{
             return true;
 	}
         
+         public String getAdviserID(String x){
+            Statement st = null;
+            String a = "";
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT idEmployee FROM EMPLOYEE WHERE lastNameEmp LIKE '"+x+"%'");
+                while(rs.next())
+                    a = rs.getString("idEmployee");
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return a;
+        }
+         
+        public ArrayList<String> getEmployee(int x){
+            Statement st = null;
+            ArrayList<String> sNames = new ArrayList();
+            String a;
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                if(x > 6)
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'High School' and positionEmp = 'Subject Teacher'");
+                else
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'Elementary' and positionEmp = 'Subject Teacher'");
+                while(rs.next()){
+                    a = rs.getString("lastNameEmp");
+                    sNames.add(a);
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return sNames;
+        }
+        
+        
 	public boolean editEmployeeInfo(Employee emp)
 	{
             int x =0;
             try{
-		String queryString = "UPDATE EMPLOYEE SET idEmployee =?, firstNameEmp = ?, middleNameEmp = ?, lastNameEmp = ?, position = ? WHERE idEmployee = "+emp.getIdNum()+"";
+		String queryString = "UPDATE EMPLOYEE SET idEmployee =?, firstNameEmp = ?, middleNameEmp = ?, lastNameEmp = ?, positionEmp = ?, departmentEmp = ?, genderEmp = ?  WHERE idEmployee = '"+emp.getIdNum()+"'";
 		connection = getConnection();
 		stmt = connection.prepareStatement(queryString);
                 stmt.setString(1, emp.getIdNum());
@@ -53,10 +92,11 @@ public class EmployeeDAO{
                 stmt.setString(3, emp.getMidName());
             	stmt.setString(4, emp.getLastName());
 		stmt.setString(5, emp.getPosition());
+                stmt.setString(6, emp.getDepartment());
+                stmt.setString(7, emp.getGender());
 		x = stmt.executeUpdate();
-                System.out.println(x);
             }catch (SQLException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + e.getErrorCode());
                 return false;
             }
             return true;
@@ -86,34 +126,7 @@ public class EmployeeDAO{
                         }
             return x != 0;
 	}
-        /*
-        public boolean getEmpInfo(Employee emp)
-        { 
-            try
-            {
-                    String queryString = "SELECT * FROM EMPLOYEE WHERE lastNameEmp = ? AND firstNameEmp = ?";
-                    connection = getConnection();
-                    stmt = connection.prepareStatement(queryString);
-                    stmt.setString(1, emp.getLastname());
-                    stmt.setString(2, emp.getFirstname());
-                    
-                    ResultSet resultString = stmt.executeQuery();
-                    resultString.next();
-                    emp.setFirstname(resultString.getString("firstNameEmp"));
-                    emp.setMidname(resultString.getString("middleNameEmp"));
-                    emp.setLastname(resultString.getString("lastNameEmp"));
-                    emp.setID(resultString.getInt("idEmployee"));
-                    emp.setChangedpass(resultString.getBoolean("passFlagEmp"));
-            }
-            catch (SQLException e) {
-			 System.out.println(e.getMessage());
-                         return false;
-            }
-                         return true;
-        }
-              
-        */
-        
+       
          public void updatePassword(Employee emp, String newPass)
         {
             String x = "null";
