@@ -120,7 +120,7 @@ public class ClassroomDAO{
             int x = 0;
             try
             {
-                    String queryString = "SELECT sectionYearLevel, subjectName, sectionName FROM SECTION , SUBJECT , CLASSTEACHER  where sectionSchoolYear = ? AND ct_idEmployee = ? AND ct_subjectID = subjectID AND ct_classID = sectionID ORDER BY sectionYearLevel;";
+                    String queryString = "SELECT sectionYearLevel, subjectName, sectionName FROM SECTION , SUBJECT , CLASSTEACHER  where sectionSchoolYear = ? AND ct_idEmployee = ? AND ct_subjectID = subjectID AND ct_classID = sectionID AND sectionYearLevel = subjectGradeLevel ORDER BY sectionYearLevel;";
                     connection = getConnection();
                     stmt = connection.prepareStatement(queryString);
                     stmt.setInt(1, schoolYear);

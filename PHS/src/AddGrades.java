@@ -1,6 +1,8 @@
 
 import ProgramCodes.Classroom;
 import ProgramCodes.Settings;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -38,13 +40,14 @@ public class AddGrades extends javax.swing.JDialog {
         changeTable();
     }
         private void changeTable() {
-        Object[] tableColumnNames = new Object[5];
-        tableColumnNames[0] = "Student ID";
-        tableColumnNames[1] = "Student Name";
-        tableColumnNames[2] = "Knowledge";
-        tableColumnNames[3] = "Understanding";
-        tableColumnNames[4] = "Process";
-        tab.setColumnIdentifiers(tableColumnNames);
+        List<Object> tableColumnNames = new ArrayList();
+        tableColumnNames.add("Student ID");
+        tableColumnNames.add("Student Name");
+        tableColumnNames.add("Knowledge");
+        tableColumnNames.add("Understanding");
+        tableColumnNames.add("Process");
+        tableColumnNames.add("Product");
+        tab.setColumnIdentifiers(tableColumnNames.toArray());
         Object[] objects = new Object[5];
         if (c.getStudentList().size() > 0) {
             for (int i = 0; i < c.getStudentList().size(); i++) {
@@ -95,6 +98,11 @@ public class AddGrades extends javax.swing.JDialog {
 
         btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/check.png"))); // NOI18N
         btnCreate.setText("Add");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
@@ -128,6 +136,12 @@ public class AddGrades extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        for (int i = 0; i < c.getStudentList().size(); i++) {
+            
+        }
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     /**
      * @param args the command line arguments
