@@ -28,7 +28,7 @@ public class SectionDAO {
         
         public boolean addSection(String s1, String s2){
             try{
-                String queryString = "INSERT INTO SECTION(sectionName, sectionYear) VALUES (?,?)";
+                String queryString = "INSERT INTO SECTION(sectionName, sectionYearLevel) VALUES (?,?)";
                 connection = getConnection();
                 stmt = connection.prepareStatement(queryString);
 		stmt.setString(1, s2);
@@ -48,7 +48,7 @@ public class SectionDAO {
                 connection = getConnection();
                 st = connection.createStatement();
                 
-                rs = st.executeQuery("SELECT * FROM SECTION WHERE sectionYear ="+ x +"");
+                rs = st.executeQuery("SELECT * FROM SECTION WHERE sectionYearLevel ="+ x +"");
                 while(rs.next()){
                     sNames.add(rs.getString("sectionName"));
                 }
@@ -56,5 +56,38 @@ public class SectionDAO {
                 System.out.println(e.getMessage() + e.getErrorCode());
             }
             return sNames;
+        }
+        
+        public int getSectionID(String x, String y){
+            Statement st = null;
+            int id = 0;
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT sectionID FROM SECTION WHERE sectionName = '"+x+"' AND sectionYearLevel = '"+y+"'");
+                System.out.println(x);
+                while(rs.next())
+                    id = rs.getInt("sectionID");
+                System.out.println("ad");
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return id;
+        }
+        
+        public ArrayList<String> getStudentInSection(String x){
+            ArrayList<String> st = new ArrayList();
+            Statement s = null;
+            try{
+                connection = getConnection();
+                s = connection.createStatement();
+                rs = s.executeQuery("SELECT * FROM SECTION WHERE sectionName = '"+x+"'");
+                int a = rs.getInt("sectionID");
+                rs = s.executeQuery("SELECT * FROM STUDENTROSTER s, STUDENT a where sr_classID = "+a+" and sr_studentID = idStudent");
+                st.add(rs.getString("lastNameSt").concat(", ").concat("firstNameSt"));
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return st;
         }
 }
