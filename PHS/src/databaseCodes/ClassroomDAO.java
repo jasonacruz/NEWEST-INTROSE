@@ -21,6 +21,58 @@ public class ClassroomDAO{
 		conn = ConnectionFactory.getInstance().getConnection();
 		return conn;
 	}
+        
+        public boolean addAdviser(String x, int y)
+        {
+             try {
+		String queryString = "INSERT INTO CLASSADVISER(adviserID, ca_classID) VALUES (?, ?)";
+		connection = getConnection();
+		stmt = connection.prepareStatement(queryString);
+		stmt.setString(1, x);
+                stmt.setInt(2, y);
+		stmt.executeUpdate();
+             }catch (SQLException e) {
+                System.out.println(e.getMessage()+ e.getErrorCode());
+                return false;
+            }
+            return true;
+        }
+        
+        public boolean addSubjTeacher(String x, int y, int z){
+            try {
+		String queryString = "INSERT INTO CLASSTEACHER(ct_subjectId, ct_idEmployee ,ct_classID) VALUES (?,?,?)";
+		connection = getConnection();
+		stmt = connection.prepareStatement(queryString);
+		stmt.setInt(1, z);
+		stmt.setInt(3, y);
+                stmt.setString(2, x);
+		stmt.executeUpdate();
+             }catch (SQLException e) {
+                System.out.println(e.getMessage()+ e.getErrorCode());
+                return false;
+            }
+            return true;
+        }
+        
+        public boolean addToClass(String x, int y)
+        {
+             try {
+		String queryString = "INSERT INTO STUDENTROSTER(sr_classID, sr_studentID) VALUES (?, ?)";
+		connection = getConnection();
+		stmt = connection.prepareStatement(queryString);
+		stmt.setString(2, x);
+                stmt.setInt(1, y);
+		stmt.executeUpdate();
+             }catch (SQLException e) {
+                System.out.println(e.getMessage()+ e.getErrorCode());
+                return false;
+            }
+            return true;
+        }
+        
+       
+        
+        
 	/*
 	public boolean addSection(Section s)
 	{
@@ -186,6 +238,10 @@ public class ClassroomDAO{
             }
 		
         }
+<<<<<<< HEAD
+        */
+}
+=======
         
         public int getSectionID(String sectionName, int yearLevel, int schoolYear)
         {  int x = 0;
@@ -208,3 +264,4 @@ public class ClassroomDAO{
 		
         }
 }
+>>>>>>> upstream/master

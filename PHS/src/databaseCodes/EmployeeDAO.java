@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class EmployeeDAO{
 	Connection connection = null;
@@ -22,7 +24,7 @@ public class EmployeeDAO{
 	public boolean addEmployee(Employee emp)
 	{
             try{
-                String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  passwordEmp, passFlagEmp , departmentEmp, genderEmp) VALUES (?,?,?,?,? , ?,idEmployee, false,?,?)";
+                String queryString = "INSERT INTO EMPLOYEE(idEmployee, firstNameEmp, middleNameEmp, lastNameEmp, positionEmp, contactNumberEmp,  departmentEmp, genderEmp) VALUES (?,?,?,?,? , ?,?,?)";
                 connection = getConnection();
                 stmt = connection.prepareStatement(queryString);
                 stmt.setString(1, emp.getIdNum());
@@ -41,6 +43,43 @@ public class EmployeeDAO{
             return true;
 	}
         
+        public String getAdviserID(String x){
+            Statement st = null;
+            String a = "";
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT idEmployee FROM EMPLOYEE WHERE lastNameEmp LIKE '"+x+"%'");
+                while(rs.next())
+                    a = rs.getString("idEmployee");
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return a;
+        }
+        
+        public ArrayList<String> getEmployee(int x){
+            Statement st = null;
+            ArrayList<String> sNames = new ArrayList();
+            String a;
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                if(x > 6)
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'High School' and positionEmp = 'Subject Teacher'");
+                else
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'Elementary' and positionEmp = 'Subject Teacher'");
+                while(rs.next()){
+                    a = rs.getString("lastNameEmp");
+                    System.out.println(a);
+                    sNames.add(a);
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return sNames;
+        }
+        
 	public boolean editEmployeeInfo(Employee emp)
 	{
             int x =0;
@@ -56,7 +95,7 @@ public class EmployeeDAO{
 		x = stmt.executeUpdate();
                 System.out.println(x);
             }catch (SQLException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + e.getErrorCode());
                 return false;
             }
             return true;
@@ -79,7 +118,6 @@ public class EmployeeDAO{
 			stmt.setString(7, emp.getLastName());
                         stmt.setString(8, emp.getPosition());
 			x = stmt.executeUpdate();
-                        System.out.println(x);
 			}catch (SQLException e) {
 			 System.out.println(e.getMessage());
                          x = 0;
@@ -131,8 +169,8 @@ public class EmployeeDAO{
             {
                 System.out.println(e.getMessage());
             }
-        
         }
+         
         public Employee getLoginReq(String idNum, String empPW) 
         {
             String x = "null";
@@ -176,6 +214,22 @@ public class EmployeeDAO{
 			 System.out.println(e.getErrorCode());
                          return null;
             }
+        }
+         public String getAdviser(String x){
+            Statement s = null;
+            String a = "";
+            String b = "";
+            try{
+                connection = getConnection();
+                s = connection.createStatement();
+                rs = s.executeQuery("select * from section where sectionName = "+x+"");
+                b = rs.getString("sectionID");
+                rs = s.executeQuery("select * from classadviser c , employee e, section s where c.adviserID = e.idEmployee AND s.sectionID = c.ca_classID = "+b+"");
+                a = rs.getString(rs.getString("lastNameEmp").concat(", ").concat(rs.getString("firstNameEmp")));
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return a;
         }
 			
 }

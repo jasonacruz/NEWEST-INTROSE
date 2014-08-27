@@ -31,13 +31,14 @@ public class StudentDAO {
                 String queryString = "INSERT INTO STUDENT(idStudent, firstNameSt, middleNameSt, lastNameSt, genderST, birthDateSt, yearLevelSt) VALUES (?,?,?,?,?,?, ?)";
                 connection = getConnection();
                 stmt = connection.prepareStatement(queryString);
+                
 		stmt.setString(1, s.getIdNum());
 		stmt.setString(2, s.getFirstName());
 		stmt.setString(3, s.getMidName());
 		stmt.setString(4, s.getLastName());
 		stmt.setString(5, s.getGender());
 		stmt.setString(6, s.getDOB());
-                stmt.setInt(7, 1);
+                stmt.setInt(7, s.getGradeLvl());
 		stmt.executeUpdate();
             }catch(SQLException e){
                 System.out.println(e.getMessage() + e.getErrorCode());
@@ -103,6 +104,37 @@ public class StudentDAO {
                 }
             }catch(SQLException g){
                 System.out.println("lol");
+            }
+            return a;
+        }
+        
+        public ArrayList<String> getStudents(int x){
+            ArrayList<String> s = new ArrayList();
+            Statement st = null;
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT * FROM STUDENT WHERE yearLevelSt = "+x+"");
+                while(rs.next()){
+                    s.add(rs.getString("lastNameSt"));
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return s;
+        }
+        
+        public String getStudentID(String x){
+            Statement st = null;
+            String a = "";
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT idStudent FROM STUDENT WHERE lastNameSt LIKE '"+x+"%'");
+                while(rs.next())
+                    a = rs.getString("idStudent");
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
             }
             return a;
         }
