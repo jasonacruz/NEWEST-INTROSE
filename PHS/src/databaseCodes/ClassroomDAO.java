@@ -186,5 +186,25 @@ public class ClassroomDAO{
             }
 		
         }
-       
+        
+        public int getSectionID(String sectionName, int yearLevel, int schoolYear)
+        {  int x = 0;
+            try
+            {
+                    String queryString = "SELECT sectionID FROM Section WHERE sectionName = ? AND sectionYearLevel = ? AND sectionSchoolYear = ?";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    stmt.setString(1, sectionName);
+                    stmt.setInt(2, yearLevel);
+                    stmt.setInt(3, schoolYear);
+                     ResultSet resultString = stmt.executeQuery();
+                     resultString.next();
+                    return resultString.getInt(1);
+            }
+            catch (SQLException e) {
+			 System.out.println(e.getMessage());
+                         return 0;
+            }
+		
+        }
 }

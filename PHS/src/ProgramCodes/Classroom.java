@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Classroom {
 
 	private String sectName;
+        private String subjectName;
 	private ArrayList<Student> studentList;
 	private int sectYearlvl;
 	private int schoolYear;
@@ -23,13 +24,19 @@ public class Classroom {
 	public String getSectName() {
 		return this.sectName;
 	}
-
+        public String getSubjectName() {
+		return this.subjectName;
+	}
 	/**
 	 * 
 	 * @param sectName
 	 */
 	public void setSectName(String sectName) {
 		this.sectName = sectName;
+	}
+        
+        public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
 	}
 
 	public int getSectYearlvl() {

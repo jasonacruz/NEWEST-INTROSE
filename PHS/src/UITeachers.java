@@ -40,13 +40,13 @@ public class UITeachers extends javax.swing.JFrame {
         teacher = emp;
         IUserName.setText(teacher.getFirstName() + " " +teacher.getLastName());
         addSectionButton();
-        System.out.println("Knowledge" + settings.getKnowledge() +" / Understanding"+ settings.getUnderstanding() + " / SchoolYear" + settings.getSchoolYear());
     }
 
     public String[] getTruncate(javax.swing.JButton jb) {
         return jb.getText().split(" - ");
     }
     
+    @SuppressWarnings("empty-statement")
     public Classroom setSection(javax.swing.JButton jb)
     {
         String[] temp;
@@ -54,9 +54,11 @@ public class UITeachers extends javax.swing.JFrame {
         temp = getTruncate(jb);
         cTemp.setSectYearlvl(Integer.parseInt(temp[0]));
         cTemp.setSectName(temp[1]);
+        if(!temp[2].equals("Adviser"));
+            cTemp.setSubjectName(temp[2]);
         cTemp.setSchoolYear(settings.getSchoolYear());
         cd.setStudentList(cTemp);
-        System.out.println(cTemp.getSectYearlvl() + " - " + cTemp.getSectName() + " - " + cTemp.getSchoolYear());
+        System.out.println(cTemp.getSectYearlvl() + " - " + cTemp.getSectName() + " - " + cTemp.getSchoolYear() + " - "+cTemp.getSubjectName());
         return cTemp;
         
         
@@ -93,10 +95,9 @@ public class UITeachers extends javax.swing.JFrame {
             buttonx.setForeground(new java.awt.Color(156, 89, 90));
             jPanel1.add(buttonx, constraint);
              buttonx.addActionListener(new ActionListener() {
+         @Override
          public void actionPerformed(ActionEvent ae2) {
             new MainTablePandC(teacher, setSection(buttonx), settings).setVisible(true);
-          //  new MainTablePandC().setVisible(true);
-            System.out.println(buttonx.getText());
         }
     });
                      }
@@ -113,10 +114,9 @@ public class UITeachers extends javax.swing.JFrame {
             button.setForeground(new java.awt.Color(156, 89, 90));
             jPanel1.add(button, constraint);
              button.addActionListener(new ActionListener() {
+         @Override
          public void actionPerformed(ActionEvent ae2) {
                new MainTable(teacher, setSection(button), settings).setVisible(true);
-            // new MainTable().setVisible(true);
-         System.out.println(button.getText());
         }
     });
                      }
@@ -181,11 +181,9 @@ public class UITeachers extends javax.swing.JFrame {
         });
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 110, 30));
 
-        jLabel3.setBackground(new java.awt.Color(156, 89, 90));
-        jLabel3.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel3.setOpaque(true);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bar.png"))); // NOI18N
         jLabel3.setRequestFocusEnabled(false);
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 150));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 150));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 600, 153, 140));
         jPanel3.setVisible(false);

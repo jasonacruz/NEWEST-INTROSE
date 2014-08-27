@@ -19,7 +19,7 @@ public class MainTable extends javax.swing.JFrame {
     
     private Classroom c;
     private Faculty teacher;
-    private Settings settings;
+    private Settings s;
     DefaultTableModel tab = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -37,9 +37,10 @@ public class MainTable extends javax.swing.JFrame {
         teacher = emp;
         this.c = c;
         IUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
-        this.settings = settings;
+        this.s = settings;
         changeTable();
     }
+//Cannot add or update a child row: a foreign key constraint fails (`phs`.`gradecomposition`, CONSTRAINT `fk_GradeComposition_classTeacher1` FOREIGN KEY (`gc_subjectID`, `gc_classID`) REFERENCES `classteacher` (`ct_subjectID`, `ct_classID`) ON DELETE NO ACTION)
 
     private void changeTable() {
         Object[] tableColumnNames = new Object[3];
@@ -67,6 +68,9 @@ public class MainTable extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        personalDataMenu = new javax.swing.JPanel();
+        editGrade1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         GradesScrollPane = new javax.swing.JScrollPane();
         Grades = new javax.swing.JTable();
         btnSubmit = new javax.swing.JButton();
@@ -81,6 +85,7 @@ public class MainTable extends javax.swing.JFrame {
         btnProj = new javax.swing.JButton();
         lblPT = new javax.swing.JLabel();
         btnPT = new javax.swing.JButton();
+        btnGrades = new javax.swing.JButton();
         lClassList = new javax.swing.JLabel();
         btnBack = new javax.swing.JLabel();
         bExport = new javax.swing.JButton();
@@ -89,13 +94,31 @@ public class MainTable extends javax.swing.JFrame {
         settingsIcon = new javax.swing.JLabel();
         IUserName = new javax.swing.JLabel();
         ribbon1 = new javax.swing.JLabel();
-        ribbon = new javax.swing.JLabel();
         redbar = new javax.swing.JLabel();
         bgElement = new javax.swing.JLabel();
 
         setTitle("Philadelphia High School");
         setBackground(new java.awt.Color(255, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        personalDataMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        personalDataMenu.setMaximumSize(new java.awt.Dimension(130, 180));
+        personalDataMenu.setOpaque(false);
+        personalDataMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                personalDataMenuMouseClicked(evt);
+            }
+        });
+        personalDataMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        editGrade1.setText("Edit Grade");
+        personalDataMenu.add(editGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
+        personalDataMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 110));
+
+        getContentPane().add(personalDataMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 120, 100));
 
         Grades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,7 +195,7 @@ public class MainTable extends javax.swing.JFrame {
 
         lblPT.setBackground(new java.awt.Color(255, 255, 255));
         lblPT.setForeground(new java.awt.Color(255, 255, 255));
-        lblPT.setText("P.T.");
+        lblPT.setText("Perodical Test");
         pClassList.add(lblPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 97, 23));
 
         btnPT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plussign.png"))); // NOI18N
@@ -183,11 +206,20 @@ public class MainTable extends javax.swing.JFrame {
         });
         pClassList.add(btnPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 40, -1));
 
-        getContentPane().add(pClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 180, 220));
+        getContentPane().add(pClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 250));
+
+        btnGrades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clients.png"))); // NOI18N
+        btnGrades.setText("Grades");
+        btnGrades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnGradesMousePressed(evt);
+            }
+        });
+        getContentPane().add(btnGrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 160, -1));
 
         lClassList.setForeground(new java.awt.Color(255, 255, 204));
         lClassList.setText("Class List");
-        getContentPane().add(lClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 20));
+        getContentPane().add(lClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 20));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
         btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,14 +243,13 @@ public class MainTable extends javax.swing.JFrame {
         getContentPane().add(settingsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, -1));
 
         IUserName.setText("User name");
-        getContentPane().add(IUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        getContentPane().add(IUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         ribbon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ribbon.png"))); // NOI18N
-        getContentPane().add(ribbon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
-        getContentPane().add(ribbon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 160, 60));
+        getContentPane().add(ribbon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         redbar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bar.png"))); // NOI18N
-        getContentPane().add(redbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 180, -1));
+        getContentPane().add(redbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, -1));
 
         bgElement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background2_1.png"))); // NOI18N
         getContentPane().add(bgElement, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1980, 1490));
@@ -227,19 +258,19 @@ public class MainTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuizzesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuizzesActionPerformed
-       AddComponent ac = new AddComponent(this,true, "Quiz", c);
+       AddComponent ac = new AddComponent(this,true, "Quiz", c,s);
        ac.setTitle("Quiz <number>");
        ac.setVisible(true);
     }//GEN-LAST:event_btnQuizzesActionPerformed
 
     private void btnHWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHWMouseClicked
-        AddComponent ac = new AddComponent(this,true, "Homework",c);
+        AddComponent ac = new AddComponent(this,true, "Homework",c,s);
         ac.setTitle("Homework <number>");
         ac.setVisible(true);
     }//GEN-LAST:event_btnHWMouseClicked
 
     private void btnSWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSWMouseClicked
-        AddComponent ac = new AddComponent(this,true, "Seatwork",c);
+        AddComponent ac = new AddComponent(this,true, "Seatwork",c,s);
         ac.setTitle("Seatwork <number>");
         ac.setVisible(true);
     }//GEN-LAST:event_btnSWMouseClicked
@@ -251,7 +282,7 @@ public class MainTable extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProjMouseClicked
 
     private void btnPTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPTMouseClicked
-        AddComponent ac = new AddComponent(this,true, "Periodical Test",c);
+        AddComponent ac = new AddComponent(this,true, "Periodical Test",c,s);
         ac.setTitle("Periodical Test");
         ac.setVisible(true);
     }//GEN-LAST:event_btnPTMouseClicked
@@ -259,6 +290,14 @@ public class MainTable extends javax.swing.JFrame {
     private void btnBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMousePressed
         this.setVisible(false);
     }//GEN-LAST:event_btnBackMousePressed
+
+    private void btnGradesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGradesMousePressed
+    
+    }//GEN-LAST:event_btnGradesMousePressed
+
+    private void personalDataMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_personalDataMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_personalDataMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -303,12 +342,15 @@ public class MainTable extends javax.swing.JFrame {
     private javax.swing.JButton bExport;
     private javax.swing.JLabel bgElement;
     private javax.swing.JLabel btnBack;
+    private javax.swing.JButton btnGrades;
     private javax.swing.JButton btnHW;
     private javax.swing.JButton btnPT;
     private javax.swing.JButton btnProj;
     private javax.swing.JButton btnQuizzes;
     private javax.swing.JButton btnSW;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton editGrade1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lClassList;
     private javax.swing.JLabel lbSxnSubj;
     private javax.swing.JLabel lblHW;
@@ -317,8 +359,8 @@ public class MainTable extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuiz;
     private javax.swing.JLabel lblSW;
     private javax.swing.JPanel pClassList;
+    private javax.swing.JPanel personalDataMenu;
     private javax.swing.JLabel redbar;
-    private javax.swing.JLabel ribbon;
     private javax.swing.JLabel ribbon1;
     private javax.swing.JLabel settingsIcon;
     // End of variables declaration//GEN-END:variables
