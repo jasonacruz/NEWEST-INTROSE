@@ -97,7 +97,7 @@ public class UITeachers extends javax.swing.JFrame {
              buttonx.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent ae2) {
-            new MainTablePandC(teacher, setSection(buttonx), settings).setVisible(true);
+            new MainTable(teacher, setSection(buttonx), settings, true).setVisible(true);
         }
     });
                      }
@@ -116,7 +116,7 @@ public class UITeachers extends javax.swing.JFrame {
              button.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent ae2) {
-               new MainTable(teacher, setSection(button), settings).setVisible(true);
+               new MainTable(teacher, setSection(button), settings, false).setVisible(true);
         }
     });
                      }

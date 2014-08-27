@@ -210,7 +210,7 @@ public class AddComponent extends javax.swing.JDialog {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         java.awt.Frame f = (java.awt.Frame) this.getParent();
-        AddGrades g = new AddGrades(f, true, c, examType);
+        AddGrades g = new AddGrades(f, true, c, examType, s);
         new GradesDAO(s).addGradeComp(c, examType, ((SpinnerNumberModel) sKnow.getModel()).getNumber().intValue(), ((SpinnerNumberModel) sUnder.getModel()).getNumber().intValue(), ((SpinnerNumberModel) sPS.getModel()).getNumber().intValue(), ((SpinnerNumberModel) sP.getModel()).getNumber().intValue());
         g.setVisible(true);
         g.setTitle(this.getTitle());

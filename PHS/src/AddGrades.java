@@ -1,6 +1,8 @@
 
 import ProgramCodes.Classroom;
+import ProgramCodes.ErrorHandler;
 import ProgramCodes.Settings;
+import databaseCodes.GradesDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -17,11 +19,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AddGrades extends javax.swing.JDialog {
     private Classroom c;
-    private Settings settings;
+    private Settings s;
+    private String examType;
+    private ErrorHandler eh = new ErrorHandler();
     DefaultTableModel tab = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return column >2;
+            return column >1;
         }
     };
     /**
@@ -33,9 +37,11 @@ public class AddGrades extends javax.swing.JDialog {
         super(parent,modal);
         initComponents();
     } 
-    public AddGrades(java.awt.Frame parent, boolean modal, Classroom c, String examType) {
+    public AddGrades(java.awt.Frame parent, boolean modal, Classroom c, String examType, Settings s) {
         super(parent,modal);
+        this.examType = examType;
         this.c = c;
+        this.s = s;
         initComponents();
         changeTable();
     }
@@ -139,7 +145,14 @@ public class AddGrades extends javax.swing.JDialog {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         for (int i = 0; i < c.getStudentList().size(); i++) {
+            System.out.println(examType);
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 2).toString()));
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 3).toString()));
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 4).toString()));
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 5).toString()));
+            System.out.println(c.getStudentList().get(i).getIdNum());
             
+            new GradesDAO(s).addStudentGrade(c, examType, Integer.parseInt(jTable1.getValueAt(i, 2).toString()), Integer.parseInt(jTable1.getValueAt(i, 3).toString()), Integer.parseInt(jTable1.getValueAt(i, 4).toString()), Integer.parseInt(jTable1.getValueAt(i, 5).toString()), c.getStudentList().get(i).getIdNum());//(Classroom c, String examType, int knowledge, int understanding, int process, int product, String idStudent)
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 

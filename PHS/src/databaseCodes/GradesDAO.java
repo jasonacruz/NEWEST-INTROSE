@@ -32,8 +32,7 @@ public class GradesDAO {
             this.s = s;
         }
         //
-    //INSERT INTO STUDENTGRADE(sg_classID, sg_subjectID, sg_idStudent, sg_gradeQuarter, sg_gradeComp, sg_gradeCompNumber, KnowledgeValue, UnderstandingValue,
-        //SkillValue, ProductValue, gradeFinal, gradeApproved) VALUES(?,?,?,?,?,?,?,?,?,?,0,0);
+    //INSERT INTO STUDENTGRADE(sg_classID, sg_subjectID, sg_idStudent, sg_gradeQuarter, sg_gradeComp, sg_gradeCompNumber, KnowledgeValue, UnderstandingValue,SkillValue, ProductValue, gradeFinal, gradeApproved) VALUES(?,?,?,?,?,?,?,?,?,?,0,0);
         public void addStudentGrade(Classroom c, String examType, int knowledge, int understanding, int process, int product, String idStudent)
         {
                 int subjectID = getSubjectID(c.getSubjectName(), c.getSectYearlvl());
@@ -41,18 +40,19 @@ public class GradesDAO {
                 int numComp = getNumComponents(c, examType) - 1;
                 String queryString;
                         try {
-                                queryString = "INSERT INTO GRADECOMPOSITION(gc_classID,gc_subjectID,gc_gradeQuarter,gc_gradeComp,gc_gradeCompNumber,KnowledgeValue,UnderstandingValue,SkillValue,ProductValue) VALUES(?,?,?,?, ?, ?,?,?,?);";
+                                queryString = "INSERT INTO STUDENTGRADE(sg_classID, sg_subjectID, sg_idStudent, sg_gradeQuarter, sg_gradeComp, sg_gradeCompNumber, KnowledgeValue, UnderstandingValue,SkillValue, ProductValue, gradeFinal, gradeApproved) VALUES(?,?,?,?,?,?,?,?,?,?,0,0);";
                                 connection = getConnection();
                                 stmt = connection.prepareStatement(queryString);
                                 stmt.setInt(1, sectionID);
                                 stmt.setInt(2, subjectID);
-                                stmt.setInt(3, s.getQuarter());
-                                stmt.setString(4, examType);
-                                stmt.setInt(5, numComp);
-                                stmt.setInt(6, knowledge);
-                                stmt.setInt(7, understanding);
-                                stmt.setInt(8, process);
-                                stmt.setInt(9, product);
+                                stmt.setString(3, idStudent);
+                                stmt.setInt(4, s.getQuarter());
+                                stmt.setString(5, examType);
+                                stmt.setInt(6, numComp);
+                                stmt.setInt(7, knowledge);
+                                stmt.setInt(8, understanding);
+                                stmt.setInt(9, process);
+                                stmt.setInt(10, product);
                                 stmt.executeUpdate();  
                         }
                                 catch(SQLException e)

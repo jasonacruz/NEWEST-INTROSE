@@ -32,16 +32,17 @@ public class MainTable extends javax.swing.JFrame {
     public MainTable() {
         initComponents();
     }
-    public MainTable(Faculty emp, Classroom c, Settings settings) {
+    public MainTable(Faculty emp, Classroom c, Settings settings, Boolean enableAdviser) {
         initComponents();
         teacher = emp;
         this.c = c;
+        bExport.setVisible(enableAdviser);
+        pClassList.setVisible(!enableAdviser);
         IUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
         this.s = settings;
         changeTable();
     }
-//Cannot add or update a child row: a foreign key constraint fails (`phs`.`gradecomposition`, CONSTRAINT `fk_GradeComposition_classTeacher1` FOREIGN KEY (`gc_subjectID`, `gc_classID`) REFERENCES `classteacher` (`ct_subjectID`, `ct_classID`) ON DELETE NO ACTION)
-
+    
     private void changeTable() {
         Object[] tableColumnNames = new Object[3];
         tableColumnNames[0] = "Student ID";
@@ -68,9 +69,6 @@ public class MainTable extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        personalDataMenu = new javax.swing.JPanel();
-        editGrade1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         GradesScrollPane = new javax.swing.JScrollPane();
         Grades = new javax.swing.JTable();
         btnSubmit = new javax.swing.JButton();
@@ -100,25 +98,6 @@ public class MainTable extends javax.swing.JFrame {
         setTitle("Philadelphia High School");
         setBackground(new java.awt.Color(255, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        personalDataMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-        personalDataMenu.setMaximumSize(new java.awt.Dimension(130, 180));
-        personalDataMenu.setOpaque(false);
-        personalDataMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                personalDataMenuMouseClicked(evt);
-            }
-        });
-        personalDataMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        editGrade1.setText("Edit Grade");
-        personalDataMenu.add(editGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panel_menu.png"))); // NOI18N
-        personalDataMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 110));
-
-        getContentPane().add(personalDataMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 120, 100));
 
         Grades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -295,10 +274,6 @@ public class MainTable extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnGradesMousePressed
 
-    private void personalDataMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_personalDataMenuMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_personalDataMenuMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -349,8 +324,6 @@ public class MainTable extends javax.swing.JFrame {
     private javax.swing.JButton btnQuizzes;
     private javax.swing.JButton btnSW;
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JButton editGrade1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lClassList;
     private javax.swing.JLabel lbSxnSubj;
     private javax.swing.JLabel lblHW;
@@ -359,7 +332,6 @@ public class MainTable extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuiz;
     private javax.swing.JLabel lblSW;
     private javax.swing.JPanel pClassList;
-    private javax.swing.JPanel personalDataMenu;
     private javax.swing.JLabel redbar;
     private javax.swing.JLabel ribbon1;
     private javax.swing.JLabel settingsIcon;
