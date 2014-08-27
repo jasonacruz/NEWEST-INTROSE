@@ -43,6 +43,21 @@ public class EmployeeDAO{
             return true;
 	}
         
+        public String getAdviserID(String x){
+            Statement st = null;
+            String a = "";
+            try{
+                connection = getConnection();
+                st = connection.createStatement();
+                rs = st.executeQuery("SELECT idEmployee FROM EMPLOYEE WHERE lastNameEmp LIKE '"+x+"%'");
+                while(rs.next())
+                    a = rs.getString("idEmployee");
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return a;
+        }
+        
         public ArrayList<String> getEmployee(int x){
             Statement st = null;
             ArrayList<String> sNames = new ArrayList();
@@ -50,16 +65,14 @@ public class EmployeeDAO{
             try{
                 connection = getConnection();
                 st = connection.createStatement();
-                System.out.println("xx");
                 if(x > 6)
-                    rs = st.executeQuery("select * from employee where departmentEmp = 'High School'");
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'High School' and positionEmp = 'Subject Teacher'");
                 else
-                    rs = st.executeQuery("select * from employee where departmentEmp = 'Elementary'");
-                System.out.println("xxx");
-                  //  rs = st.executeQuery("SELECT * FROM EMPLOYEE WHERE departmentEmp IS Elementary AND positionEmp IS Subject Teacher");
+                    rs = st.executeQuery("select * from employee where departmentEmp = 'Elementary' and positionEmp = 'Subject Teacher'");
                 while(rs.next()){
-                    System.out.println("xxxx");
-                    sNames.add(rs.getString("lastNameEmp"));
+                    a = rs.getString("lastNameEmp");
+                    System.out.println(a);
+                    sNames.add(a);
                 }
             }catch(SQLException e){
                 System.out.println(e.getMessage() + e.getErrorCode());
@@ -105,7 +118,6 @@ public class EmployeeDAO{
 			stmt.setString(7, emp.getLastName());
                         stmt.setString(8, emp.getPosition());
 			x = stmt.executeUpdate();
-                        System.out.println(x);
 			}catch (SQLException e) {
 			 System.out.println(e.getMessage());
                          x = 0;
@@ -157,8 +169,8 @@ public class EmployeeDAO{
             {
                 System.out.println(e.getMessage());
             }
-        
         }
+         
         public Employee getLoginReq(String idNum, String empPW) 
         {
             String x = "null";
@@ -202,6 +214,22 @@ public class EmployeeDAO{
 			 System.out.println(e.getErrorCode());
                          return null;
             }
+        }
+         public String getAdviser(String x){
+            Statement s = null;
+            String a = "";
+            String b = "";
+            try{
+                connection = getConnection();
+                s = connection.createStatement();
+                rs = s.executeQuery("select * from section where sectionName = "+x+"");
+                b = rs.getString("sectionID");
+                rs = s.executeQuery("select * from classadviser c , employee e, section s where c.adviserID = e.idEmployee AND s.sectionID = c.ca_classID = "+b+"");
+                a = rs.getString(rs.getString("lastNameEmp").concat(", ").concat(rs.getString("firstNameEmp")));
+            }catch(SQLException e){
+                System.out.println(e.getMessage() + e.getErrorCode());
+            }
+            return a;
         }
 			
 }
