@@ -28,11 +28,16 @@ public class SectionDAO {
         
         public boolean addSection(String s1, String s2){
             try{
+<<<<<<< HEAD
                 String queryString = "INSERT INTO SECTION(sectionName, sectionYearLevel) VALUES (?,?)";
+=======
+                String queryString = "INSERT INTO SECTION(sectionName, sectionYearLevel, sectionSchoolYear) VALUES (?,?,?)";
+>>>>>>> upstream/master
                 connection = getConnection();
                 stmt = connection.prepareStatement(queryString);
 		stmt.setString(1, s2);
 		stmt.setString(2, s1);
+                stmt.setString(3, s1);
 		stmt.executeUpdate();
             }catch(SQLException e){
                 System.out.println(e.getMessage() + e.getErrorCode());
@@ -47,11 +52,15 @@ public class SectionDAO {
             try{
                 connection = getConnection();
                 st = connection.createStatement();
+<<<<<<< HEAD
                 
                 rs = st.executeQuery("SELECT * FROM SECTION WHERE sectionYearLevel ="+ x +"");
                 while(rs.next()){
                     sNames.add(rs.getString("sectionName"));
                 }
+=======
+                rs = st.executeQuery("SELECT * FROM SECTION WHERE sectionYearLevel ="+ x +"");
+>>>>>>> upstream/master
             }catch(SQLException e){
                 System.out.println(e.getMessage() + e.getErrorCode());
             }

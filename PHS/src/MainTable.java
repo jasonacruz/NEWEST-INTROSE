@@ -1,5 +1,9 @@
 
+import ProgramCodes.Classroom;
 import ProgramCodes.Faculty;
+import ProgramCodes.Settings;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,21 +16,50 @@ import ProgramCodes.Faculty;
  * @author James
  */
 public class MainTable extends javax.swing.JFrame {
-
-    Faculty teacher;
+    
+    private Classroom c;
+    private Faculty teacher;
+    private Settings s;
+    DefaultTableModel tab = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column != 2;
+        }
+    };
     /**
-     * Creates new form Splash
+     * Creates new form UITeachers
      */
     public MainTable() {
         initComponents();
     }
-
-    MainTable(Faculty emp) {
+    public MainTable(Faculty emp, Classroom c, Settings settings, Boolean enableAdviser) {
         initComponents();
         teacher = emp;
+        this.c = c;
+        bExport.setVisible(enableAdviser);
+        pClassList.setVisible(!enableAdviser);
         IUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
+        this.s = settings;
+        changeTable();
     }
-
+    
+    private void changeTable() {
+        Object[] tableColumnNames = new Object[3];
+        tableColumnNames[0] = "Student ID";
+        tableColumnNames[1] = "Student Name";
+        tableColumnNames[2] = "Grade";
+        tab.setColumnIdentifiers(tableColumnNames);
+        Object[] objects = new Object[3];
+        if (c.getStudentList().size() > 0) {
+            for (int i = 0; i < c.getStudentList().size(); i++) {
+                objects[0] = c.getStudentList().get(i).getIdNum();
+                objects[1] = (c.getStudentList().get(i).getLastName() + ", " + c.getStudentList().get(i).getFirstName() + " " + c.getStudentList().get(i).getMidName());
+                objects[2] = "";
+                tab.addRow(objects);
+            }
+            this.Grades.setModel(tab);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +83,7 @@ public class MainTable extends javax.swing.JFrame {
         btnProj = new javax.swing.JButton();
         lblPT = new javax.swing.JLabel();
         btnPT = new javax.swing.JButton();
+        btnGrades = new javax.swing.JButton();
         lClassList = new javax.swing.JLabel();
         btnBack = new javax.swing.JLabel();
         bExport = new javax.swing.JButton();
@@ -58,7 +92,6 @@ public class MainTable extends javax.swing.JFrame {
         settingsIcon = new javax.swing.JLabel();
         IUserName = new javax.swing.JLabel();
         ribbon1 = new javax.swing.JLabel();
-        ribbon = new javax.swing.JLabel();
         redbar = new javax.swing.JLabel();
         bgElement = new javax.swing.JLabel();
 
@@ -141,7 +174,7 @@ public class MainTable extends javax.swing.JFrame {
 
         lblPT.setBackground(new java.awt.Color(255, 255, 255));
         lblPT.setForeground(new java.awt.Color(255, 255, 255));
-        lblPT.setText("P.T.");
+        lblPT.setText("Perodical Test");
         pClassList.add(lblPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 97, 23));
 
         btnPT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plussign.png"))); // NOI18N
@@ -152,14 +185,28 @@ public class MainTable extends javax.swing.JFrame {
         });
         pClassList.add(btnPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 40, -1));
 
-        getContentPane().add(pClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 180, 220));
+        getContentPane().add(pClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 250));
+
+        btnGrades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clients.png"))); // NOI18N
+        btnGrades.setText("Grades");
+        btnGrades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnGradesMousePressed(evt);
+            }
+        });
+        getContentPane().add(btnGrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 160, -1));
 
         lClassList.setForeground(new java.awt.Color(255, 255, 204));
         lClassList.setText("Class List");
-        getContentPane().add(lClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 20));
+        getContentPane().add(lClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 20));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
-        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBackMousePressed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 21, 50, 50));
 
         bExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         bExport.setText("Compile & Export");
@@ -175,14 +222,13 @@ public class MainTable extends javax.swing.JFrame {
         getContentPane().add(settingsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, -1));
 
         IUserName.setText("User name");
-        getContentPane().add(IUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        getContentPane().add(IUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         ribbon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ribbon.png"))); // NOI18N
-        getContentPane().add(ribbon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
-        getContentPane().add(ribbon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 160, 60));
+        getContentPane().add(ribbon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         redbar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bar.png"))); // NOI18N
-        getContentPane().add(redbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 180, -1));
+        getContentPane().add(redbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, -1));
 
         bgElement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background2_1.png"))); // NOI18N
         getContentPane().add(bgElement, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1980, 1490));
@@ -191,19 +237,19 @@ public class MainTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuizzesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuizzesActionPerformed
-       AddComponent ac = new AddComponent(this,true);
+       AddComponent ac = new AddComponent(this,true, "Quiz", c,s);
        ac.setTitle("Quiz <number>");
        ac.setVisible(true);
     }//GEN-LAST:event_btnQuizzesActionPerformed
 
     private void btnHWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHWMouseClicked
-        AddComponent ac = new AddComponent(this,true);
+        AddComponent ac = new AddComponent(this,true, "Homework",c,s);
         ac.setTitle("Homework <number>");
         ac.setVisible(true);
     }//GEN-LAST:event_btnHWMouseClicked
 
     private void btnSWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSWMouseClicked
-        AddComponent ac = new AddComponent(this,true);
+        AddComponent ac = new AddComponent(this,true, "Seatwork",c,s);
         ac.setTitle("Seatwork <number>");
         ac.setVisible(true);
     }//GEN-LAST:event_btnSWMouseClicked
@@ -215,10 +261,18 @@ public class MainTable extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProjMouseClicked
 
     private void btnPTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPTMouseClicked
-        AddComponent ac = new AddComponent(this,true);
+        AddComponent ac = new AddComponent(this,true, "Periodical Test",c,s);
         ac.setTitle("Periodical Test");
         ac.setVisible(true);
     }//GEN-LAST:event_btnPTMouseClicked
+
+    private void btnBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMousePressed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackMousePressed
+
+    private void btnGradesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGradesMousePressed
+    
+    }//GEN-LAST:event_btnGradesMousePressed
 
     /**
      * @param args the command line arguments
@@ -237,20 +291,20 @@ public class MainTable extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Splash().setVisible(true);
+                new UITeachers().setVisible(true);
             }
         });
     }
@@ -263,6 +317,7 @@ public class MainTable extends javax.swing.JFrame {
     private javax.swing.JButton bExport;
     private javax.swing.JLabel bgElement;
     private javax.swing.JLabel btnBack;
+    private javax.swing.JButton btnGrades;
     private javax.swing.JButton btnHW;
     private javax.swing.JButton btnPT;
     private javax.swing.JButton btnProj;
@@ -278,7 +333,6 @@ public class MainTable extends javax.swing.JFrame {
     private javax.swing.JLabel lblSW;
     private javax.swing.JPanel pClassList;
     private javax.swing.JLabel redbar;
-    private javax.swing.JLabel ribbon;
     private javax.swing.JLabel ribbon1;
     private javax.swing.JLabel settingsIcon;
     // End of variables declaration//GEN-END:variables

@@ -11,7 +11,7 @@ public class ErrorHandler{
 		else
 			return true;
 		}
-	public boolean sCheckSpace(String s) // check if string contains to spaces. returns false if not valid
+	public boolean sCheckSpace(String s) // check if string contains two spaces. returns false if not valid
 	{
 		int x;
 		

@@ -26,7 +26,7 @@ public class mainLogin extends javax.swing.JFrame {
     EmployeeDAO ed = new EmployeeDAO();
     ErrorHandler eh = new ErrorHandler();
     UIAdmin UIA;
-    Splash UIF;
+    UITeachers UIF;
     UIPrincipal UIP;
     public mainLogin() {
         initComponents();
@@ -164,7 +164,7 @@ public class mainLogin extends javax.swing.JFrame {
                 }
                 else if(emp.getPosition().equals("Subject Teacher"))
                 {    
-                    UIF = new Splash((Faculty) emp);
+                    UIF = new UITeachers((Faculty) emp);
                     UIF.setVisible(true);
                 }
                 else if(emp.getPosition().equals("Principal")|| emp.getPosition().equals("Coordinator"))
@@ -191,7 +191,7 @@ public class mainLogin extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "You may now login with your new password!", "Successful", JOptionPane.INFORMATION_MESSAGE);
                      }
                     else if(!eh.sLength(pw, 6, 16))
-                        JOptionPane.showMessageDialog(rootPane, "Your password must be between 6 to 16 characters!!", "Unsuccessful", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(rootPane, "Your password must be between 6 to 16 characters!", "Unsuccessful", JOptionPane.ERROR_MESSAGE);
                     }
                  }
                 }

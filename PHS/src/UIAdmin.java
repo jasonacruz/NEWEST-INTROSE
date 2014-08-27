@@ -1078,11 +1078,14 @@ public class xUIAdmin extends javax.swing.JFrame {
                 assignSubjectButtonMouseClicked(evt);
             }
         });
+<<<<<<< HEAD
         assignSubjectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignSubjectButtonActionPerformed(evt);
             }
         });
+=======
+>>>>>>> upstream/master
         classDataMenu.add(assignSubjectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 110, -1));
 
         editAssignSubjectButton.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -1168,6 +1171,7 @@ public class xUIAdmin extends javax.swing.JFrame {
             }
         });
         schoolyearSettingsMenu.add(currentSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 110, -1));
+<<<<<<< HEAD
 
         quarterSettingsButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         quarterSettingsButton.setText("Quarter Settings");
@@ -1179,6 +1183,19 @@ public class xUIAdmin extends javax.swing.JFrame {
         });
         schoolyearSettingsMenu.add(quarterSettingsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 110, -1));
 
+=======
+
+        quarterSettingsButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        quarterSettingsButton.setText("Quarter Settings");
+        quarterSettingsButton.setOpaque(false);
+        quarterSettingsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                quarterSettingsButtonMouseClicked(evt);
+            }
+        });
+        schoolyearSettingsMenu.add(quarterSettingsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 110, -1));
+
+>>>>>>> upstream/master
         resetCurrentSettings.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         resetCurrentSettings.setText("Reset Settings");
         resetCurrentSettings.setOpaque(false);
@@ -1302,7 +1319,11 @@ public class xUIAdmin extends javax.swing.JFrame {
                 studentBirthMonthComboBoxActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
         addStudentPanel.add(studentBirthMonthComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
+=======
+        addStudentPanel.add(studentBirthMonthComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+>>>>>>> upstream/master
 
         studentBirthDateComboBox.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         studentBirthDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
@@ -1311,7 +1332,11 @@ public class xUIAdmin extends javax.swing.JFrame {
                 studentBirthDateComboBoxActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
         addStudentPanel.add(studentBirthDateComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 50, -1));
+=======
+        addStudentPanel.add(studentBirthDateComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 50, -1));
+>>>>>>> upstream/master
 
         studentBirthYearComboBox.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         studentBirthYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -2234,11 +2259,14 @@ public class xUIAdmin extends javax.swing.JFrame {
                 saveButton1MouseClicked(evt);
             }
         });
+<<<<<<< HEAD
         saveButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButton1ActionPerformed(evt);
             }
         });
+=======
+>>>>>>> upstream/master
         currentSettingsPanel.add(saveButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 100, -1));
 
         schoolYear.setText("School Year:");
@@ -2402,18 +2430,26 @@ public class xUIAdmin extends javax.swing.JFrame {
         gradeLevelLabel6.setText("Grade Level:");
         assignSubjectPanel.add(gradeLevelLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 70, 20));
 
+<<<<<<< HEAD
         gradeLevelComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+=======
+        gradeLevelComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+>>>>>>> upstream/master
         assignSubjectPanel.add(gradeLevelComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 210, -1));
 
         sectionLabel4.setText("Section:");
         assignSubjectPanel.add(sectionLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
 
+<<<<<<< HEAD
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox6ActionPerformed(evt);
             }
         });
+=======
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+>>>>>>> upstream/master
         assignSubjectPanel.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 210, -1));
 
         invalidInputMessage45.setForeground(new java.awt.Color(255, 0, 0));
@@ -2423,23 +2459,31 @@ public class xUIAdmin extends javax.swing.JFrame {
         SubjectLabel.setText("Subject:");
         assignSubjectPanel.add(SubjectLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 20));
 
+<<<<<<< HEAD
         subjectComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         subjectComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subjectComboBox2ActionPerformed(evt);
             }
         });
+=======
+        subjectComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+>>>>>>> upstream/master
         assignSubjectPanel.add(subjectComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 210, -1));
 
         subjectTeacherLabel.setText("Subject Teacher:");
         assignSubjectPanel.add(subjectTeacherLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
+<<<<<<< HEAD
         subjectTeacherComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         subjectTeacherComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subjectTeacherComboBoxActionPerformed(evt);
             }
         });
+=======
+        subjectTeacherComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+>>>>>>> upstream/master
         assignSubjectPanel.add(subjectTeacherComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 210, -1));
 
         invalidInputMessage48.setForeground(new java.awt.Color(255, 0, 0));
@@ -2811,6 +2855,7 @@ public class xUIAdmin extends javax.swing.JFrame {
         viewGradesPanel.setVisible(false);
         changeGradesPanel.setVisible(false);
         currentSettingsPanel.setVisible(false);
+<<<<<<< HEAD
     }                                     
 
     private void newPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                 
@@ -2818,6 +2863,15 @@ public class xUIAdmin extends javax.swing.JFrame {
     }                                                
 
     private void classDataMenuMouseClicked(java.awt.event.MouseEvent evt) {                                           
+=======
+    }//GEN-LAST:event_SettingsMouseClicked
+
+    private void newPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newPasswordFieldActionPerformed
+
+    private void classDataMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classDataMenuMouseClicked
+>>>>>>> upstream/master
         // TODO add your handling code here:
     }                                          
 
@@ -2829,7 +2883,11 @@ public class xUIAdmin extends javax.swing.JFrame {
         schoolyearSettingsMenu.setVisible(false);
     }                                            
 
+<<<<<<< HEAD
     private void addButton2MouseClicked(java.awt.event.MouseEvent evt) {                                        
+=======
+    private void addButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButton2MouseClicked
+>>>>>>> upstream/master
         addSectionDialogBox.setVisible(true);
     }                                       
 
@@ -2920,9 +2978,15 @@ public class xUIAdmin extends javax.swing.JFrame {
 
     private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {                                        
         changeGradesDialogBox.setVisible(true);
+<<<<<<< HEAD
     }                                       
 
     private void YesButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+=======
+    }//GEN-LAST:event_saveButtonMouseClicked
+
+    private void YesButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesButton10ActionPerformed
+>>>>>>> upstream/master
         // TODO add your handling code here:
     }                                           
 
@@ -3107,6 +3171,7 @@ public class xUIAdmin extends javax.swing.JFrame {
            departmentLabel.setVisible(true);
            departmentComboBox.setVisible(true);
        }
+<<<<<<< HEAD
     }                                                       
 
     private void assignButton3MouseClicked(java.awt.event.MouseEvent evt) {                                           
@@ -3142,6 +3207,35 @@ public class xUIAdmin extends javax.swing.JFrame {
     }                                           
 
     private void addSectionButtonMouseClicked(java.awt.event.MouseEvent evt) {                                              
+=======
+    }//GEN-LAST:event_facultyPositionComboBoxActionPerformed
+
+    private void assignButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignButton3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignButton3MouseClicked
+
+    private void assignButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignButton3ActionPerformed
+
+    private void assignButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignButton2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignButton2MouseClicked
+
+    private void assignButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignButton2ActionPerformed
+
+    private void saveButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButton2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButton2MouseClicked
+
+    private void saveButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButton2ActionPerformed
+
+    private void addSectionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSectionButtonMouseClicked
+>>>>>>> upstream/master
         addSectionPanel.setVisible(true);
         classDataMenu.setVisible(false);
         accountSettingsPanel.setVisible(false);
@@ -3156,9 +3250,15 @@ public class xUIAdmin extends javax.swing.JFrame {
         viewGradesPanel.setVisible(false);
         changeGradesPanel.setVisible(false);
         currentSettingsPanel.setVisible(false);
+<<<<<<< HEAD
     }                                             
 
     private void assignFacultyButtonMouseClicked(java.awt.event.MouseEvent evt) {                                                 
+=======
+    }//GEN-LAST:event_addSectionButtonMouseClicked
+
+    private void assignFacultyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignFacultyButtonMouseClicked
+>>>>>>> upstream/master
         assignFacultyPanel.setVisible(true);
         classDataMenu.setVisible(false);
         addSectionPanel.setVisible(false);
@@ -3173,9 +3273,15 @@ public class xUIAdmin extends javax.swing.JFrame {
         viewGradesPanel.setVisible(false);
         changeGradesPanel.setVisible(false);
         currentSettingsPanel.setVisible(false);
+<<<<<<< HEAD
     }                                                
 
     private void assignStudentButtonMouseClicked(java.awt.event.MouseEvent evt) {                                                 
+=======
+    }//GEN-LAST:event_assignFacultyButtonMouseClicked
+
+    private void assignStudentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignStudentButtonMouseClicked
+>>>>>>> upstream/master
         assignStudentPanel.setVisible(true);
         classDataMenu.setVisible(false);
         assignFacultyPanel.setVisible(false);
@@ -3189,6 +3295,7 @@ public class xUIAdmin extends javax.swing.JFrame {
         viewGradesPanel.setVisible(false);
         changeGradesPanel.setVisible(false);
         currentSettingsPanel.setVisible(false);
+<<<<<<< HEAD
     }                                                
 
     private void assignStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
@@ -3196,6 +3303,15 @@ public class xUIAdmin extends javax.swing.JFrame {
     }                                                   
 
     private void editSectionButtonMouseClicked(java.awt.event.MouseEvent evt) {                                               
+=======
+    }//GEN-LAST:event_assignStudentButtonMouseClicked
+
+    private void assignStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignStudentButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignStudentButtonActionPerformed
+
+    private void editSectionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editSectionButtonMouseClicked
+>>>>>>> upstream/master
         editSectionPanel.setVisible(true);
         classDataMenu.setVisible(false);
         assignFacultyPanel.setVisible(false);
@@ -3209,6 +3325,7 @@ public class xUIAdmin extends javax.swing.JFrame {
         viewGradesPanel.setVisible(false);
         changeGradesPanel.setVisible(false);
         currentSettingsPanel.setVisible(false);
+<<<<<<< HEAD
     }                                              
 
     private void editSectionButtonMouseEntered(java.awt.event.MouseEvent evt) {                                               
@@ -3243,6 +3360,27 @@ public class xUIAdmin extends javax.swing.JFrame {
     }                                                   
 
     private void currentSettingsMouseClicked(java.awt.event.MouseEvent evt) {                                             
+=======
+    }//GEN-LAST:event_editSectionButtonMouseClicked
+
+    private void editSectionButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editSectionButtonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editSectionButtonMouseEntered
+
+    private void assignSubjectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignSubjectButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assignSubjectButtonMouseClicked
+
+    private void editAssignSubjectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editAssignSubjectButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editAssignSubjectButtonMouseClicked
+
+    private void schoolyearSettingsMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_schoolyearSettingsMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_schoolyearSettingsMenuMouseClicked
+
+    private void currentSettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentSettingsMouseClicked
+>>>>>>> upstream/master
         currentSettingsPanel.setVisible(true);
         schoolyearSettingsMenu.setVisible(false);
         changeGradesPanel.setVisible(false);
@@ -3255,6 +3393,7 @@ public class xUIAdmin extends javax.swing.JFrame {
         addFacultyPanel.setVisible(false);
         addStudentPanel.setVisible(false);
         editStudentPanel.setVisible(false);
+<<<<<<< HEAD
     }                                            
 
     private void currentSettingsActionPerformed(java.awt.event.ActionEvent evt) {                                                
@@ -3407,6 +3546,29 @@ public class xUIAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Error.");
         
     }                                                  
+=======
+    }//GEN-LAST:event_currentSettingsMouseClicked
+
+    private void currentSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentSettingsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_currentSettingsActionPerformed
+
+    private void quarterSettingsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quarterSettingsButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quarterSettingsButtonMouseClicked
+
+    private void resetCurrentSettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetCurrentSettingsMouseClicked
+        resetCurrentSettingsDialogBox.setVisible(true);
+    }//GEN-LAST:event_resetCurrentSettingsMouseClicked
+
+    private void resetCurrentSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetCurrentSettingsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resetCurrentSettingsActionPerformed
+
+    private void editAssignSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAssignSubjectButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editAssignSubjectButtonActionPerformed
+>>>>>>> upstream/master
    
     /**
      * @param args the command line arguments
@@ -3557,8 +3719,11 @@ public class xUIAdmin extends javax.swing.JFrame {
     private javax.swing.JDialog currentSettingsDialogBox;
     private javax.swing.JPanel currentSettingsPanel;
     private javax.swing.JLabel currentSubjectTeacherLabel;
+<<<<<<< HEAD
     private javax.swing.JComboBox dCombox;
     private javax.swing.JComboBox dayComboBox;
+=======
+>>>>>>> upstream/master
     private javax.swing.JComboBox departmentComboBox;
     private javax.swing.JLabel departmentLabel;
     private javax.swing.JButton editAssignSubjectButton;
@@ -3579,21 +3744,30 @@ public class xUIAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel finalRatingLabel1;
     private javax.swing.JLabel finalRatingValueLabel;
     private javax.swing.JLabel finalRatingValueLabel1;
+<<<<<<< HEAD
     private javax.swing.JLabel firstNameLabel;
+=======
+>>>>>>> upstream/master
     private javax.swing.JLabel firstQuarterSettings;
     private javax.swing.JLabel firstSectionLabel;
     private javax.swing.JTextField firstSectionNameField;
     private javax.swing.JTextField firstnameField;
     private javax.swing.JTextField firstnameField1;
+<<<<<<< HEAD
     private javax.swing.JTextField fnTextField;
+=======
+>>>>>>> upstream/master
     private javax.swing.JLabel fourthQuarterSettings;
     private javax.swing.JComboBox fromFirstQuarterComboBox;
     private javax.swing.JComboBox fromFourthQuarterComboBox;
     private javax.swing.JComboBox fromSecondQuarterComboBox;
     private javax.swing.JComboBox fromThirdQuarterComboBox;
+<<<<<<< HEAD
     private javax.swing.JComboBox gComboBox;
     private javax.swing.JComboBox gCombox;
     private javax.swing.JLabel gLabel;
+=======
+>>>>>>> upstream/master
     private javax.swing.JLabel genderLabel;
     private javax.swing.JLabel gradeLabel;
     private javax.swing.JComboBox gradeLevelComboBox;
@@ -3667,9 +3841,12 @@ public class xUIAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+=======
+>>>>>>> upstream/master
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -3752,6 +3929,11 @@ public class xUIAdmin extends javax.swing.JFrame {
     private javax.swing.JButton schoolYearSettings;
     private javax.swing.JPanel schoolyearSettingsMenu;
     private javax.swing.JLabel secondQuarterSettings;
+<<<<<<< HEAD
+=======
+    private javax.swing.JTextField secondSectionField;
+    private javax.swing.JLabel secondSectionLabel;
+>>>>>>> upstream/master
     private javax.swing.JComboBox sectionComboBox;
     private javax.swing.JComboBox sectionComboBox1;
     private javax.swing.JLabel sectionLabel;
@@ -3759,8 +3941,11 @@ public class xUIAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel sectionLabel3;
     private javax.swing.JLabel sectionLabel4;
     private javax.swing.JLabel sectionLabel5;
+<<<<<<< HEAD
     private javax.swing.JLabel snLabel;
     private javax.swing.JTextField snTextField;
+=======
+>>>>>>> upstream/master
     private javax.swing.JComboBox studentBirthDateComboBox;
     private javax.swing.JComboBox studentBirthMonthComboBox;
     private javax.swing.JComboBox studentBirthYearComboBox;

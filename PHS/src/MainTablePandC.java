@@ -1,3 +1,8 @@
+
+import ProgramCodes.Classroom;
+import ProgramCodes.Faculty;
+import ProgramCodes.Settings;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,13 +15,22 @@
  */
 public class MainTablePandC extends javax.swing.JFrame {
 
+    private Faculty teacher;
+    private Classroom c;
+    private Settings settings;
     /**
-     * Creates new form Splash
+     * Creates new form UITeachers
      */
     public MainTablePandC() {
         initComponents();
     }
 
+    public MainTablePandC(Faculty emp, Classroom c, Settings settings) {
+        initComponents();
+        teacher = emp;
+        lUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
+        this.settings = settings;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,9 +84,15 @@ public class MainTablePandC extends javax.swing.JFrame {
 
         bSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         bSave.setText("Save a copy");
+        bSave.setEnabled(false);
         getContentPane().add(bSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, -1, -1));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBackMousePressed(evt);
+            }
+        });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         lbSxnSubj.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
@@ -85,7 +105,7 @@ public class MainTablePandC extends javax.swing.JFrame {
         getContentPane().add(settingsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, -1));
 
         lUserName.setText("User name");
-        getContentPane().add(lUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        getContentPane().add(lUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         ribbon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ribbon.png"))); // NOI18N
         getContentPane().add(ribbon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
@@ -98,6 +118,10 @@ public class MainTablePandC extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMousePressed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackMousePressed
 
     /**
      * @param args the command line arguments
@@ -116,20 +140,20 @@ public class MainTablePandC extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UITeachers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Splash().setVisible(true);
+                new UITeachers().setVisible(true);
             }
         });
     }

@@ -1,3 +1,12 @@
+
+import ProgramCodes.Classroom;
+import ProgramCodes.ErrorHandler;
+import ProgramCodes.Settings;
+import databaseCodes.GradesDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,15 +18,55 @@
  * @author DE JOYA
  */
 public class AddGrades extends javax.swing.JDialog {
-
+    private Classroom c;
+    private Settings s;
+    private String examType;
+    private ErrorHandler eh = new ErrorHandler();
+    DefaultTableModel tab = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column >1;
+        }
+    };
     /**
      * Creates new form AddGrades
+     * @param parent
+     * @param modal
      */
     public AddGrades(java.awt.Frame parent, boolean modal) {
         super(parent,modal);
         initComponents();
+    } 
+    public AddGrades(java.awt.Frame parent, boolean modal, Classroom c, String examType, Settings s) {
+        super(parent,modal);
+        this.examType = examType;
+        this.c = c;
+        this.s = s;
+        initComponents();
+        changeTable();
     }
-
+        private void changeTable() {
+        List<Object> tableColumnNames = new ArrayList();
+        tableColumnNames.add("Student ID");
+        tableColumnNames.add("Student Name");
+        tableColumnNames.add("Knowledge");
+        tableColumnNames.add("Understanding");
+        tableColumnNames.add("Process");
+        tableColumnNames.add("Product");
+        tab.setColumnIdentifiers(tableColumnNames.toArray());
+        Object[] objects = new Object[5];
+        if (c.getStudentList().size() > 0) {
+            for (int i = 0; i < c.getStudentList().size(); i++) {
+                objects[0] = c.getStudentList().get(i).getIdNum();
+                objects[1] = (c.getStudentList().get(i).getLastName() + ", " + c.getStudentList().get(i).getFirstName() + " " + c.getStudentList().get(i).getMidName());
+                objects[2] = "";
+                objects[3] = "";
+                objects[4] = "";
+                tab.addRow(objects);
+            }
+            this.jTable1.setModel(tab);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +104,11 @@ public class AddGrades extends javax.swing.JDialog {
 
         btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/check.png"))); // NOI18N
         btnCreate.setText("Add");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
@@ -89,6 +143,19 @@ public class AddGrades extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        for (int i = 0; i < c.getStudentList().size(); i++) {
+            System.out.println(examType);
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 2).toString()));
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 3).toString()));
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 4).toString()));
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 5).toString()));
+            System.out.println(c.getStudentList().get(i).getIdNum());
+            
+            new GradesDAO(s).addStudentGrade(c, examType, Integer.parseInt(jTable1.getValueAt(i, 2).toString()), Integer.parseInt(jTable1.getValueAt(i, 3).toString()), Integer.parseInt(jTable1.getValueAt(i, 4).toString()), Integer.parseInt(jTable1.getValueAt(i, 5).toString()), c.getStudentList().get(i).getIdNum());//(Classroom c, String examType, int knowledge, int understanding, int process, int product, String idStudent)
+        }
+    }//GEN-LAST:event_btnCreateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -119,7 +186,7 @@ public class AddGrades extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Splash().setVisible(true);
+                new UITeachers().setVisible(true);
             }
         });
     }
