@@ -2,7 +2,10 @@
 import ProgramCodes.Classroom;
 import ProgramCodes.Faculty;
 import ProgramCodes.Settings;
+import databaseCodes.GradesDAO;
+import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -20,6 +23,7 @@ public class MainTable extends javax.swing.JFrame {
     private Classroom c;
     private Faculty teacher;
     private Settings s;
+    private GradesDAO gd;
     DefaultTableModel tab = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -30,6 +34,7 @@ public class MainTable extends javax.swing.JFrame {
      * Creates new form UITeachers
      */
     public MainTable() {
+        this.gd = new GradesDAO(s);
         initComponents();
     }
     public MainTable(Faculty emp, Classroom c, Settings settings, Boolean enableAdviser) {
@@ -40,25 +45,69 @@ public class MainTable extends javax.swing.JFrame {
         pClassList.setVisible(!enableAdviser);
         IUserName.setText(teacher.getFirstName()+ " " + teacher.getLastName());
         this.s = settings;
+        this.gd = new GradesDAO(s);
         changeTable();
     }
     
     private void changeTable() {
-        Object[] tableColumnNames = new Object[3];
+        Object[] tableColumnNames = new Object[24];
         tableColumnNames[0] = "Student ID";
         tableColumnNames[1] = "Student Name";
-        tableColumnNames[2] = "Grade";
+        tableColumnNames[2] = "KNLDG-Quiz";
+        tableColumnNames[3] = "KNLDG-Oral";
+        tableColumnNames[4] = "KNLDG-PT";
+        tableColumnNames[5] = "KNLDG-AVE";
+        tableColumnNames[6] = "KNLDG%";
+        tableColumnNames[7] = "PRCSS-Quiz";
+        tableColumnNames[8] = "PRCSS-Oral";
+        tableColumnNames[9] = "PRCSS-PT";
+        tableColumnNames[10] = "PRCSS-AVE";
+        tableColumnNames[11] = "PRCSS%";
+        tableColumnNames[12] = "USTND-Quiz";
+        tableColumnNames[13] = "USTND-Oral";
+        tableColumnNames[14] = "USTND-PT";
+        tableColumnNames[15] = "USTND-AVE";
+        tableColumnNames[16] = "USTND%";
+        tableColumnNames[17] = "PRDCT-Project";
+        tableColumnNames[18] = "PRDCT-Oral";
+        tableColumnNames[19] = "PRDCT-HW";
+        tableColumnNames[20] = "PRDCT-AVE";
+        tableColumnNames[21] = "PRDCT%";
+        tableColumnNames[22] = "TOTAL";
+        tableColumnNames[23] = "FINAL RATING";
         tab.setColumnIdentifiers(tableColumnNames);
-        Object[] objects = new Object[3];
+        Object[] objects = new Object[24];
         if (c.getStudentList().size() > 0) {
             for (int i = 0; i < c.getStudentList().size(); i++) {
                 objects[0] = c.getStudentList().get(i).getIdNum();
                 objects[1] = (c.getStudentList().get(i).getLastName() + ", " + c.getStudentList().get(i).getFirstName() + " " + c.getStudentList().get(i).getMidName());
-                objects[2] = "";
+                objects[2] = gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 1);
+                objects[3] = gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 1);
+                objects[4] = gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 1);
+                objects[6] = ((gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 1)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 1) +gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 1) )/ 0.03;
+                objects[7] = ((gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 1)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 1) +gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 1) )/ 0.03 * (s.getKnowledge()/100);
+                objects[8] = gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 2);
+                objects[9] = gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 2);
+                objects[10] = gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 2);
+                objects[11] = ((gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(),2)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 2) +gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 2) )/ 0.03;
+                objects[12] = ((gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 2)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 2) +gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 2) )/ 0.03 * (s.getProcess()/100);
+                objects[13] = gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 3);
+                objects[14] = gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(),3);
+                objects[15] = gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(),3);
+                objects[16] = ((gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 3)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 3) +gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 3) )/ 0.03;
+                objects[17] = ((gd.getGradeComp(c, "Quiz", c.getStudentList().get(i).getIdNum(), 3)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(),3) +gd.getGradeComp(c, "Periodical Test", c.getStudentList().get(i).getIdNum(), 3) )/ 0.03 * (s.getUnderstanding()/100);
+                objects[18] = gd.getGradeComp(c, "Project", c.getStudentList().get(i).getIdNum(), 4);
+                objects[19] = gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 4);
+                objects[19] = gd.getGradeComp(c, "Homework", c.getStudentList().get(i).getIdNum(), 4);
+                objects[21] = ((gd.getGradeComp(c, "Project", c.getStudentList().get(i).getIdNum(), 4)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 4) + gd.getGradeComp(c, "Homework", c.getStudentList().get(i).getIdNum(), 4) )/ 0.03;
+                objects[22] = ((gd.getGradeComp(c, "Project", c.getStudentList().get(i).getIdNum(), 4)) + gd.getGradeComp(c, "Class Participation", c.getStudentList().get(i).getIdNum(), 4) + gd.getGradeComp(c, "Homework", c.getStudentList().get(i).getIdNum(), 4) )/ 0.03 * (s.getProduct()/100);
                 tab.addRow(objects);
             }
+            Grades.setFont(new Font("Arial", Font.PLAIN, 10));
             this.Grades.setModel(tab);
         }
+        Grades.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        GradesScrollPane.setViewportView(Grades);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +132,8 @@ public class MainTable extends javax.swing.JFrame {
         btnProj = new javax.swing.JButton();
         lblPT = new javax.swing.JLabel();
         btnPT = new javax.swing.JButton();
+        lblPT1 = new javax.swing.JLabel();
+        btnPT1 = new javax.swing.JButton();
         btnGrades = new javax.swing.JButton();
         lClassList = new javax.swing.JLabel();
         btnBack = new javax.swing.JLabel();
@@ -94,10 +145,17 @@ public class MainTable extends javax.swing.JFrame {
         ribbon1 = new javax.swing.JLabel();
         redbar = new javax.swing.JLabel();
         bgElement = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setTitle("Philadelphia High School");
         setBackground(new java.awt.Color(255, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        GradesScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        GradesScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        GradesScrollPane.setMaximumSize(new java.awt.Dimension(1600, 1600));
+        GradesScrollPane.setName(""); // NOI18N
+        GradesScrollPane.setPreferredSize(new java.awt.Dimension(1600, 1600));
 
         Grades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,7 +170,7 @@ public class MainTable extends javax.swing.JFrame {
         ));
         GradesScrollPane.setViewportView(Grades);
 
-        getContentPane().add(GradesScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 1080, 410));
+        getContentPane().add(GradesScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 1470, 410));
 
         btnSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/check.png"))); // NOI18N
         btnSubmit.setText("Submit");
@@ -138,7 +196,7 @@ public class MainTable extends javax.swing.JFrame {
 
         lblHW.setForeground(new java.awt.Color(255, 255, 255));
         lblHW.setText("Homework (number)");
-        pClassList.add(lblHW, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 55, -1, -1));
+        pClassList.add(lblHW, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 130, -1));
 
         btnHW.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plussign.png"))); // NOI18N
         btnHW.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,7 +208,7 @@ public class MainTable extends javax.swing.JFrame {
 
         lblSW.setForeground(new java.awt.Color(255, 255, 255));
         lblSW.setText("Seatwork (number)");
-        pClassList.add(lblSW, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 102, 23));
+        pClassList.add(lblSW, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 120, 23));
 
         btnSW.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plussign.png"))); // NOI18N
         btnSW.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,6 +228,11 @@ public class MainTable extends javax.swing.JFrame {
                 btnProjMouseClicked(evt);
             }
         });
+        btnProj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProjActionPerformed(evt);
+            }
+        });
         pClassList.add(btnProj, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 40, -1));
 
         lblPT.setBackground(new java.awt.Color(255, 255, 255));
@@ -184,6 +247,24 @@ public class MainTable extends javax.swing.JFrame {
             }
         });
         pClassList.add(btnPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 40, -1));
+
+        lblPT1.setBackground(new java.awt.Color(255, 255, 255));
+        lblPT1.setForeground(new java.awt.Color(255, 255, 255));
+        lblPT1.setText("Class Participation");
+        pClassList.add(lblPT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 110, 23));
+
+        btnPT1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plussign.png"))); // NOI18N
+        btnPT1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPT1MouseClicked(evt);
+            }
+        });
+        btnPT1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPT1ActionPerformed(evt);
+            }
+        });
+        pClassList.add(btnPT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 40, -1));
 
         getContentPane().add(pClassList, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 250));
 
@@ -232,6 +313,7 @@ public class MainTable extends javax.swing.JFrame {
 
         bgElement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background2_1.png"))); // NOI18N
         getContentPane().add(bgElement, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1980, 1490));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -255,7 +337,8 @@ public class MainTable extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSWMouseClicked
 
     private void btnProjMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProjMouseClicked
-       AddProjectGrades ac = new AddProjectGrades(this,true);
+        AddProjectGrades ac = new AddProjectGrades(this,true);
+        new GradesDAO(s).addGradeComp(c, "Project", 0, 0, 0, 100);
         ac.setTitle("Project");
         ac.setVisible(true);
     }//GEN-LAST:event_btnProjMouseClicked
@@ -273,6 +356,20 @@ public class MainTable extends javax.swing.JFrame {
     private void btnGradesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGradesMousePressed
     
     }//GEN-LAST:event_btnGradesMousePressed
+
+    private void btnPT1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPT1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPT1MouseClicked
+
+    private void btnPT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPT1ActionPerformed
+        AddComponent ac = new AddComponent(this,true, "Class Participation",c,s);
+        ac.setTitle("Class Participation");
+        ac.setVisible(true);
+    }//GEN-LAST:event_btnPT1ActionPerformed
+
+    private void btnProjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProjActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,14 +417,17 @@ public class MainTable extends javax.swing.JFrame {
     private javax.swing.JButton btnGrades;
     private javax.swing.JButton btnHW;
     private javax.swing.JButton btnPT;
+    private javax.swing.JButton btnPT1;
     private javax.swing.JButton btnProj;
     private javax.swing.JButton btnQuizzes;
     private javax.swing.JButton btnSW;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lClassList;
     private javax.swing.JLabel lbSxnSubj;
     private javax.swing.JLabel lblHW;
     private javax.swing.JLabel lblPT;
+    private javax.swing.JLabel lblPT1;
     private javax.swing.JLabel lblProj;
     private javax.swing.JLabel lblQuiz;
     private javax.swing.JLabel lblSW;

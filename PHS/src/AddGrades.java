@@ -5,6 +5,7 @@ import ProgramCodes.Settings;
 import databaseCodes.GradesDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -145,6 +146,7 @@ public class AddGrades extends javax.swing.JDialog {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         for (int i = 0; i < c.getStudentList().size(); i++) {
+            try{
             System.out.println(examType);
             System.out.println(Integer.parseInt(jTable1.getValueAt(i, 2).toString()));
             System.out.println(Integer.parseInt(jTable1.getValueAt(i, 3).toString()));
@@ -152,7 +154,14 @@ public class AddGrades extends javax.swing.JDialog {
             System.out.println(Integer.parseInt(jTable1.getValueAt(i, 5).toString()));
             System.out.println(c.getStudentList().get(i).getIdNum());
             
-            new GradesDAO(s).addStudentGrade(c, examType, Integer.parseInt(jTable1.getValueAt(i, 2).toString()), Integer.parseInt(jTable1.getValueAt(i, 3).toString()), Integer.parseInt(jTable1.getValueAt(i, 4).toString()), Integer.parseInt(jTable1.getValueAt(i, 5).toString()), c.getStudentList().get(i).getIdNum());//(Classroom c, String examType, int knowledge, int understanding, int process, int product, String idStudent)
+           Boolean check = new GradesDAO(s).addStudentGrade(c, examType, Integer.parseInt(jTable1.getValueAt(i, 2).toString()), Integer.parseInt(jTable1.getValueAt(i, 3).toString()), Integer.parseInt(jTable1.getValueAt(i, 4).toString()), Integer.parseInt(jTable1.getValueAt(i, 5).toString()), c.getStudentList().get(i).getIdNum());//(Classroom c, String examType, int knowledge, int understanding, int process, int product, String idStudent)
+            if (!check)
+                JOptionPane.showMessageDialog(rootPane,  c.getStudentList().get(i).getIdNum() + " have an invalid grade value","ERROR MESSAGE", JOptionPane.ERROR_MESSAGE);
+            }
+            catch(NumberFormatException e)
+            {
+                
+            }
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 

@@ -1,3 +1,13 @@
+
+import ProgramCodes.Classroom;
+import ProgramCodes.ErrorHandler;
+import ProgramCodes.Settings;
+import databaseCodes.GradesDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +19,16 @@
  * @author DE JOYA
  */
 public class AddProjectGrades extends javax.swing.JDialog {
-
+    private Classroom c;
+    private Settings s;
+    private String examType;
+    private ErrorHandler eh = new ErrorHandler();
+    DefaultTableModel tab = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column >1;
+        }
+    };
     /**
      * Creates new form AddProjectGrades
      */
@@ -17,7 +36,31 @@ public class AddProjectGrades extends javax.swing.JDialog {
         super(frame,modal);
         initComponents();
     }
-
+    public AddProjectGrades(java.awt.Frame frame, boolean modal, Classroom c,  Settings s) {
+        super(frame,modal);
+        this.c = c;
+        this.s = s;
+        initComponents();
+    }
+    
+    private void changeTable() {
+        List<Object> tableColumnNames = new ArrayList();
+        tableColumnNames.add("Student ID");
+        tableColumnNames.add("Student Name");
+        tableColumnNames.add("Grade");
+        tab.setColumnIdentifiers(tableColumnNames.toArray());
+        Object[] objects = new Object[5];
+        if (c.getStudentList().size() > 0) {
+            for (int i = 0; i < c.getStudentList().size(); i++) {
+                objects[0] = c.getStudentList().get(i).getIdNum();
+                objects[1] = (c.getStudentList().get(i).getLastName() + ", " + c.getStudentList().get(i).getFirstName() + " " + c.getStudentList().get(i).getMidName());
+                objects[2] = "";
+                tab.addRow(objects);
+            }
+            this.jTable1.setModel(tab);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +98,11 @@ public class AddProjectGrades extends javax.swing.JDialog {
 
         btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/check.png"))); // NOI18N
         btnCreate.setText("Add");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
@@ -88,6 +136,21 @@ public class AddProjectGrades extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+         for (int i = 0; i < c.getStudentList().size(); i++) {
+            try{
+            System.out.println(examType);
+            System.out.println(Integer.parseInt(jTable1.getValueAt(i, 2).toString()));
+            System.out.println(c.getStudentList().get(i).getIdNum());
+            new GradesDAO(s).addStudentProject(c, Integer.parseInt(jTable1.getValueAt(i, 2).toString()), c.getStudentList().get(i).getIdNum());
+            }
+            catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, "ERROR MESSAGE", "A student might have an invalid grade value", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     /**
      * @param args the command line arguments
