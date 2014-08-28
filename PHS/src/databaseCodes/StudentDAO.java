@@ -137,5 +137,62 @@ public class StudentDAO {
             return a;
         }
         
+        public ArrayList<String> getStudentListP(String section)
+        {
+             ArrayList<String> list = new ArrayList();
+       try
+            {
+                    String queryString = "select * from student\n" +
+                                         "where idStudent = some \n" +
+                                         "(select sr_studentID from StudentRoster\n" +
+                                         "where sr_classID = some \n" +
+                                         "(select sectionID from section where \n" +
+                                         "sectionname like ?)\n" +
+                                         ") order by lastNameSt asc";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    stmt.setString(1, section);
+                    rs =stmt.executeQuery();
+                    
+            while (rs.next()) {
+                 StudentBean ab = new StudentBean(rs.getString("idStudent"),rs.getString("firstNameSt"), rs.getString("middleNameSt"), rs.getString("lastNameSt"),rs.getString("genderSt"),rs.getString("birthDateSt"), rs.getInt("yearLevelSt"));
+                 list.add(ab.getName());
+                }
+            if(list.isEmpty() == false)
+              return list;
+            else
+              {
+              list.add("Unavailable");
+              return list;
+              }
+            
+            }
+            catch (SQLException e) {
+			 System.out.println("ERROR CODE: "+ e.getErrorCode());
+                         list.add("Empty");
+                         return list;
+            }
+        }
+        
+        public int getStudentIDP(String pName){
+            try
+            {
+                    String queryString = "select idStudent from student where \n" +
+                                         "concat(lastNameSt,\", \",firstNameSt,\" \",middleNameSt) like ?";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    stmt.setString(1, pName);
+                    rs =stmt.executeQuery();
+                    
+            while (rs.next()) {
+                 return rs.getInt("idStudent");
+                }
+            return -1;
+            }
+            catch (SQLException e) {
+			 System.out.println("ERROR CODE: "+ e.getErrorCode());
+                          return -2;
+            }
+        }
         //
 }
