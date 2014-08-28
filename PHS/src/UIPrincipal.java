@@ -417,7 +417,7 @@ public class UIPrincipal extends javax.swing.JFrame {
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
          StudentDAO a = new StudentDAO();
-         System.out.println("StudentID: "+ a.getStudentID((String)jComboBox6.getSelectedItem()));
+         System.out.println("StudentID: "+ a.getStudentIDP((String)jComboBox6.getSelectedItem()));
     }
     /**
      * @param args the command line arguments
