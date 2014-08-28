@@ -362,10 +362,19 @@ public class UIPrincipal extends javax.swing.JFrame {
 
     private void gradeNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeNumberActionPerformed
         // TODO add your handling code here:
+        SectionDAO a = new SectionDAO();
+        ArrayList<String> sList = new ArrayList();
+        sList = a.getSectionList((String) gradeNumber.getSelectedItem());
+        Section.setModel(new javax.swing.DefaultComboBoxModel(sList.toArray()));
+       SectionActionPerformed(evt);
     }//GEN-LAST:event_gradeNumberActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  
+  SectionDAO a = new SectionDAO();
+       ArrayList<String> gList = new ArrayList();
+       gList = a.getYearList();
+       gradeNumber.setModel(new javax.swing.DefaultComboBoxModel(gList.toArray()));
+        gradeNumberActionPerformed(evt);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -382,6 +391,29 @@ public class UIPrincipal extends javax.swing.JFrame {
         viewGradesPanel.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private void SectionActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+        subjectDAO a = new subjectDAO();
+        ArrayList<String> List = new ArrayList();
+        List = a.getSubjectNames((String) Section.getSelectedItem(),(String) gradeNumber.getSelectedItem());
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(List.toArray()));
+        jComboBox3ActionPerformed(evt);
+    }                                       
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        StudentDAO a = new StudentDAO();
+        ArrayList<String> List = new ArrayList();
+        List = a.getStudentListP((String) Section.getSelectedItem());
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(List.toArray()));
+        jComboBox6ActionPerformed(evt);
+    }                                          
+
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+         StudentDAO a = new StudentDAO();
+         System.out.println("StudentID: "+ a.getStudentID((String)jComboBox6.getSelectedItem()));
+    }
     /**
      * @param args the command line arguments
      */
