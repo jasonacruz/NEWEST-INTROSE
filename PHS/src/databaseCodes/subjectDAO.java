@@ -58,5 +58,40 @@ public class subjectDAO {
             return y;
         }
         
-        
+ public ArrayList<String> getSubjectNames(String section,String grade){
+            ArrayList<String> list = new ArrayList();
+       try
+            {
+                    String queryString = "select * from subject where \n" +
+                                        "subjectID = some (select ct_subjectID from classteacher where ct_classID = \n" +
+                                        "(select sectionID from section where sectionName like ? )\n" +
+                                        ")\n" +
+                                        "and subjectGradeLevel = ?";
+ 
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    stmt.setString(1, section);
+                    stmt.setString(2, grade);
+                    rs =stmt.executeQuery();
+                    
+            while (rs.next()) {
+                 
+                 subjectBean ab = new subjectBean(rs.getInt("subjectID"),rs.getString("subjectName"), rs.getInt("subjectGradeLevel"));
+                 list.add(ab.getSubjectName());
+                }
+            if(list.isEmpty() == false)
+              return list;
+            else
+              {
+              list.add("Unavailable");
+              return list;
+              }
+            
+            }
+            catch (SQLException e) {
+			 System.out.println("ERROR CODE: "+ e.getErrorCode());
+                         list.add("Empty");
+                         return list;
+            }
+    }
 }
