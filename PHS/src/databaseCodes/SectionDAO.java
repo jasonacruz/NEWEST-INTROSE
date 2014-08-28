@@ -90,4 +90,67 @@ public class SectionDAO {
             }
             return st;
         }
+        
+            public ArrayList<String> getYearList(){
+        ArrayList<String> list = new ArrayList();
+       try
+            {
+                    String queryString = "select * from section \n" +
+                                         "where sectionSchoolYear = \n" +
+                                         "(select MAX(SchoolYear) from schooldays)\n" +
+                                         "group by sectionYearLevel";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    rs =stmt.executeQuery();
+                    
+            while (rs.next()) {
+                 SectionBean ab = new SectionBean(rs.getInt("sectionID"),rs.getString("sectionName"), rs.getInt("sectionYearLevel"), rs.getInt("sectionSchoolYear"));
+                 list.add(Integer.toString(ab.getYear()));
+                }
+            if(list.isEmpty() == false)
+              return list;
+            else
+              {
+              list.add("Unavailable");
+              return list;
+              }
+            
+            }
+            catch (SQLException e) {
+			 System.out.println("ERROR CODE: "+ e.getErrorCode());
+                         list.add("Empty");
+                         return list;
+            }
+    }
+    
+    public ArrayList<String> getSectionList(String level){
+        ArrayList<String> list = new ArrayList();
+       try
+            {
+                    String queryString = "select * from section where sectionYearLevel = ? and sectionSchoolYear = \n" +
+                                         "(select MAX(SchoolYear) from schooldays)\n";
+                    connection = getConnection();
+                    stmt = connection.prepareStatement(queryString);
+                    stmt.setString(1, level);
+                    rs =stmt.executeQuery();
+                    
+            while (rs.next()) {
+                 SectionBean ab = new SectionBean(rs.getInt("sectionID"),rs.getString("sectionName"), rs.getInt("sectionYearLevel"), rs.getInt("sectionSchoolYear"));
+                 list.add(ab.getName());
+                }
+            if(list.isEmpty() == false)
+              return list;
+            else
+              {
+              list.add("Unavailable");
+              return list;
+              }
+            
+            }
+            catch (SQLException e) {
+			 System.out.println("ERROR CODE: "+ e.getErrorCode());
+                         list.add("Empty");
+                         return list;
+            }
+    }
 }
